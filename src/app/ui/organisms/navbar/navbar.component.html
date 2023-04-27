@@ -1,0 +1,24 @@
+<nav *kkIsBreakpoint="768" class="absolute top-0 left-0 w-full flex items-center justify-between py-2 2xl:py-6 px-6 2xl:px-10 z-50">
+  <a routerLink="/">
+    <kk-logo></kk-logo>
+  </a>
+  <div class="flex font-josefin text-sm gap-x-10">
+    <a routerLink="/" class="hover:opacity-70 transition-opacity">Strona Główna</a>
+    <a routerLink="/" class="hover:opacity-70 transition-opacity">Anime</a>
+    <a routerLink="/" class="hover:opacity-70 transition-opacity">O Nas</a>
+    <a routerLink="/" class="hover:opacity-70 transition-opacity">Patronite</a>
+  </div>
+</nav>
+
+<nav *kkIsBreakpoint="0; max 767" class="mobile-nav absolute top-0 left-0 w-full flex flex-col justify-between">
+  <div class="p-4 z-50">
+    <kk-logo></kk-logo>
+  </div>
+
+  <div class="bg-deep-black p-2 flex justify-around items-center w-full z-50">
+    <span class="material-icons text-3xl">home</span>
+    <span class="material-icons-outlined text-3xl">search</span>
+    <span class="material-icons-outlined text-3xl">info</span>
+    <span class="material-icons-outlined text-3xl">savings</span>
+  </div>
+</nav>
