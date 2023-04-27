@@ -1,1 +1,15 @@
-/* You can add global styles to this file, and also import other style files */
+@import 'material-icons/iconfont/material-icons.scss';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import "app/styles/variables";
+@import "app/styles/colors";
+@import "app/styles/fonts";
+
+body {
+  background-color: var(--smoky-black);
+  color: var(--almost-white);
+  font-family: 'Lato', sans-serif;
+}

@@ -1,0 +1,47 @@
+<div [ngStyle]="{'background-image': 'url(' + series.imageUrl + ')'}" class="img-bg-container relative h-screen flex flex-col justify-end">
+  <div class="absolute shadow-bg-container">
+  </div>
+
+  <div class="w-full z-30 px-4 md:px-16 flex flex-col gap-y-2 md:gap-y-3 mb-20 md:mb-10 2xl:mb-20">
+    <div class="text-shade-of-grey text-[10px] md:text-base flex gap-x-1 md:gap-x-3 uppercase font-bold font-lato">
+      <span class="flex gap-x-1 md:gap-x-3" *ngFor="let tag of series.tags; let l = last">
+        <span>{{ tag }}</span>
+        <span *ngIf="!l">|</span>
+      </span>
+    </div>
+
+    <h1 class="font-saira font-bold text-3xl md:text-7xl">{{ series.titleJpRom }}</h1>
+
+    <div class="font-noto-jp text-xs md:text-xl flex gap-x-1.5 md:gap-x-3">
+      <span>{{ series.titleEn }},</span>
+      <span>{{ series.titleJp }},</span>
+      <span *ngFor="let title of series.titlesAlt; let l = last">
+        <span *ngIf="l">
+          {{ title }}
+        </span>
+        <span *ngIf="!l">
+          {{ title }},
+        </span>
+      </span>
+    </div>
+
+    <div class="font-bold text-shade-of-grey text-[10px] md:text-base flex gap-x-1.5 md:gap-x-3 md:mt-8">
+      <p>{{ series.startDate | date: 'dd.MM.yyyy' }} - {{ series.endDate | date: 'dd.MM.yyyy' }}</p>
+      <p>|</p>
+      <p>{{ series.type | uppercase }}</p>
+      <p>|</p>
+      <p>Odcinki: {{ series.episodesCount }}</p>
+      <p>|</p>
+      <p>{{ series.episodeDuration }} min</p>
+    </div>
+
+    <p class="text-almost-white w-full md:w-8/12 xl:w-6/12 text-justify text-xs md:text-sm 2xl:text-lg 2xl:pe-10">
+      {{ series.synopsis }}
+    </p>
+
+    <div class="flex gap-x-4 mt-4">
+      <button class="hover:opacity-80 transition-opacity bg-royal-blue rounded-sm text-white w-44 2xl:w-56 h-12 2xl:h-16 flex justify-center items-center text-base 2xl:text-lg font-bold">Oglądaj</button>
+      <button class="hover:opacity-80 transition-opacity border-royal-blue border-solid border-2 rounded-sm text-white w-44 2xl:w-56 h-12 2xl:h-16 flex justify-center items-center text-base 2xl:text-lg font-bold">Trailer</button>
+    </div>
+  </div>
+</div>

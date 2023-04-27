@@ -1,0 +1,11 @@
+<div>
+  <kk-series-page-hero [series]="series"></kk-series-page-hero>
+</div>
+
+<div *ngIf="series.relations">
+  <kk-series-page-relations [relations]="series.relations"></kk-series-page-relations>
+</div>
+
+<div>
+  <kk-series-page-episodes [episodes]="series.episodes"></kk-series-page-episodes>
+</div>

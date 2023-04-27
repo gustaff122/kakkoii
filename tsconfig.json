@@ -2,7 +2,54 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
-    "baseUrl": "./",
+    "baseUrl": "src",
+    "paths": {
+      "@kakkoii/*": [
+        "app/*"
+      ],
+      "@kakkoii/core/*": [
+        "app/core/*"
+      ],
+      "@kakkoii/directives/*": [
+        "app/directives/*"
+      ],
+      "@kakkoii/guards/*": [
+        "app/guards/*"
+      ],
+      "@kakkoii/interceptors/*": [
+        "app/interceptors/*"
+      ],
+      "@kakkoii/interfaces/*": [
+        "app/interfaces/*"
+      ],
+      "@kakkoii/providers/*": [
+        "app/providers/*"
+      ],
+      "@kakkoii/resolvers/*": [
+        "app/resolvers/*"
+      ],
+      "@kakkoii/services/*": [
+        "app/services/*"
+      ],
+      "@kakkoii/styles/*": [
+        "app/styles/*"
+      ],
+      "@kakkoii/types/*": [
+        "app/types/*"
+      ],
+      "@kakkoii/ui/*": [
+        "app/ui/*"
+      ],
+      "@kakkoii/utils/*": [
+        "app/utils/*"
+      ],
+      "@kakkoii/assets/*": [
+        "app/assets/*"
+      ],
+      "@env/*": [
+        "environments/*"
+      ]
+    },
     "outDir": "./dist/out-tsc",
     "forceConsistentCasingInFileNames": true,
     "strict": true,

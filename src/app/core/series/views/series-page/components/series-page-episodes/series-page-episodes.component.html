@@ -1,0 +1,15 @@
+<div class="px-4 md:px-16 py-4">
+  <h1 class="text-xl font-bold mb-6">Lista Odcinków:</h1>
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-5 content-center gap-y-2 lg:gap-y-4 2xl:gap-y-8 gap-x-2 lg:gap-x-4 2xl:gap-x-8">
+    <div *ngFor="let episode of episodes" class="w-full flex bg-deep-black hover:opacity-70 transition-opacity">
+      <div class="aspect-square bg-sky-blue font-josefin text-4xl w-3/12 flex items-center justify-center">
+        <span class="translate-y-0.5" *ngIf="episode.number < 10">0{{ episode.number }}</span>
+        <span class="translate-y-0.5" *ngIf="episode.number > 10">{{ episode.number }}</span>
+      </div>
+      <div class="h-full w-9/12 flex flex-col justify-center gap-y-1 px-4 py-2">
+        <p class="text-md">{{ episode.titleEn }}</p>
+        <p class="text-xs text-shade-of-grey">{{ episode.aired | date: 'dd.MM.yyyy' }}</p>
+      </div>
+    </div>
+  </div>
+</div>

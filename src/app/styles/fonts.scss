@@ -1,0 +1,27 @@
+@import url('https://fonts.googleapis.com/css2?family=Saira+Extra+Condensed:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+.font {
+  &-josefin {
+    font-family: 'Josefin Sans', sans-serif;
+  }
+
+  &-lato {
+    font-family: 'Lato', sans-serif;
+  }
+
+  &-saira {
+    font-family: 'Saira Extra Condensed', sans-serif;
+  }
+
+  &-noto-jp {
+    font-family: 'Noto Sans JP', sans-serif;
+  }
+
+  &-roboto {
+    font-family: 'Roboto', sans-serif;
+  }
+}

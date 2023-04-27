@@ -1,0 +1,47 @@
+.text {
+  &-royal-blue {
+    color: var(--royal-blue);
+  }
+  &-sky-blue {
+    color: var(--sky-blue);
+  }
+  &-light-blue {
+    color: var(--light-blue);
+  }
+  &-smoky-black {
+    color: var(--smoky-black);
+  }
+  &-deep-black {
+    color: var(--deep-black);
+  }
+  &-shade-of-grey {
+    color: var(--shade-of-grey);
+  }
+}
+
+.bg {
+  &-royal-blue {
+    background-color: var(--royal-blue);
+  }
+  &-sky-blue {
+    background-color: var(--sky-blue);
+  }
+  &-light-blue {
+    background-color: var(--light-blue);
+  }
+  &-smoky-black {
+    background-color: var(--smoky-black);
+  }
+  &-deep-black {
+    background-color: var(--deep-black);
+  }
+  &-shade-of-grey {
+    background-color: var(--shade-of-grey);
+  }
+}
+
+.border {
+  &-royal-blue {
+    border-color: var(--royal-blue);
+  }
+}

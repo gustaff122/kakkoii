@@ -1,0 +1,1 @@
+export type SeriesType = 'ova' | 'tv' | 'movie' | 'ona' | 'special';

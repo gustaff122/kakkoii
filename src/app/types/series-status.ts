@@ -1,0 +1,1 @@
+export type SeriesStatus = 'ongoing' | 'finished' | 'upcoming' | 'tba' | 'aborted';

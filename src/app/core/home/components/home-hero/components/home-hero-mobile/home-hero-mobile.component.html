@@ -1,0 +1,23 @@
+<div [ngStyle]="{'background-image': 'url(' + currentBgImage + ')'}" class="img-bg-container relative h-screen flex flex-col justify-end">
+  <div class="absolute shadow-bg-container">
+  </div>
+
+  <div class="h-full w-full flex flex-col justify-center gap-y-10 pt-20 pb-10">
+    <div class="py-2">
+      <kk-series-slider-main [series]="series" (imageChange)="changeCurrentBgImage($event)"></kk-series-slider-main>
+    </div>
+
+    <div class="w-full z-40 mb-14 px-1">
+      <h1 class="text-center font-roboto text-2xl font-bold">Witamy na <span class="text-royal-blue">Kakkoii!</span></h1>
+      <div class="text-shade-of-grey text-[11px] text-center py-4">
+        <p>Dajemy ci możliwość oglądania wszystkich Anime i Mang za darmo!</p>
+        <p>Znajdź swoją ulubioną serię i zacznij oglądać już teraz!</p>
+      </div>
+      <div class="flex gap-x-4 px-2">
+        <button class="hover:opacity-80 transition-opacity bg-royal-blue rounded-sm text-white w-1/2 py-3 flex justify-center items-center  text-sm font-bold">Zacznij oglądać</button>
+        <button class="hover:opacity-80 transition-opacity border-royal-blue border-solid border-2 rounded-sm text-white w-1/2 py-3 flex justify-center text-sm items-center font-bold">Wesprzyj nas</button>
+      </div>
+    </div>
+  </div>
+
+</div>
