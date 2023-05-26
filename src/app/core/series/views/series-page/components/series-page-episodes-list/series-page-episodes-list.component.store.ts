@@ -19,6 +19,7 @@ interface SeriesPageEpisodesListComponentState extends DefaultComponentState {
 export class SeriesPageEpisodesListComponentStore extends DefaultComponentStore<SeriesPageEpisodesListComponentState> {
 
   public readonly episodes$: Observable<SeriesEpisode[]> = this.select((state) => state.episodes);
+  public readonly totalCount$: Observable<number | null> = this.select((state) => state.totalCount);
   public readonly canLoadMore$: Observable<boolean> = this.select((state) => state.totalCount > state.episodes.length);
 
   public readonly changeDirection = this.effect((origin$: Observable<{ direction: DirectionType }>) => {

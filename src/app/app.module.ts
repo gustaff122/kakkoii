@@ -12,6 +12,7 @@ import { matExpandMore, matHome, matSearch, matWifiOff, matArrowDropUp, matArrow
 import { matInfoOutline, matSavingsOutline } from  '@ng-icons/material-icons/outline'
 import { bootstrapTwitter, bootstrapDiscord, bootstrapFacebook } from  '@ng-icons/bootstrap-icons'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NgProgressModule } from 'ngx-progressbar';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,12 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     }),
     FooterComponent,
     NgIconsModule,
+    NgProgressModule.withConfig({
+      spinner: false,
+      color: '#3b5eda',
+      speed: 300,
+      trickleSpeed: 900,
+    }),
   ],
   providers: [
     provideIcons({  matExpandMore, matHome, matSearch, matInfoOutline, matSavingsOutline, bootstrapTwitter, bootstrapDiscord, bootstrapFacebook, matWifiOff, matArrowDropUp, matArrowDropDown })

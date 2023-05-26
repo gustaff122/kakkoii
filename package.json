@@ -28,6 +28,7 @@
     "@ngneat/overview": "^4.1.0",
     "@ngrx/component-store": "^15.4.0",
     "@ngx-pwa/offline": "^13.0.3",
+    "ngx-progressbar": "^11.0.0",
     "ngx-scrollbar": "^11.0.0",
     "rxjs": "~7.5.0",
     "swiper": "^9.2.4",
