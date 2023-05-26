@@ -15,6 +15,6 @@ export const seriesExistsGuard: CanActivateFn = (_route: ActivatedRouteSnapshot)
         } else {
           return router.parseUrl('/');
         }
-      }),
+      })
     );
 };

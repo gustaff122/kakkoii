@@ -1,0 +1,20 @@
+<div class="py-4">
+  <h1 class="text-xl font-lato mb-6">{{ sectionTitle }}:</h1>
+  <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-7 gap-2 md:gap-8">
+    <ng-container [ngTemplateOutlet]="series.length > 0 ? contentTpl : emptyTpl"></ng-container>
+    <ng-container [ngTemplateOutlet]="(loading && totalCount > series.length) ? loadingTpl : null"></ng-container>
+  </div>
+</div>
+
+<ng-template #contentTpl>
+    <kk-series-thumbnail *ngFor="let item of series" [series]="item"></kk-series-thumbnail>
+</ng-template>
+
+<ng-template #emptyTpl>
+  <p class="text-shade-of-grey">Brak serii...</p>
+</ng-template>
+
+<ng-template #loadingTpl>
+  <div *ngFor="let _ of [].constructor(16)" class="bg-smooth-black aspect-card w-full rounded-lg h-full animate-pulse">
+  </div>
+</ng-template>

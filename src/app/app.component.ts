@@ -10,10 +10,10 @@ import { fromEvent, Subscription } from 'rxjs';
 export class AppComponent implements OnInit, OnDestroy {
   title = 'Kakkoii';
 
-  private subscriptions: Subscription = new Subscription()
+  private subscriptions: Subscription = new Subscription();
 
   constructor(
-    @Inject(DOCUMENT) private readonly document: Document
+    @Inject(DOCUMENT) private readonly document: Document,
   ) {
   }
 

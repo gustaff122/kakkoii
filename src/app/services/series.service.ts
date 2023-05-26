@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Series } from '../interfaces/series';
-import { Paginator } from '../interfaces/paginator';
-import { environment } from '@env/environment';
+import { SeriesListFilters } from '@kakkoii/interfaces/series-list-filters';
+import { Paginator } from '@kakkoii/interfaces/paginator';
+import { Series } from '@kakkoii/interfaces/series';
+import { environment } from '@kakkoii/env/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -17,11 +18,33 @@ export class SeriesService {
   ) {
   }
 
-  public getSeriesList(paginator: Paginator, filters?: Partial<{ name: string }>): Observable<{ series: Series[], totalCount: number }> {
+  public getSeriesList(paginator: Paginator, filters?: Partial<SeriesListFilters>): Observable<{ series: Series[], totalCount: number }> {
     let params = new HttpParams().set('page', paginator.page).set('limit', paginator.limit);
 
     if (filters?.name) {
       params = params.append('name', filters.name);
+    }
+
+    if (filters?.status) {
+      params = params.append('status', filters.status);
+    }
+
+    if (filters?.type) {
+      params = params.append('type', filters.type);
+    }
+
+    if (filters?.tags) {
+      filters.tags.forEach(tag => {
+        params = params.append('tags', tag)
+      })
+    }
+
+    if (filters?.season) {
+      params = params.append('season', filters.season);
+    }
+
+    if (filters?.year) {
+      params = params.append('year', filters.year);
     }
 
     return this.httpClient.get<{ series: Series[], totalCount: number }>(`${this.API_URL}/series`, { params });

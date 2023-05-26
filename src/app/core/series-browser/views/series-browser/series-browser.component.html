@@ -1,0 +1,14 @@
+<div class="mb-4">
+  <kk-series-search-bar (filtersChange)="getFirstPageHandler($event)"></kk-series-search-bar>
+</div>
+
+<div *ngIf="filters$ | async">
+  <kk-infinite-scroll (scrolled)="nextPageHandler()">
+    <kk-series-list sectionTitle="Wyniki wyszukiwania" [series]="series$ | async" [loading]="loading$ | async" [totalCount]="totalCount$ | async"></kk-series-list>
+  </kk-infinite-scroll>
+</div>
+
+
+<div>
+  <kk-series-current-season-list></kk-series-current-season-list>
+</div>

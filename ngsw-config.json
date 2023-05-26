@@ -12,6 +12,9 @@
           "/manifest.webmanifest",
           "/*.css",
           "/*.js"
+        ],
+        "urls": [
+          "https://fonts.googleapis.com/**"
         ]
       }
     },
@@ -24,6 +27,61 @@
           "/assets/**",
           "/*.(svg|cur|jpg|jpeg|png|apng|webp|avif|gif|otf|ttf|woff|woff2)"
         ]
+      }
+    }
+  ],
+  "dataGroups": [
+    {
+      "name": "series list (performance)",
+      "urls": [
+        "http://localhost:3200/series"
+      ],
+      "cacheConfig": {
+        "maxAge": "1d",
+        "maxSize": 14,
+        "strategy": "performance"
+      },
+      "cacheQueryOptions": {
+        "ignoreSearch": false
+      }
+    },
+    {
+      "name": "series by pseudo (performance)",
+      "urls": [
+        "http://localhost:3200/series/pseudo/*"
+      ],
+      "cacheConfig": {
+        "maxAge": "1d",
+        "maxSize": 14,
+        "strategy": "performance"
+      },
+      "cacheQueryOptions": {
+        "ignoreSearch": false
+      }
+    },
+    {
+      "name": "relations (performance)",
+      "urls": [
+        "http://localhost:3200/relations/*"
+      ],
+      "cacheConfig": {
+        "maxAge": "1d",
+        "maxSize": 14,
+        "strategy": "performance"
+      },
+      "cacheQueryOptions": {
+        "ignoreSearch": false
+      }
+    },
+    {
+      "name": "episodes (freshness)",
+      "urls": [
+        "http://localhost:3200/episodes/*"
+      ],
+      "cacheConfig": {
+        "maxAge": "5m",
+        "maxSize": 14,
+        "strategy": "freshness"
       }
     }
   ]

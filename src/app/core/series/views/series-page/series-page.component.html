@@ -1,11 +1,11 @@
 <div>
-  <kk-series-page-hero [series]="series"></kk-series-page-hero>
+  <kk-series-page-hero (startWatchingBtn)="scrollTo(episodes)" [series]="series"></kk-series-page-hero>
 </div>
 
-<div *ngIf="series.relations">
-  <kk-series-page-relations [relations]="series.relations"></kk-series-page-relations>
+<div class="px-4 md:px-16 py-4  " @opacityAnimation #episodes>
+  <router-outlet></router-outlet>
 </div>
 
 <div>
-  <kk-series-page-episodes [episodes]="series.episodes"></kk-series-page-episodes>
+  <kk-series-page-relations [seriesId]="series._id"></kk-series-page-relations>
 </div>

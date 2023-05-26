@@ -7,30 +7,4 @@
         <p class="text-base mt-2 text-shade-of-grey">{{ item.titleJpRom }}</p>
       </div>
     </swiper-slide>
-
-    <swiper-slide *ngFor="let item of series; let i = index">
-      <div class="p-6">
-        <a [routerLink]="['/series', item.pseudo]" class="aspect-video">
-          <img [id]="id+'-swiper-img-'+(i+2)" class="rounded-md object-cover aspect-video" [src]="item.imageUrl" alt="Anime series">
-        </a>
-        <p class="text-base mt-2 text-shade-of-grey">{{ item.titleJpRom }}</p>
-      </div>
-    </swiper-slide>
-
-    <swiper-slide *ngFor="let item of series; let i = index">
-      <div class="p-6">
-        <a [routerLink]="['/series', item.pseudo]" class="aspect-video">
-          <img [id]="id+'-swiper-img-'+(i+4)" class="rounded-md object-cover aspect-video" [src]="item.imageUrl" alt="Anime series">
-        </a>
-        <p class="text-base mt-2 text-shade-of-grey">{{ item.titleJpRom }}</p>
-      </div>
-    </swiper-slide>
-    <swiper-slide *ngFor="let item of series; let i = index">
-      <div class="p-6">
-        <a [routerLink]="['/series', item.pseudo]" class="aspect-video">
-          <img [id]="id+'-swiper-img-'+(i+6)"  class="rounded-md object-cover aspect-video" [src]="item.imageUrl" alt="Anime series">
-        </a>
-        <p class="text-base mt-2 text-shade-of-grey">{{ item.titleJpRom }}</p>
-      </div>
-    </swiper-slide>
-  </swiper-container>
+</swiper-container>

@@ -1,8 +1,8 @@
 {
-  "name": "kakkoii",
-  "short_name": "kakkoii",
-  "theme_color": "#1976d2",
-  "background_color": "#fafafa",
+  "name": "Kakkoii",
+  "short_name": "Kakkoii",
+  "theme_color": "#3b5eda",
+  "background_color": "#0f0f0f",
   "display": "standalone",
   "scope": "./",
   "start_url": "./",

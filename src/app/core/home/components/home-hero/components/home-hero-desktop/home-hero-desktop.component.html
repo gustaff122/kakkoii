@@ -1,8 +1,8 @@
-<div [ngStyle]="{'background-image': 'url(' + currentBgImage + ')'}" class="img-bg-container relative h-screen flex flex-col justify-end">
+<div [ngStyle]="{'background-image': 'url(' + currentBgImage + ')'}" class="img-bg-container relative min-h-[720px] h-screen flex flex-col justify-end">
   <div class="absolute shadow-bg-container">
   </div>
 
-  <div class="w-full z-30 px-16 flex flex-col gap-y-3 mb-8 2xl:mb-10">
+  <div class="w-full z-30 pt-16 px-16 flex flex-col gap-y-3 mb-8 2xl:mb-10">
     <div class="flex gap-x-4 items-center">
       <h2 class="text-shade-of-grey text-2xl">Witamy</h2>
       <hr class="w-[378px] opacity-75">
@@ -14,12 +14,12 @@
     </div>
 
     <div class="text-shade-of-grey py-4 2xl:py-8 text-sm 2xl:text-lg">
-      <p>Dajemy ci możliwość oglądania wszystkich Anime i Mang za darmo!</p>
-      <p>Znajdź swoją ulubioną serię i zacznij oglądać już teraz!</p>
+      <p>Wejdź do świata anime, gdzie emocje nabierają kolorów.</p>
+      <p>Przeżyj z Nami wiele niesamowitych historii!</p>
     </div>
 
     <div class="flex gap-x-4">
-      <button class="hover:opacity-80 transition-opacity bg-royal-blue rounded-sm text-white w-44 2xl:w-56 h-12 2xl:h-16 flex justify-center items-center text-base 2xl:text-lg font-bold">Zacznij oglądać</button>
+      <button (click)="startWatchingButtonFn()" class="hover:opacity-80 transition-opacity bg-royal-blue rounded-sm text-white w-44 2xl:w-56 h-12 2xl:h-16 flex justify-center items-center text-base 2xl:text-lg font-bold">Zacznij oglądać</button>
       <button class="hover:opacity-80 transition-opacity border-royal-blue border-solid border-2 rounded-sm text-white w-44 2xl:w-56 h-12 2xl:h-16 flex justify-center items-center text-base 2xl:text-lg font-bold">Wesprzyj nas</button>
     </div>
   </div>

@@ -1,0 +1,21 @@
+<a [routerLink]="['/series', series.pseudo]" class="w-full transition-opacity hover:opacity-70 z-[-1]">
+  <div class="bg-smooth-black rounded-lg h-96">
+    <div class="relative w-full h-3/4">
+      <div class="img-bg-gradient absolute h-full w-full">
+      </div>
+        <img class="!object-cover h-full w-full rounded-t-lg" alt="Seria anime" [src]="series.thumbnailUrl">
+    </div>
+    <div class="relative w-full h-1/4">
+      <div class="absolute bg-sky-blue rounded px-2 text-sm right-3 -top-2">
+        EP {{ series.episodesCount }}
+      </div>
+      <p class="px-3 h-[52px] pt-3 text-start bg-smooth-black w-full text-sm">{{ series.titleJpRom }}</p>
+      <div class="px-3 w-full flex justify-center rounded-b-lg bg-smooth-black gap-x-1.5 pt-2">
+        <span class="flex gap-x-1 items-center pb-3 rounded-b-lg" *ngFor="let tag of series.tags.slice(0, 3); let l = last">
+          <span class="text-[9px] text-shade-of-grey">{{ tag }}</span>
+          <span class="-translate-y-[1px] text-[8px]" *ngIf="!l">●</span>
+        </span>
+      </div>
+    </div>
+  </div>
+</a>

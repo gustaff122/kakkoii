@@ -1,5 +1,3 @@
-@import 'material-icons/iconfont/material-icons.scss';
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -7,9 +5,28 @@
 @import "app/styles/variables";
 @import "app/styles/colors";
 @import "app/styles/fonts";
+@import "app/styles/scrollbar";
+@import "app/styles/ng-select";
+
 
 body {
   background-color: var(--smoky-black);
   color: var(--almost-white);
   font-family: 'Lato', sans-serif;
+}
+
+input {
+  &::placeholder {
+    color: #999999;
+  }
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type=number] {
+  -moz-appearance: textfield;
 }

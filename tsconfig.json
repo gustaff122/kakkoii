@@ -7,6 +7,9 @@
       "@kakkoii/*": [
         "app/*"
       ],
+      "@kakkoii/animations/*": [
+        "app/animations/*"
+      ],
       "@kakkoii/core/*": [
         "app/core/*"
       ],
@@ -21,6 +24,9 @@
       ],
       "@kakkoii/interfaces/*": [
         "app/interfaces/*"
+      ],
+      "@kakkoii/pipes/*": [
+        "app/pipes/*"
       ],
       "@kakkoii/providers/*": [
         "app/providers/*"
@@ -46,7 +52,7 @@
       "@kakkoii/assets/*": [
         "app/assets/*"
       ],
-      "@env/*": [
+      "@kakkoii/env/*": [
         "environments/*"
       ]
     },

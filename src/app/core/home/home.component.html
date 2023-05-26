@@ -1,4 +1,7 @@
 <div>
-  <kk-home-hero></kk-home-hero>
+  <kk-home-hero (startWatchingBtn)="scrollTo(currentSeason)"></kk-home-hero>
 </div>
 
+<div #currentSeason>
+  <kk-series-current-season-carousel></kk-series-current-season-carousel>
+</div>

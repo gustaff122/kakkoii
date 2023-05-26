@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Series } from '@kakkoii/interfaces/series';
 
@@ -13,5 +13,11 @@ import { Series } from '@kakkoii/interfaces/series';
   standalone: true,
 })
 export class SeriesPageHeroComponent {
+  @Output() public readonly startWatchingBtn: EventEmitter<void> = new EventEmitter<void>();
+
   @Input() public series: Series
+
+  public startWatchingButtonFn(): void {
+    this.startWatchingBtn.emit()
+  }
 }

@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Output } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { Series } from '@kakkoii/interfaces/series';
@@ -17,9 +17,10 @@ import { SeriesSliderMainComponent } from '@kakkoii/ui/organisms/series-slider-m
   standalone: true,
 })
 export class HomeHeroMobileComponent {
+  @Output() public readonly startWatchingBtn: EventEmitter<void> = new EventEmitter<void>();
 
   public readonly series: Series[] = this.activatedRoute.snapshot.data[HOME];
-  public currentBgImage = this.series[0].imageUrl
+  public currentBgImage = this.series[2].imageUrl
 
   constructor(
     private readonly activatedRoute: ActivatedRoute,
@@ -28,5 +29,9 @@ export class HomeHeroMobileComponent {
 
   public changeCurrentBgImage(imgUrl: string): void {
     this.currentBgImage = imgUrl
+  }
+
+  public startWatchingButtonFn(): void {
+    this.startWatchingBtn.emit()
   }
 }

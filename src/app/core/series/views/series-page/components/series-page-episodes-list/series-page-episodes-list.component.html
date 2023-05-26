@@ -1,0 +1,48 @@
+<div id="episodesListFragment">
+  <div class="flex items-center justify-between w-full">
+    <h1 class="text-xl font-bold mb-6">Lista Odcinków:</h1>
+    <button (click)="setDirectionAscHandler()" *ngIf="direction === 'desc'" class="flex gap-x-0.5 items-center">
+      Malejąco
+      <ng-icon class="text-2xl" name="matArrowDropDown"></ng-icon>
+    </button>
+    <button (click)="setDirectionDescHandler()" *ngIf="direction === 'asc'" class="flex gap-x-0.5 items-center">
+      Rosnąco
+      <ng-icon class="text-2xl" name="matArrowDropUp"></ng-icon>
+    </button>
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 content-center gap-y-2 lg:gap-y-4 2xl:gap-y-8 gap-x-2 lg:gap-x-4 2xl:gap-x-8">
+    <ng-container [ngTemplateOutlet]="(loading$ | async) ? loadingTpl : contentTpl"></ng-container>
+  </div>
+</div>
+
+<ng-template #contentTpl>
+  <a [routerLink]="[episode.number]" fragment="episodePlayer" *ngFor="let episode of (episodes$ | async)" class="w-full flex bg-deep-black hover:opacity-70 transition-opacity">
+    <div class="aspect-square bg-sky-blue font-josefin text-4xl w-3/12 flex items-center justify-center">
+      <span class="translate-y-0.5" *ngIf="episode.number < 10">0{{ episode.number }}</span>
+      <span class="translate-y-0.5" *ngIf="episode.number >= 10">{{ episode.number }}</span>
+    </div>
+    <div class="h-full w-9/12 flex flex-col justify-center gap-y-1 px-4 py-2">
+      <p class="text-md">{{ episode.titleEn }}</p>
+      <p class="text-xs text-shade-of-grey">{{ episode.aired | date: 'dd.MM.yyyy' }}</p>
+    </div>
+  </a>
+  <button *ngIf="canLoadMore$ | async" (click)="loadEpisodesHandler()" class="w-full flex bg-deep-black hover:opacity-70 transition-opacity">
+    <div class="aspect-square bg-sky-blue font-josefin text-4xl w-3/12 flex items-center justify-center">
+      <ng-icon name="matExpandMore"></ng-icon>
+    </div>
+    <div class="h-full w-9/12 flex flex-col justify-center gap-y-1 px-4 py-2 text-xl font-bold">
+      Załaduj więcej
+    </div>
+  </button>
+  <ng-container [ngTemplateOutlet]="(loading$ | async) ? loadingTpl : null"></ng-container>
+</ng-template>
+
+<ng-template #loadingTpl>
+  <div *ngFor="let _ of [].constructor(24)" class="w-full flex bg-deep-black animate-pulse">
+    <div class="aspect-square bg-sky-blue font-josefin text-4xl w-3/12 flex items-center justify-center">
+    </div>
+    <div class="h-full w-9/12 flex flex-col justify-center gap-y-1 px-4 py-2">
+    </div>
+  </div>
+</ng-template>
