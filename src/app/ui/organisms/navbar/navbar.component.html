@@ -5,8 +5,6 @@
   <div class="flex font-josefin text-sm items-center gap-x-10">
     <a *kkIsBreakpoint="1024" routerLink="/" class="hover:opacity-70 transition-opacity">Strona Główna</a>
     <a routerLink="/browser" class="hover:opacity-70 transition-opacity">Anime</a>
-    <a routerLink="/" class="hover:opacity-70 transition-opacity">O Nas</a>
-    <a routerLink="/" class="hover:opacity-70 transition-opacity">Patronite</a>
     <div class="w-64">
       <kk-search-autocomplete [(ngModel)]="search"></kk-search-autocomplete>
     </div>
@@ -21,8 +19,6 @@
   <nav class="bg-deep-black p-2 bottom-0 fixed flex justify-around items-center w-full z-50">
     <a class="flex items-center" routerLink="/"><ng-icon name="matHome" class="text-3xl"></ng-icon></a>
     <a class="flex items-center" routerLink="/browser"><ng-icon name="matSearch" class="text-3xl"></ng-icon></a>
-    <a class="flex items-center" routerLink="/"><ng-icon name="matInfoOutline" class="text-3xl"></ng-icon></a>
-    <a class="flex items-center" routerLink="/"><ng-icon name="matSavingsOutline" class="text-3xl"></ng-icon></a>
   </nav>
 </nav>
 

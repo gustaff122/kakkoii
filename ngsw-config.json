@@ -34,7 +34,7 @@
     {
       "name": "series list (performance)",
       "urls": [
-        "http://localhost:3200/series"
+        "https://api.kakkoii.pl/series"
       ],
       "cacheConfig": {
         "maxAge": "1d",
@@ -48,7 +48,7 @@
     {
       "name": "series by pseudo (performance)",
       "urls": [
-        "http://localhost:3200/series/pseudo/*"
+        "https://api.kakkoii.pl/series/pseudo/*"
       ],
       "cacheConfig": {
         "maxAge": "1d",
@@ -62,7 +62,7 @@
     {
       "name": "relations (performance)",
       "urls": [
-        "http://localhost:3200/relations/*"
+        "https://api.kakkoii.pl/relations/*"
       ],
       "cacheConfig": {
         "maxAge": "1d",
@@ -76,12 +76,23 @@
     {
       "name": "episodes (freshness)",
       "urls": [
-        "http://localhost:3200/episodes/*"
+        "https://api.kakkoii.pl/episodes/*"
       ],
       "cacheConfig": {
         "maxAge": "5m",
         "maxSize": 14,
         "strategy": "freshness"
+      }
+    },
+    {
+      "name": "static files (performance)",
+      "urls": [
+        "https://static.kakkoii.pl/*"
+      ],
+      "cacheConfig": {
+        "maxAge": "30d",
+        "maxSize": 80,
+        "strategy": "performance"
       }
     }
   ]
