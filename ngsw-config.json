@@ -32,14 +32,14 @@
   ],
   "dataGroups": [
     {
-      "name": "series list (performance)",
+      "name": "series list (freshness)",
       "urls": [
         "https://api.kakkoii.pl/series"
       ],
       "cacheConfig": {
         "maxAge": "1d",
         "maxSize": 14,
-        "strategy": "performance"
+        "strategy": "freshness"
       },
       "cacheQueryOptions": {
         "ignoreSearch": false

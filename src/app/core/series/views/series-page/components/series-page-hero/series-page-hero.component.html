@@ -4,7 +4,7 @@
 
   <div class="w-full z-30 px-4 md:px-16 flex flex-col gap-y-2 md:gap-y-3 mb-20 md:mb-10 2xl:mb-20">
     <div class="text-shade-of-grey text-[10px] md:text-base flex gap-x-1 md:gap-x-3 uppercase font-bold font-lato">
-      <span class="flex gap-x-1 md:gap-x-3" *ngFor="let tag of series.tags; let l = last">
+      <span class="flex gap-x-1 md:gap-x-3" *ngFor="let tag of series.tags.slice(0, 4); let l = last">
         <span>{{ tag }}</span>
         <span *ngIf="!l">|</span>
       </span>
