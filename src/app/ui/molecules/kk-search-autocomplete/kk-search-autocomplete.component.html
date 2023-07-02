@@ -9,17 +9,17 @@
              (ngModelChange)="updateChanges()">
     <ng-template ng-option-tmp let-item="item">
       <a [routerLink]="['/series', item.pseudo]" class="h-14 flex items-center gap-x-3">
-        <div class="h-14 w-10">
+        <div class="w-3/12">
           <img class="object-cover" alt="thumbnail" [src]="item.thumbnailUrl">
         </div>
-        <div>
+        <div class="w-9/12 text-ellipsis overflow-hidden">
           {{ item.titleEn }} <br/>
           <small>{{ item.titleJpRom }}</small>
         </div>
       </a>
     </ng-template>
     <ng-template ng-label-tmp let-item="item">
-        <div class="translate-y-0.5">
+        <div class="translate-y-0.5 w-9/12 text-ellipsis overflow-hidden">
           {{ item.titleEn }}
       </div>
     </ng-template>

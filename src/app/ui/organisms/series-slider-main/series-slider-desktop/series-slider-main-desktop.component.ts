@@ -4,6 +4,7 @@ import { Series } from '@kakkoii/interfaces/series';
 import { SwiperProvider } from '@kakkoii/providers/swiper.provider';
 import { generateId } from '@kakkoii/utils/generate-id';
 import { RouterLink } from '@angular/router';
+import { NgIconComponent } from '@ng-icons/core';
 
 @Component({
   selector: 'kk-series-slider-main-desktop',
@@ -17,6 +18,7 @@ import { RouterLink } from '@angular/router';
     CommonModule,
     RouterLink,
     NgOptimizedImage,
+    NgIconComponent,
   ],
   standalone: true,
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
@@ -43,7 +45,7 @@ export class SeriesSliderMainDesktopComponent implements AfterViewInit {
         slidesPerView: 4.5,
         centeredSlides: true,
         slideToClickedSlide: true,
-        slideActiveClass: '!scale-110'
+        slideActiveClass: 'active-slide',
       });
 
       swiper.swiper.slideNext()
@@ -54,7 +56,5 @@ export class SeriesSliderMainDesktopComponent implements AfterViewInit {
         this.imageChange.emit(img.src)
       });
     }
-
-
   }
 }

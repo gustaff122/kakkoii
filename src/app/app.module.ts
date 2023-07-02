@@ -8,7 +8,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { FooterComponent } from '@kakkoii/ui/organisms/footer/footer.component';
 import { NgIconsModule, provideIcons } from '@ng-icons/core';
-import { matExpandMore, matHome, matSearch, matWifiOff, matArrowDropUp, matArrowDropDown } from  '@ng-icons/material-icons/baseline'
+import { matExpandMore, matHome, matSearch, matWifiOff, matArrowDropUp, matArrowDropDown, matPlayArrow } from  '@ng-icons/material-icons/baseline'
 import { matInfoOutline, matSavingsOutline } from  '@ng-icons/material-icons/outline'
 import { bootstrapTwitter, bootstrapDiscord, bootstrapFacebook } from  '@ng-icons/bootstrap-icons'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -40,7 +40,7 @@ import { NgProgressModule } from 'ngx-progressbar';
     }),
   ],
   providers: [
-    provideIcons({  matExpandMore, matHome, matSearch, matInfoOutline, matSavingsOutline, bootstrapTwitter, bootstrapDiscord, bootstrapFacebook, matWifiOff, matArrowDropUp, matArrowDropDown })
+    provideIcons({  matExpandMore, matHome, matSearch, matInfoOutline, matSavingsOutline, bootstrapTwitter, bootstrapDiscord, bootstrapFacebook, matWifiOff, matArrowDropUp, matArrowDropDown, matPlayArrow })
   ],
   bootstrap: [AppComponent]
 })

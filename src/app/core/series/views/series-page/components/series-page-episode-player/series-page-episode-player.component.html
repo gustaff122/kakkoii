@@ -49,7 +49,7 @@
         <div *ngIf="hasLinks$ | async" class="flex w-full justify-between items-center px-5 mt-5 lg:pt-0">
           <span class="font-bold">Tłumaczenie:</span>
           <div class="kk-select-dark kk-select-no-close w-48">
-            <ng-select (change)="changeTranslatorHandler()" formControlName="selectedTranslator" placeholder="Wybierz">
+            <ng-select [searchable]="false" (change)="changeTranslatorHandler()" formControlName="selectedTranslator" placeholder="Wybierz">
               <ng-option *ngFor="let link of links$ | async; let i = index" [value]="i">{{ link.translator }}</ng-option>
             </ng-select>
           </div>
@@ -58,7 +58,7 @@
         <div *ngIf="hasLinks$ | async" class="flex w-full justify-between px-5">
           <span class="font-bold">Serwis:</span>
           <div class="kk-select-dark kk-select-no-close w-48">
-            <ng-select formControlName="linkUrl" placeholder="Wybierz">
+            <ng-select [searchable]="false" formControlName="linkUrl" placeholder="Wybierz">
               <ng-option *ngFor="let link of linksMirrors$ | async" [value]="link.url">{{ link.mirror }}</ng-option>
             </ng-select>
           </div>

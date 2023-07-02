@@ -15,6 +15,24 @@ body {
   font-family: 'Lato', sans-serif;
 }
 
+.active-slide {
+  transform: scale(1.1) !important;
+}
+.swiper-noevents {
+  swiper-slide a {
+    pointer-events: none;
+  }
+
+  swiper-slide.active-slide a {
+    opacity: 1 !important;
+    pointer-events: auto;
+
+    .material-icons {
+      z-index: 50;
+    }
+  }
+}
+
 input {
   &::placeholder {
     color: #999999;

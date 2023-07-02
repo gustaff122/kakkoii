@@ -5,6 +5,7 @@ import { SwiperProvider } from '@kakkoii/providers/swiper.provider';
 import { generateId } from '@kakkoii/utils/generate-id';
 import { Pagination } from 'swiper';
 import { RouterLink } from '@angular/router';
+import { NgIconComponent } from '@ng-icons/core';
 
 @Component({
   selector: 'kk-series-slider-main-mobile',
@@ -18,6 +19,7 @@ import { RouterLink } from '@angular/router';
     CommonModule,
     RouterLink,
     NgOptimizedImage,
+    NgIconComponent,
   ],
   standalone: true,
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
@@ -47,7 +49,7 @@ export class SeriesSliderMainMobileComponent implements AfterViewInit {
         slideToClickedSlide: true,
         pagination: true,
         spaceBetween: 20,
-        slideActiveClass: '!scale-110'
+        slideActiveClass: 'active-slide',
       });
 
       swiper.swiper.slideNext()
