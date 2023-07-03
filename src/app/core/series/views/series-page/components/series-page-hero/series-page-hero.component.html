@@ -13,16 +13,11 @@
     <h1 class="font-saira font-bold text-3xl md:text-7xl">{{ series.titleJpRom }}</h1>
 
     <div class="font-noto-jp text-xs md:text-xl flex gap-x-1.5 md:gap-x-3">
-      <span>{{ series.titleEn }},</span>
-      <span>{{ series.titleJp }},</span>
-      <span *ngFor="let title of series.titlesAlt; let l = last">
-        <span *ngIf="l">
-          {{ title }}
-        </span>
-        <span *ngIf="!l">
-          {{ title }},
-        </span>
-      </span>
+      {{ series.titleEn }},&nbsp;&nbsp;
+      {{ series.titleJp }},&nbsp;&nbsp;
+      <ng-container *ngFor="let title of series.titlesAlt; let last = last">
+        {{ title }}{{ !last ? ',&nbsp;&nbsp;' : '' }}
+      </ng-container>
     </div>
 
     <div class="font-bold text-shade-of-grey text-[10px] md:text-base flex gap-x-1.5 md:gap-x-3 md:mt-8">

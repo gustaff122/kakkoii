@@ -36,7 +36,7 @@ export class SeriesCarouselComponent implements AfterViewInit {
     const swiper: any = this.document.querySelector(`#${this.id}-swiper`);
 
     if (swiper) {
-      this.swiperProvider.basic(swiper, {
+      this.swiperProvider.withPagination(swiper, {
         slideToClickedSlide: true,
         breakpoints: {
           0: {
