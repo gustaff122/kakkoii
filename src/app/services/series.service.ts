@@ -35,16 +35,16 @@ export class SeriesService {
 
     if (filters?.tags) {
       filters.tags.forEach(tag => {
-        params = params.append('tags', tag)
-      })
+        params = params.append('tags', tag);
+      });
     }
 
-    if (filters?.season) {
-      params = params.append('season', filters.season);
+    if (filters?.season_type) {
+      params = params.append('season_type', filters.season_type);
     }
 
-    if (filters?.year) {
-      params = params.append('year', filters.year);
+    if (filters?.season_year) {
+      params = params.append('season_year', filters.season_year);
     }
 
     return this.httpClient.get<{ series: Series[], totalCount: number }>(`${this.API_URL}/series`, { params });

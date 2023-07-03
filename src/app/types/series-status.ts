@@ -1,1 +1,1 @@
-export type SeriesStatus = 'ongoing' | 'finished' | 'upcoming' | 'tba' | 'aborted';
+export type SeriesStatus = 'Planowana' | 'Wstrzymana' | 'Porzucona' | 'Zakończona' | 'Wydawana';

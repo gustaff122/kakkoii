@@ -13,7 +13,7 @@ import { DirectionType } from '@kakkoii/types/direction-type';
   styleUrls: [ './series-page-episodes-list.component.scss' ],
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [
-    SeriesPageEpisodesListComponentStore
+    SeriesPageEpisodesListComponentStore,
   ],
   imports: [
     CommonModule,
@@ -36,21 +36,24 @@ export class SeriesPageEpisodesListComponent implements OnInit {
   }
 
   public ngOnInit(): void {
-    this.seriesPageEpisodesListComponentStore.getEpisodes({ direction: this.direction })
+    this.seriesPageEpisodesListComponentStore.getEpisodes({ direction: this.direction });
   }
 
   public loadEpisodesHandler(): void {
-    this.seriesPageEpisodesListComponentStore.getEpisodes({ direction: this.direction })
+    this.seriesPageEpisodesListComponentStore.getEpisodes({ direction: this.direction });
   }
 
   public setDirectionAscHandler(): void {
     this.direction = 'asc';
-    this.seriesPageEpisodesListComponentStore.changeDirection({ direction: this.direction })
+    this.seriesPageEpisodesListComponentStore.changeDirection({ direction: this.direction });
   }
 
   public setDirectionDescHandler(): void {
     this.direction = 'desc';
-    this.seriesPageEpisodesListComponentStore.changeDirection({ direction: this.direction })
+    this.seriesPageEpisodesListComponentStore.changeDirection({ direction: this.direction });
+  }
 
+  public trackByFn(_index: number, item: SeriesEpisode): number {
+    return item.episode_id;
   }
 }

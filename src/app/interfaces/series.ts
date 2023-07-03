@@ -1,28 +1,25 @@
-import { SeriesTags } from '@kakkoii/types/series-tags';
-import { SeriesAgeRating } from '@kakkoii/types/series-age-rating';
 import { SeriesType } from '@kakkoii/types/series-type';
+import { Season } from '@kakkoii/types/season';
 import { SeriesStatus } from '@kakkoii/types/series-status';
+import { SeriesTags } from '@kakkoii/types/series-tags';
 
 export interface Series {
-  _id: string;
-  pseudo: string;
-  titleEn: string;
-  titleJpRom: string;
-  titleJp: string;
-  titlesAlt?: string[];
-  startDate?: string;
-  endDate?: string;
-  synopsis: string;
-  tags: SeriesTags[];
-  thumbnailUrl?: string;
-  imageUrl?: string;
-  trailerUrl?: string;
-  ageRating: SeriesAgeRating;
-  type: SeriesType;
-  episodeDuration?: number;
-  episodesCount?: number;
-  nsfw?: boolean;
-  studio?: string;
+  anime_id: number;
+  nsfw: boolean;
+  anime_type: SeriesType;
+  title: string;
+  subtitles: string[];
+  description: string;
+  poster: string;
+  banner: string;
   status: SeriesStatus;
-  source: string;
+  season_type: Season;
+  season_year: number;
+  tags: SeriesTags[];
+  external_link_type: string;
+  external_link_value: string;
+  rating: number;
+  pseudo_link: string;
+  ep_count: number;
+  studio: string;
 }

@@ -1,4 +1,4 @@
-<nav *kkIsBreakpoint="768" class="absolute top-0 left-0 w-full flex items-center justify-between py-2 2xl:py-6 px-6 2xl:px-10 z-50">
+<nav *kkIsBreakpoint="768" class="absolute top-0 left-0 w-full flex items-center justify-between py-6 px-10 z-50">
   <a routerLink="/">
     <kk-logo></kk-logo>
   </a>
@@ -11,14 +11,18 @@
   </div>
 </nav>
 
-<nav *kkIsBreakpoint="0; max 767" >
+<nav *kkIsBreakpoint="0; max 767">
   <a routerLink="/" class="absolute top-0 left-0 p-4 z-50">
     <kk-logo></kk-logo>
   </a>
 
-  <nav class="bg-deep-black p-2 bottom-0 fixed flex justify-around items-center w-full z-50">
-    <a class="flex items-center" routerLink="/"><ng-icon name="matHome" class="text-3xl"></ng-icon></a>
-    <a class="flex items-center" routerLink="/browser"><ng-icon name="matSearch" class="text-3xl"></ng-icon></a>
+  <nav class="bg-almost-white text-smoky-black p-2 bottom-0 fixed flex justify-around items-center w-full z-50">
+    <a class="flex items-center" routerLink="/">
+      <ng-icon name="matHome" class="text-3xl"></ng-icon>
+    </a>
+    <a class="flex items-center" routerLink="/browser">
+      <ng-icon name="matSearch" class="text-3xl"></ng-icon>
+    </a>
   </nav>
 </nav>
 

@@ -7,24 +7,24 @@ import { SeriesEpisode } from '@kakkoii/interfaces/series-episode';
 import { EpisodesService } from '@kakkoii/services/episodes.service';
 import { ActivatedRoute } from '@angular/router';
 import { Paginator } from '@kakkoii/interfaces/paginator';
-import { SeriesFilteredLinks } from '@kakkoii/interfaces/series-filtered-links';
-import { SeriesLink } from '@kakkoii/interfaces/series-link';
+import { SeriesFilteredLinks } from '@kakkoii/interfaces/series-filtered-players';
+import { SeriesPlayer } from '@kakkoii/interfaces/series-player';
+import { SERIES } from '@kakkoii/resolvers/series-resolver/series.key';
 
 interface SeriesPageEpisodePlayerComponentState extends DefaultComponentState {
   episode: SeriesEpisode | null,
-  links: SeriesFilteredLinks[],
+  players: SeriesFilteredLinks[],
   selectedTranslator: number;
   episodesCount: number,
 }
 
 @Injectable()
 export class SeriesPageEpisodePlayerComponentStore extends DefaultComponentStore<SeriesPageEpisodePlayerComponentState> {
-
   public readonly episode$: Observable<SeriesEpisode> = this.select((state) => state.episode);
-  public readonly links$: Observable<SeriesFilteredLinks[]> = this.select((state) => state.links);
-  public readonly linksMirrors$: Observable<SeriesLink[]> = this.select((state) => state.links[state.selectedTranslator].links);
+  public readonly players$: Observable<SeriesFilteredLinks[]> = this.select((state) => state.players);
+  public readonly playersMirrors$: Observable<SeriesPlayer[]> = this.select((state) => state.players[state.selectedTranslator].players);
   public readonly episodesCount$: Observable<number | null> = this.select((state) => state.episodesCount);
-  public readonly hasLinks$: Observable<boolean> = this.select((state) => !!(state.episode && state.episode.links && state.episode.links.length > 0));
+  public readonly hasPlayers$: Observable<boolean> = this.select((state) => !!state.players);
 
   public readonly getEpisode = this.effect((origin$: Observable<{ epNumber: number, callbackFn: () => void }>) => {
     return origin$.pipe(
@@ -34,37 +34,36 @@ export class SeriesPageEpisodePlayerComponentStore extends DefaultComponentStore
         });
       }),
       exhaustMap(({ epNumber, callbackFn }) => {
-        const seriesPseudo = this.activatedRoute.snapshot.params['seriesPseudo']
+        const animeId = this.activatedRoute.snapshot.data[SERIES].anime_id;
         const paginator: Paginator = {
           page: 1,
           limit: 1,
-        }
+        };
 
         return forkJoin([
-          this.episodesService.getEpisode(seriesPseudo, epNumber),
-          this.episodesService.getEpisodes(seriesPseudo, paginator, 'asc')
+          this.episodesService.getEpisode(animeId, epNumber),
+          this.episodesService.getEpisodes(animeId, paginator, 'asc'),
         ])
           .pipe(
-            tapResponse(([episode, { totalCount }]) => {
-              const seriesLinks = episode.links;
-              const links = seriesLinks.reduce((acc, link) => {
+            tapResponse(([ { episode, players }, { totalCount } ]) => {
+              const links = players.reduce((acc, link) => {
                 const translator = link.translator;
 
                 const existingTranslator = acc.find(item => item.translator === translator);
                 if (existingTranslator) {
-                  existingTranslator.links.push(link);
+                  existingTranslator.players.push(link);
                 } else {
-                  acc.push({ translator, links: [link] });
+                  acc.push({ translator, players: [ link ] });
                 }
 
                 return acc;
               }, []);
 
               this.patchState({
-                  episode,
-                  links,
-                  episodesCount: totalCount,
-                  loading: false,
+                episode,
+                players: links,
+                episodesCount: totalCount,
+                loading: false,
               });
               callbackFn();
             }, ({ error }: HttpErrorResponse) => {
@@ -81,19 +80,19 @@ export class SeriesPageEpisodePlayerComponentStore extends DefaultComponentStore
   public readonly selectTranslator = this.updater((state, { selectedTranslator }: { selectedTranslator: number }): SeriesPageEpisodePlayerComponentState => {
     return {
       ...state,
-      selectedTranslator
+      selectedTranslator,
     };
   });
 
   constructor(
     private readonly episodesService: EpisodesService,
-    private readonly activatedRoute: ActivatedRoute
+    private readonly activatedRoute: ActivatedRoute,
   ) {
     super({
       episode: null,
       episodesCount: null,
       selectedTranslator: 0,
-      links: [],
+      players: [],
       loading: false,
       error: null,
     });

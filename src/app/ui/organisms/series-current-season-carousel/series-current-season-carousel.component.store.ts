@@ -6,6 +6,7 @@ import { DefaultComponentState, DefaultComponentStore } from '@kakkoii/utils/def
 import { Series } from '@kakkoii/interfaces/series';
 import { SeriesService } from '@kakkoii/services/series.service';
 import { Paginator } from '@kakkoii/interfaces/paginator';
+import { Season } from '@kakkoii/types/season';
 
 interface SeriesCurrentSeasonCarouselComponentState extends DefaultComponentState {
   series: Series[],
@@ -18,11 +19,11 @@ export class SeriesCurrentSeasonCarouselComponentStore extends DefaultComponentS
   public readonly hasSeries$: Observable<boolean> = this.select((state) => state.series.length > 0);
 
   public readonly getSeries = this.effect((origin$: Observable<void>) => {
-    const { season, year } = this.getSeason();
+    const { season_type, season_year } = this.getSeason();
     const paginator: Paginator = {
       page: 0,
-      limit: 12
-    }
+      limit: 12,
+    };
 
     return origin$.pipe(
       tap(() => {
@@ -31,14 +32,14 @@ export class SeriesCurrentSeasonCarouselComponentStore extends DefaultComponentS
         });
       }),
       exhaustMap(() => {
-        return this.seriesService.getSeriesList(paginator, { year, season })
+        return this.seriesService.getSeriesList(paginator, { season_year, season_type })
           .pipe(
             tapResponse(({ series }) => {
-              this.patchState( {
+              this.patchState({
                 series,
                 loading: false,
               });
-              }, ({ error }: HttpErrorResponse) => {
+            }, ({ error }: HttpErrorResponse) => {
               this.patchState({
                 loading: false,
                 error,
@@ -49,37 +50,37 @@ export class SeriesCurrentSeasonCarouselComponentStore extends DefaultComponentS
     );
   });
 
-  private getSeason(): { season: 'winter' | 'fall' | 'spring' | 'summer', year: number } {
-    const month = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+  private getSeason(): { season_type: Season, season_year: number } {
+    const month = [ 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December' ];
     const d = new Date();
     const monthName = month[d.getMonth()];
-    const year = d.getFullYear();
+    const season_year = d.getFullYear();
 
     switch (monthName) {
       case 'January':
       case 'February':
-        return { season: 'winter', year };
+        return { season_type: 'winter', season_year };
 
       case 'March':
       case 'April':
       case 'May':
-        return { season: 'spring', year };
+        return { season_type: 'spring', season_year };
 
       case 'June':
       case 'July':
       case 'August':
-        return { season: 'summer', year };
+        return { season_type: 'summer', season_year };
 
       case 'September':
       case 'October':
       case 'November':
-        return { season: 'fall', year };
+        return { season_type: 'autumn', season_year };
 
       case 'December':
-        return { season: 'winter', year: year + 1 }
+        return { season_type: 'winter', season_year: season_year + 1 };
 
       default:
-        return { season: 'winter', year }
+        return { season_type: 'winter', season_year };
     }
   }
 

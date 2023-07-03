@@ -1,44 +1,40 @@
-export type SeriesTags = 'Action'
-  | 'Adventure'
-  | 'Comedy'
-  | 'Drama'
-  | 'Slice of Life'
-  | 'Fantasy'
-  | 'Magic'
-  | 'Supernatural'
-  | 'Horror'
-  | 'Mystery'
-  | 'Psychological'
-  | 'Romance'
-  | 'Sci-Fi'
-  | 'Cyberpunk'
-  | 'Game'
-  | 'Ecchi'
-  | 'Demons'
-  | 'Harem'
-  | 'Josei'
-  | 'Martial Arts'
-  | 'Kids'
-  | 'Historical'
-  | 'Hentai'
-  | 'Isekai'
-  | 'Military'
-  | 'Mecha'
-  | 'Music'
-  | 'Parody'
-  | 'Police'
-  | 'Post-Apocalyptic'
-  | 'Reverse Harem'
-  | 'School'
-  | 'Seinen'
-  | 'Shoujo'
-  | 'Shoujo-ai'
-  | 'Shounen'
-  | 'Shounen-ai'
-  | 'Space'
-  | 'Sports'
-  | 'Super Power'
-  | 'Tragedy'
-  | 'Vampire'
-  | 'Yuri'
-  | 'Yaoi';
+export type SeriesTags = 'Isekai' |
+  'Demony' |
+  'Wampiry' |
+  'Cringe' |
+  'Muzyczne' |
+  'Sztuki Walki' |
+  'Wyścigowe' |
+  'Seinen' |
+  'Magia' |
+  'Romans' |
+  'Fantasy' |
+  'Akcja' |
+  'Shounen' |
+  'Shoujo' |
+  'Samuraje' |
+  'Psychologiczne' |
+  'Thriller' |
+  'Shoujo Ai' |
+  'Harem' |
+  'Okruchy Życia' |
+  'Nadprzyrodzone' |
+  'Gra' |
+  'Przygodowe' |
+  'Sportowe' |
+  'Mecha' |
+  'Ecchi' |
+  'Zombie' |
+  'Zagadki/Tajemnice' |
+  'Sci-Fi' |
+  'Komedia' |
+  'Wojskowe' |
+  'Josei' |
+  'Parodia' |
+  'Historyczne' |
+  'Shounen Ai' |
+  'Horror' |
+  'Szkolne' |
+  'Dramat' |
+  'Super moce'
+

@@ -3,15 +3,18 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
 @Pipe({
   name: 'playerUrl',
-  standalone: true
+  standalone: true,
 })
 
 export class PlayerUrlPipe implements PipeTransform {
-  constructor(private readonly sanitizer: DomSanitizer) {
+  constructor(
+    private readonly sanitizer: DomSanitizer,
+  ) {
   }
-  transform(url: string): SafeResourceUrl {
+
+  public transform(url: string): SafeResourceUrl {
     const domain = (new URL(url));
-    const domainName = domain.hostname.replace('www.','');
+    const domainName = domain.hostname.replace('www.', '');
 
     let playerUrl;
 
@@ -23,10 +26,10 @@ export class PlayerUrlPipe implements PipeTransform {
           const videoId = match[1];
           playerUrl = `https://ebd.cda.pl/1080x720/${videoId}`;
         }
-        break
+        break;
       }
       default: {
-        playerUrl = url
+        playerUrl = url;
       }
     }
 

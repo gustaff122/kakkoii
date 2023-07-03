@@ -12,7 +12,7 @@ import { NgIconComponent } from '@ng-icons/core';
   styleUrls: [ './series-slider-main-desktop.component.scss' ],
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [
-    SwiperProvider
+    SwiperProvider,
   ],
   imports: [
     CommonModule,
@@ -27,7 +27,7 @@ export class SeriesSliderMainDesktopComponent implements AfterViewInit {
 
   @Output() public readonly imageChange: EventEmitter<string> = new EventEmitter<string>();
 
-  @Input() series: Series[]
+  @Input() series: Series[];
 
   public readonly id = generateId();
 
@@ -42,18 +42,34 @@ export class SeriesSliderMainDesktopComponent implements AfterViewInit {
 
     if (swiper) {
       this.swiperProvider.basic(swiper, {
-        slidesPerView: 4.5,
         centeredSlides: true,
         slideToClickedSlide: true,
         slideActiveClass: 'active-slide',
+        breakpoints: {
+          768: {
+            slidesPerView: 2.5,
+          },
+          1024: {
+            slidesPerView: 3.5,
+          },
+          1280: {
+            slidesPerView: 4,
+          },
+          1536: {
+            slidesPerView: 4.5,
+          },
+          2140: {
+            slidesPerView: 4.5,
+          },
+        },
       });
 
-      swiper.swiper.slideNext()
-      swiper.swiper.slideNext()
+      swiper.swiper.slideNext();
+      swiper.swiper.slideNext();
 
       swiper.addEventListener('slidechange', () => {
-        const img: any = this.document.querySelector(`#${this.id}-swiper-img-${swiper.swiper.activeIndex}`)
-        this.imageChange.emit(img.src)
+        const img: any = this.document.querySelector(`#${this.id}-swiper-img-${swiper.swiper.activeIndex}`);
+        this.imageChange.emit(img.src);
       });
     }
   }

@@ -17,14 +17,14 @@
 </div>
 
 <ng-template #contentTpl>
-  <a [routerLink]="[episode.number]" fragment="episodePlayer" *ngFor="let episode of (episodes$ | async)" class="w-full flex bg-deep-black hover:opacity-70 transition-opacity">
+  <a [routerLink]="[item.episode_no]" fragment="episodePlayer" *ngFor="let item of (episodes$ | async); trackBy: trackByFn" class="w-full flex bg-deep-black hover:opacity-70 transition-opacity">
     <div class="aspect-square bg-sky-blue font-josefin text-4xl w-3/12 flex items-center justify-center">
-      <span class="translate-y-0.5" *ngIf="episode.number < 10">0{{ episode.number }}</span>
-      <span class="translate-y-0.5" *ngIf="episode.number >= 10">{{ episode.number }}</span>
+      <span class="translate-y-0.5" *ngIf="item.episode_no === 0">01</span>
+      <span class="translate-y-0.5" *ngIf="item.episode_no < 10 && item.episode_no !== 0">0{{ item.episode_no }}</span>
+      <span class="translate-y-0.5" *ngIf="item.episode_no >= 10">{{ item.episode_no }}</span>
     </div>
     <div class="h-full w-9/12 flex flex-col justify-center gap-y-1 px-4 py-2">
-      <p class="text-md">{{ episode.titleEn }}</p>
-      <p class="text-xs text-shade-of-grey">{{ episode.aired | date: 'dd.MM.yyyy' }}</p>
+      <p class="text-md">{{ item.title }}</p>
     </div>
   </a>
   <button *ngIf="canLoadMore$ | async" (click)="loadEpisodesHandler()" class="w-full flex bg-deep-black hover:opacity-70 transition-opacity">
@@ -39,7 +39,7 @@
 </ng-template>
 
 <ng-template #loadingTpl>
-  <div *ngFor="let _ of [].constructor(24)" class="w-full flex bg-deep-black animate-pulse">
+  <div *ngFor="let _ of [].constructor(12)" class="w-full flex bg-deep-black animate-pulse">
     <div class="aspect-square bg-sky-blue font-josefin text-4xl w-3/12 flex items-center justify-center">
     </div>
     <div class="h-full w-9/12 flex flex-col justify-center gap-y-1 px-4 py-2">

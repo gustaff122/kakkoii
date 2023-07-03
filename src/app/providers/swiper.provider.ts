@@ -24,7 +24,8 @@ export class SwiperProvider {
       `,
       ],
       ...options,
-    });  }
+    });
+  }
 
   public withPagination(swiper: any, options: SwiperOptions): void {
     this.swiper = swiper;
@@ -37,7 +38,7 @@ export class SwiperProvider {
             transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1) !important;
             transition-duration: 150ms !important;
           }
-        
+
           div.swiper-wrapper {
             padding-bottom: 1rem;
           }
@@ -45,22 +46,22 @@ export class SwiperProvider {
             width: 1.5rem;
             border-radius: 5px;
           }
-          
+
           span.swiper-pagination-bullet:not(.swiper-pagination-bullet-active) {
             position: relative;
             opacity: 1;
             height: 0.2rem;
             bottom: -14px;
           }
-          
+
           span.swiper-pagination-bullet:not(.swiper-pagination-bullet-active) {
             background: var(--almost-white);
           }
-          
+
           span.swiper-pagination-bullet.swiper-pagination-bullet-active {
             background: var(--royal-blue);
           }
-          
+
           span.swiper-pagination-bullet.swiper-pagination-bullet-active {
             position: relative;
             opacity: 1;

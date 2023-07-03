@@ -20,7 +20,7 @@ export class HomeHeroMobileComponent {
   @Output() public readonly startWatchingBtn: EventEmitter<void> = new EventEmitter<void>();
 
   public readonly series: Series[] = this.activatedRoute.snapshot.data[HOME];
-  public currentBgImage = this.series[2].imageUrl
+  public currentBgImage = this.series[2].banner;
 
   constructor(
     private readonly activatedRoute: ActivatedRoute,
@@ -28,10 +28,10 @@ export class HomeHeroMobileComponent {
   }
 
   public changeCurrentBgImage(imgUrl: string): void {
-    this.currentBgImage = imgUrl
+    this.currentBgImage = imgUrl;
   }
 
   public startWatchingButtonFn(): void {
-    this.startWatchingBtn.emit()
+    this.startWatchingBtn.emit();
   }
 }

@@ -12,7 +12,7 @@ import { RouterLink } from '@angular/router';
   styleUrls: [ './series-page-relations.component.scss' ],
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [
-    SeriesPageRelationsComponentStore
+    SeriesPageRelationsComponentStore,
   ],
   imports: [
     CommonModule,
@@ -22,18 +22,18 @@ import { RouterLink } from '@angular/router';
   standalone: true,
 })
 export class SeriesPageRelationsComponent implements OnInit {
-  @Input() public seriesId: string;
+  @Input() public seriesId: number;
 
   public readonly relations$: Observable<SeriesRelation[]> = this.seriesPageRelationsComponentStore.relations$;
   public readonly hasRelations$: Observable<boolean> = this.seriesPageRelationsComponentStore.hasRelations$;
   public readonly loading$: Observable<boolean> = this.seriesPageRelationsComponentStore.loading$;
 
   constructor(
-    @Self() private readonly seriesPageRelationsComponentStore: SeriesPageRelationsComponentStore
+    @Self() private readonly seriesPageRelationsComponentStore: SeriesPageRelationsComponentStore,
   ) {
   }
 
   public ngOnInit(): void {
-    this.seriesPageRelationsComponentStore.getRelations({ seriesId: this.seriesId })
+    this.seriesPageRelationsComponentStore.getRelations({ seriesId: this.seriesId });
   }
 }

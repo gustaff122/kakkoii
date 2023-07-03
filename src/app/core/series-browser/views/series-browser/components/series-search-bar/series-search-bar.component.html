@@ -1,68 +1,78 @@
-<div class="w-full rounded bg-smooth-black py-2 px-6">
+<div class="w-full rounded bg-smooth-black py-5 px-6">
   <form [formGroup]="form">
     <div class="flex flex-col gap-y-2">
       <label for="name">Tytuł</label>
-      <input formControlName="name" autocomplete="off" class="bg-chilly-black px-3 py-2 rounded-sm outline-none" id="name" placeholder="Na co masz dzisiaj ochotę?">
+      <div class="relative">
+        <input formControlName="name" autocomplete="off"
+               class="w-full bg-chilly-black ps-3 pe-32 py-2 rounded-sm outline-none" id="name"
+               placeholder="Szukaj...">
+        <div class="absolute h-full px-3 py-1.5 top-0 right-0">
+          <button (click)="dropDownHandler()"
+                  class="hover:opacity-80 transition-opacity bg-royal-blue px-3 gap-x-2 flex justify-center items-center h-full rounded shadow shadow-slate-700">
+            <ng-icon class="text-xl pr-3" name="matTune"></ng-icon>
+            <span class="translate-y-0.5 font-josefin">Opcje</span>
+          </button>
+        </div>
+      </div>
     </div>
 
-    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-x-3 gap-y-2 mt-4">
-      <div class="flex flex-col gap-y-2">
-        <label for="status">Status</label>
-        <div id="status" class="kk-select-dark">
-          <ng-select placeholder="Wszystkie" formControlName="status">
-            <ng-option value="ongoing">Wychodzące</ng-option>
-            <ng-option value="finished">Zakończone</ng-option>
-            <ng-option value="upcoming">Nadchodzące</ng-option>
-            <ng-option value="tba">Wstrzymane</ng-option>
-            <ng-option value="aborted">Zapowiedziane</ng-option>
-          </ng-select>
-        </div>
-      </div>
-
-      <div class="flex flex-col gap-y-2">
-        <label for="type">Typ</label>
-        <div id="type" class="kk-select-dark">
-          <ng-select placeholder="Wszystkie" formControlName="type">
-            <ng-option value="tv">TV</ng-option>
-            <ng-option value="ova">OVA</ng-option>
-            <ng-option value="movie">Film</ng-option>
-            <ng-option value="ona">ONA</ng-option>
-            <ng-option value="special">Special</ng-option>
-          </ng-select>
-        </div>
-      </div>
-
-      <div class="flex flex-col gap-y-2">
+    <div *ngIf="droppedDown$ | async" @dropDownMenu class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-x-3 gap-y-2 mt-4">
+      <div class="menu-item col-span-2 lg:col-span-1 flex flex-col gap-y-2">
         <label for="tags">Tagi</label>
         <div id="tags" class="kk-select-dark">
-          <ng-select [items]="tagsData" bindValue="value" bindLabel="label" [multiple]="true" placeholder="Wszystkie" formControlName="tags">
+          <ng-select [items]="tagsData" bindValue="value" bindLabel="label" [multiple]="true" placeholder="Wszystkie"
+                     formControlName="tags">
             <ng-template ng-multi-label-tmp let-items="items">
               <div class="rounded-lg mx-0.5 bg-royal-blue px-3 mb-1" *ngFor="let item of items | slice:0:1">
                 <span class="text-xs leading-7">{{ $any(item).label }}</span>
               </div>
               <div class="rounded-lg mx-0.5 bg-royal-blue px-3 mb-1" *ngIf="items.length > 1">
-                <span class="text-xs leading-7">{{items.length - 1}} więcej...</span>
+                <span class="text-xs leading-7">{{ items.length - 1}} więcej...</span>
               </div>
             </ng-template>
           </ng-select>
         </div>
       </div>
 
-      <div class="flex flex-col gap-y-2">
-        <label for="season">Sezon</label>
-        <div id="season" class="kk-select-dark">
-          <ng-select placeholder="Wszystkie" formControlName="season">
-            <ng-option value="winter">Zima</ng-option>
-            <ng-option value="spring">Wiosna</ng-option>
-            <ng-option value="summer">Lato</ng-option>
-            <ng-option value="fall">Jesień</ng-option>
+      <div class="menu-item flex flex-col gap-y-2">
+        <label for="status">Status</label>
+        <div id="status" class="kk-select-dark">
+          <ng-select placeholder="Wszystkie" formControlName="status">
+            <ng-option value="Wydawana">Wydawane</ng-option>
+            <ng-option value="Zakończona">Zakończone</ng-option>
+            <ng-option value="Planowana">Planowane</ng-option>
+            <ng-option value="Wstrzymana">Wstrzymane</ng-option>
+            <ng-option value="Porzucona">Porzucone</ng-option>
           </ng-select>
         </div>
       </div>
 
-      <div class="flex flex-col gap-y-2">
+      <div class="menu-item flex flex-col gap-y-2">
+        <label for="type">Typ</label>
+        <div id="type" class="kk-select-dark">
+          <ng-select placeholder="Wszystkie" formControlName="type">
+            <ng-option value="tv">TV</ng-option>
+            <ng-option value="movie">Film</ng-option>
+          </ng-select>
+        </div>
+      </div>
+
+      <div class="menu-item flex flex-col gap-y-2">
+        <label for="season">Sezon</label>
+        <div id="season" class="kk-select-dark">
+          <ng-select placeholder="Wszystkie" formControlName="season_type">
+            <ng-option value="winter">Zima</ng-option>
+            <ng-option value="spring">Wiosna</ng-option>
+            <ng-option value="summer">Lato</ng-option>
+            <ng-option value="autumn">Jesień</ng-option>
+          </ng-select>
+        </div>
+      </div>
+
+      <div class="menu-item flex flex-col gap-y-2">
         <label for="name">Rok</label>
-        <input type="number" formControlName="year" autocomplete="off" class="bg-chilly-black px-3 py-1.5 rounded-sm outline-none" id="year" placeholder="Wszystkie">
+        <input type="number" formControlName="season_year" autocomplete="off"
+               class="bg-chilly-black px-3 py-1.5 rounded-sm outline-none" id="year" placeholder="Wszystkie">
       </div>
     </div>
   </form>

@@ -9,6 +9,7 @@
 @import "app/styles/fonts";
 @import "app/styles/scrollbar";
 @import "app/styles/ng-select";
+@import "app/styles/swiper.scss";
 
 
 body {
@@ -20,6 +21,7 @@ body {
 .active-slide {
   transform: scale(1.1) !important;
 }
+
 .swiper-noevents {
   swiper-slide a {
     pointer-events: none;

@@ -2,6 +2,8 @@ import { Component, Input } from '@angular/core';
 import { Series } from '@kakkoii/interfaces/series';
 import { RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { TagsPipe } from '@kakkoii/pipes/tags.pipe';
+import { ImgFallbackDirective } from '@kakkoii/directives/img-fallback.directive';
 
 @Component({
   selector: 'kk-series-thumbnail',
@@ -11,8 +13,10 @@ import { CommonModule } from '@angular/common';
   imports: [
     CommonModule,
     RouterLink,
+    TagsPipe,
+    ImgFallbackDirective,
   ],
 })
 export class SeriesThumbnailComponent {
-  @Input() public series: Series
+  @Input() public series: Series;
 }

@@ -4,6 +4,8 @@ import { Series } from '@kakkoii/interfaces/series';
 import { RouterLink } from '@angular/router';
 import { SwiperProvider } from '@kakkoii/providers/swiper.provider';
 import { generateId } from '@kakkoii/utils/generate-id';
+import { Navigation } from 'swiper';
+import { NgIconComponent } from '@ng-icons/core';
 
 @Component({
   selector: 'kk-series-carousel',
@@ -11,12 +13,13 @@ import { generateId } from '@kakkoii/utils/generate-id';
   styleUrls: [ './series-carousel.component.scss' ],
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [
-    SwiperProvider
+    SwiperProvider,
   ],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
   imports: [
     CommonModule,
     RouterLink,
+    NgIconComponent,
   ],
   standalone: true,
 })
@@ -36,30 +39,35 @@ export class SeriesCarouselComponent implements AfterViewInit {
     const swiper: any = this.document.querySelector(`#${this.id}-swiper`);
 
     if (swiper) {
-      this.swiperProvider.basic(swiper, {
+      this.swiperProvider.withPagination(swiper, {
+        modules: [ Navigation ],
+        navigation: {
+          nextEl: '.swiper-button-next-unique',
+          prevEl: '.swiper-button-prev-unique',
+        },
         slideToClickedSlide: true,
         breakpoints: {
           0: {
             slidesPerView: 2.5,
-            spaceBetween: 10
+            spaceBetween: 10,
           },
           768: {
             slidesPerView: 3,
-            spaceBetween: 30
+            spaceBetween: 30,
           },
           1024: {
             slidesPerView: 4,
-            spaceBetween: 40
+            spaceBetween: 40,
           },
           1280: {
             slidesPerView: 6,
-            spaceBetween: 40
+            spaceBetween: 40,
           },
           1536: {
             slidesPerView: 7,
-            spaceBetween: 40
-          }
-        }
+            spaceBetween: 40,
+          },
+        },
       });
     }
   }

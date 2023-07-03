@@ -2,10 +2,11 @@
   <kk-series-page-hero (startWatchingBtn)="scrollTo(episodes)" [series]="series"></kk-series-page-hero>
 </div>
 
-<div class="px-4 md:px-16 py-4" @opacityAnimation #episodes>
-  <router-outlet></router-outlet>
+
+<div class="py-4">
+  <kk-series-page-relations [seriesId]="series.anime_id"></kk-series-page-relations>
 </div>
 
-<div>
-  <kk-series-page-relations [seriesId]="series._id"></kk-series-page-relations>
+<div class="px-4 md:px-16 py-4" #episodes>
+  <router-outlet></router-outlet>
 </div>

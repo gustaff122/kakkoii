@@ -19,6 +19,6 @@ import { SeriesCurrentSeasonCarouselComponent } from '@kakkoii/ui/organisms/seri
 })
 export class HomeComponent {
   public scrollTo(el: HTMLElement): void {
-    el.scrollIntoView({behavior: 'smooth'});
+    el.scrollIntoView({ behavior: 'smooth' });
   }
 }

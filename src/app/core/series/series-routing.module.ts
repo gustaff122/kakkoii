@@ -8,6 +8,8 @@ import { SeriesPageComponent } from './views/series-page/series-page.component';
 import { SeriesPageEpisodesListComponent } from './views/series-page/components/series-page-episodes-list/series-page-episodes-list.component';
 import { SeriesPageEpisodePlayerComponent } from './views/series-page/components/series-page-episode-player/series-page-episode-player.component';
 import { episodeAvailableGuard } from '@kakkoii/guards/episode-available.guard';
+import { EPISODE } from '@kakkoii/resolvers/episode-resolver/episode.key';
+import { episodeResolver } from '@kakkoii/resolvers/episode-resolver/episode.resolver';
 
 const routes: Routes = [
   {
@@ -24,25 +26,28 @@ const routes: Routes = [
         component: SeriesPageComponent,
         canActivate: [ seriesExistsGuard ],
         resolve: {
-          [SERIES]: seriesResolver
+          [SERIES]: seriesResolver,
         },
         children: [
           {
             path: '',
             redirectTo: 'episodes',
-            pathMatch: 'full'
+            pathMatch: 'full',
           },
           {
             path: 'episodes',
             component: SeriesPageEpisodesListComponent,
           },
           {
-            path: 'episodes/:epNumber',
+            path: 'episodes/:episode_no',
             component: SeriesPageEpisodePlayerComponent,
             canActivate: [ episodeAvailableGuard ],
-            runGuardsAndResolvers: 'always'
+            resolve: {
+              [EPISODE]: episodeResolver,
+            },
+            runGuardsAndResolvers: 'always',
           },
-        ]
+        ],
       },
       {
         path: '**',

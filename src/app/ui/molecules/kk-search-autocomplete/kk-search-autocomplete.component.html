@@ -10,17 +10,16 @@
     <ng-template ng-option-tmp let-item="item">
       <a [routerLink]="['/series', item.pseudo]" class="h-14 flex items-center gap-x-3">
         <div class="w-3/12">
-          <img class="object-cover" alt="thumbnail" [src]="item.thumbnailUrl">
+          <img class="object-cover" alt="thumbnail" [src]="item.poster">
         </div>
         <div class="w-9/12 text-ellipsis overflow-hidden">
-          {{ item.titleEn }} <br/>
-          <small>{{ item.titleJpRom }}</small>
+          {{ item.title }} <br/>
         </div>
       </a>
     </ng-template>
     <ng-template ng-label-tmp let-item="item">
-        <div class="translate-y-0.5 w-9/12 text-ellipsis overflow-hidden">
-          {{ item.titleEn }}
+      <div class="translate-y-0.5 w-9/12 text-ellipsis overflow-hidden">
+        {{ item.titleEn }}
       </div>
     </ng-template>
   </ng-select>

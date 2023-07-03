@@ -9,9 +9,9 @@ import { LoadingSpinnerComponent } from '@kakkoii/utils/loading-spinner/loading-
 import { SeriesEpisode } from '@kakkoii/interfaces/series-episode';
 import { PlayerUrlPipe } from '@kakkoii/pipes/player-url.pipe';
 import { NgSelectModule } from '@ng-select/ng-select';
-import { SeriesFilteredLinks } from '@kakkoii/interfaces/series-filtered-links';
+import { SeriesFilteredLinks } from '@kakkoii/interfaces/series-filtered-players';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { SeriesLink } from '@kakkoii/interfaces/series-link';
+import { SeriesPlayer } from '@kakkoii/interfaces/series-player';
 import { NgScrollbarModule } from 'ngx-scrollbar';
 
 interface SelectedTranslatorForm {
@@ -25,7 +25,7 @@ interface SelectedTranslatorForm {
   styleUrls: [ './series-page-episode-player.component.scss' ],
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [
-    SeriesPageEpisodePlayerComponentStore
+    SeriesPageEpisodePlayerComponentStore,
   ],
   imports: [
     CommonModule,
@@ -40,46 +40,48 @@ interface SelectedTranslatorForm {
   standalone: true,
 })
 export class SeriesPageEpisodePlayerComponent implements OnInit {
-  public readonly epNumber: string = this.activatedRoute.snapshot.params['epNumber'];
-  public readonly titleEn: string = this.activatedRoute.snapshot.data[SERIES].titleEn;
+  public readonly epNumber: string = this.activatedRoute.snapshot.params['episode_no'];
+  public readonly title: string = this.activatedRoute.snapshot.data[SERIES].title;
 
   public form: FormGroup<SelectedTranslatorForm>;
 
   public readonly loading$: Observable<boolean> = this.seriesPageEpisodesListComponentStore.loading$;
   public readonly episode$: Observable<SeriesEpisode> = this.seriesPageEpisodesListComponentStore.episode$;
-  public readonly links$: Observable<SeriesFilteredLinks[]> = this.seriesPageEpisodesListComponentStore.links$;
-  public readonly hasLinks$: Observable<boolean> = this.seriesPageEpisodesListComponentStore.hasLinks$;
-  public readonly linksMirrors$: Observable<SeriesLink[]> = this.seriesPageEpisodesListComponentStore.linksMirrors$;
+  public readonly players$: Observable<SeriesFilteredLinks[]> = this.seriesPageEpisodesListComponentStore.players$;
+  public readonly hasPlayers$: Observable<boolean> = this.seriesPageEpisodesListComponentStore.hasPlayers$;
+  public readonly playersMirrors$: Observable<SeriesPlayer[]> = this.seriesPageEpisodesListComponentStore.playersMirrors$;
   public readonly episodesCount$: Observable<number | null> = this.seriesPageEpisodesListComponentStore.episodesCount$;
 
   constructor(
     @Self() private readonly seriesPageEpisodesListComponentStore: SeriesPageEpisodePlayerComponentStore,
     private readonly activatedRoute: ActivatedRoute,
-    private readonly formBuilder: FormBuilder
+    private readonly formBuilder: FormBuilder,
   ) {
   }
 
   public ngOnInit(): void {
-    this.seriesPageEpisodesListComponentStore.getEpisode({ epNumber: parseInt(this.epNumber), callbackFn: () => {
+    this.seriesPageEpisodesListComponentStore.getEpisode({
+      epNumber: parseInt(this.epNumber), callbackFn: () => {
         this.buildForm();
-      } });
+      },
+    });
   }
 
   public changeTranslatorHandler(): void {
     const selectedTranslator = this.form.get('selectedTranslator').value;
 
-    this.seriesPageEpisodesListComponentStore.selectTranslator({ selectedTranslator })
-    firstValueFrom(this.linksMirrors$).then((links) => {
-      this.form.patchValue({ linkUrl: links[0].url })
-    })
+    this.seriesPageEpisodesListComponentStore.selectTranslator({ selectedTranslator });
+    firstValueFrom(this.playersMirrors$).then((links) => {
+      this.form.patchValue({ linkUrl: links[0].player_link });
+    });
   }
 
   private buildForm(): void {
-    firstValueFrom(this.linksMirrors$).then((links) => {
+    firstValueFrom(this.playersMirrors$).then((links) => {
       this.form = this.formBuilder.group<SelectedTranslatorForm>({
         selectedTranslator: new FormControl(0),
-        linkUrl: new FormControl(links ? links[0].url : null)
+        linkUrl: new FormControl(links ? links[0].player_link : null),
       });
-    })
+    });
   }
 }

@@ -8,6 +8,9 @@ import { Observable } from 'rxjs';
 import { SeriesSearchBarComponent } from './components/series-search-bar/series-search-bar.component';
 import { InfiniteScrollComponent } from '@kakkoii/utils/infinite-scroll/infinite-scroll.component';
 import { SeriesListFilters } from '@kakkoii/interfaces/series-list-filters';
+import {
+  SeriesCurrentSeasonCarouselComponent,
+} from '@kakkoii/ui/organisms/series-current-season-carousel/series-current-season-carousel.component';
 
 @Component({
   selector: 'kk-series-browser',
@@ -15,7 +18,7 @@ import { SeriesListFilters } from '@kakkoii/interfaces/series-list-filters';
   styleUrls: [ './series-browser.component.scss' ],
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [
-    SeriesBrowserComponentStore
+    SeriesBrowserComponentStore,
   ],
   standalone: true,
   imports: [
@@ -24,6 +27,7 @@ import { SeriesListFilters } from '@kakkoii/interfaces/series-list-filters';
     SeriesListComponent,
     SeriesSearchBarComponent,
     InfiniteScrollComponent,
+    SeriesCurrentSeasonCarouselComponent,
   ],
 })
 export class SeriesBrowserComponent {
@@ -33,17 +37,17 @@ export class SeriesBrowserComponent {
   public readonly totalCount$: Observable<number | null> = this.seriesBrowserComponentStore.totalCount$;
 
   constructor(
-    @Self() private readonly seriesBrowserComponentStore: SeriesBrowserComponentStore
+    @Self() private readonly seriesBrowserComponentStore: SeriesBrowserComponentStore,
   ) {
   }
 
   public getFirstPageHandler(filters: Partial<SeriesListFilters>): void {
-    if (filters.year || filters.season || filters.status || filters.tags || filters.name || filters.type) {
-      this.seriesBrowserComponentStore.getSeries({ filters })
+    if (filters.season_year || filters.season_type || filters.status || filters.tags || filters.name || filters.type) {
+      this.seriesBrowserComponentStore.getSeries({ filters });
     }
   }
 
   public nextPageHandler(): void {
-    this.seriesBrowserComponentStore.getNextPage()
+    this.seriesBrowserComponentStore.getNextPage();
   }
 }

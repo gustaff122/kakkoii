@@ -13,6 +13,7 @@ interface SeriesBrowserComponentState extends DefaultComponentState {
   filters: Partial<SeriesListFilters> | null;
   totalCount: number | null,
   page: number,
+  droppedDown: boolean;
 }
 
 @Injectable()
@@ -21,6 +22,8 @@ export class SeriesBrowserComponentStore extends DefaultComponentStore<SeriesBro
   public readonly series$: Observable<Series[]> = this.select((state) => state.series);
   public readonly totalCount$: Observable<number | null> = this.select((state) => state.totalCount);
   public readonly filters$: Observable<Partial<SeriesListFilters> | null> = this.select((state) => state.filters);
+
+  public readonly droppedDown$: Observable<boolean> = this.select(state => state.droppedDown)
 
   public readonly getSeries = this.effect((origin$: Observable<{ filters: Partial<SeriesListFilters> }>) => {
     return origin$.pipe(
@@ -94,6 +97,13 @@ export class SeriesBrowserComponentStore extends DefaultComponentStore<SeriesBro
     );
   });
 
+  public readonly dropDown = this.updater((state): SeriesBrowserComponentState => {
+    return {
+      ...state,
+      droppedDown: !state.droppedDown
+    };
+  });
+
   constructor(
     private readonly seriesService: SeriesService
   ) {
@@ -102,6 +112,7 @@ export class SeriesBrowserComponentStore extends DefaultComponentStore<SeriesBro
       filters: null,
       page: 0,
       totalCount: null,
+      droppedDown: false,
       loading: false,
       error: null,
     });

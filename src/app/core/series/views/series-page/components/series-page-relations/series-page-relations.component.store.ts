@@ -16,7 +16,7 @@ export class SeriesPageRelationsComponentStore extends DefaultComponentStore<Ser
   public readonly relations$: Observable<SeriesRelation[]> = this.select((state) => state.relations);
   public readonly hasRelations$: Observable<boolean> = this.select((state) => state.relations.length > 0);
 
-  public readonly getRelations = this.effect((origin$: Observable<{ seriesId: string }>) => {
+  public readonly getRelations = this.effect((origin$: Observable<{ seriesId: number }>) => {
     return origin$.pipe(
       tap(() => {
         this.patchState({
@@ -27,11 +27,11 @@ export class SeriesPageRelationsComponentStore extends DefaultComponentStore<Ser
         return this.relationsService.getSeriesRelations(seriesId)
           .pipe(
             tapResponse((relations) => {
-              this.patchState( {
+              this.patchState({
                 relations: relations,
                 loading: false,
               });
-              }, ({ error }: HttpErrorResponse) => {
+            }, ({ error }: HttpErrorResponse) => {
               this.patchState({
                 loading: false,
                 error,

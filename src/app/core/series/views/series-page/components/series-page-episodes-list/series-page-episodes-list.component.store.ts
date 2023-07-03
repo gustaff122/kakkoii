@@ -8,6 +8,7 @@ import { EpisodesService } from '@kakkoii/services/episodes.service';
 import { Paginator } from '@kakkoii/interfaces/paginator';
 import { ActivatedRoute } from '@angular/router';
 import { DirectionType } from '@kakkoii/types/direction-type';
+import { SERIES } from '@kakkoii/resolvers/series-resolver/series.key';
 
 interface SeriesPageEpisodesListComponentState extends DefaultComponentState {
   episodes: SeriesEpisode[],
@@ -27,11 +28,11 @@ export class SeriesPageEpisodesListComponentStore extends DefaultComponentStore<
       tap(() => {
         this.patchState({
           loading: true,
-          page: 1
+          page: 1,
         });
       }),
       exhaustMap(({ direction }) => {
-        const seriesPseudo = this.activatedRoute.snapshot.params['seriesPseudo']
+        const anime_id = this.activatedRoute.snapshot.data[SERIES].anime_id;
         const page = this.get().page;
 
         const paginator: Paginator = {
@@ -39,7 +40,7 @@ export class SeriesPageEpisodesListComponentStore extends DefaultComponentStore<
           page,
         };
 
-        return this.episodesService.getEpisodes(seriesPseudo, paginator, direction)
+        return this.episodesService.getEpisodes(anime_id, paginator, direction)
           .pipe(
             tapResponse(({ episodes, totalCount }) => {
               this.patchState((state) => {
@@ -50,7 +51,7 @@ export class SeriesPageEpisodesListComponentStore extends DefaultComponentStore<
                   loaded: true,
                   page: this.get().page + 1,
                   loading: false,
-                }
+                };
               });
             }, ({ error }: HttpErrorResponse) => {
               this.patchState({
@@ -71,26 +72,26 @@ export class SeriesPageEpisodesListComponentStore extends DefaultComponentStore<
         });
       }),
       exhaustMap(({ direction }) => {
-        const seriesPseudo = this.activatedRoute.snapshot.params['seriesPseudo']
+        const animeId = this.activatedRoute.snapshot.data[SERIES].anime_id;
         const page = this.get().page;
 
         const paginator: Paginator = {
-          limit: 24,
+          limit: 12,
           page,
         };
 
-        return this.episodesService.getEpisodes(seriesPseudo, paginator, direction)
+        return this.episodesService.getEpisodes(animeId, paginator, direction)
           .pipe(
             tapResponse(({ episodes, totalCount }) => {
               this.patchState((state) => {
                 return {
                   ...state,
-                  episodes: [...state.episodes, ...episodes],
+                  episodes: [ ...state.episodes, ...episodes ],
                   totalCount,
                   loaded: true,
                   page: this.get().page + 1,
                   loading: false,
-                }
+                };
               });
             }, ({ error }: HttpErrorResponse) => {
               this.patchState({
@@ -105,7 +106,7 @@ export class SeriesPageEpisodesListComponentStore extends DefaultComponentStore<
 
   constructor(
     private readonly episodesService: EpisodesService,
-    private readonly activatedRoute: ActivatedRoute
+    private readonly activatedRoute: ActivatedRoute,
   ) {
     super({
       episodes: [],

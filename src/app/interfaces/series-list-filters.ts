@@ -8,6 +8,6 @@ export interface SeriesListFilters {
   type: SeriesType;
   status: SeriesStatus;
   tags: SeriesTags[];
-  season: Season;
-  year: number;
+  season_type: Season;
+  season_year: number;
 }

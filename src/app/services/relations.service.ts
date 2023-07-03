@@ -16,7 +16,7 @@ export class RelationsService {
   ) {
   }
 
-  public getSeriesRelations(seriesId: string): Observable<SeriesRelation[]> {
+  public getSeriesRelations(seriesId: number): Observable<SeriesRelation[]> {
     return this.httpClient.get<SeriesRelation[]>(`${this.API_URL}/relations/${seriesId}`);
   }
 }
