@@ -1,30 +1,32 @@
 <div class="w-full relative kk-search">
   <ng-select [items]="series$ | async"
              [typeahead]="seriesInput$"
+             loadingText="Trwa szukanie..."
              [loading]="loading$ | async"
              [(ngModel)]="innerValue"
              placeholder="Szukaj..."
-             notFoundText="Nie znaleziono"
+             notFoundText="Nie znaleziono serii..."
              typeToSearchText="Szukaj wyników"
              (ngModelChange)="updateChanges()">
     <ng-template ng-option-tmp let-item="item">
-      <a [routerLink]="['/series', item.pseudo]" class="h-14 flex items-center gap-x-3">
-        <div class="w-3/12">
-          <img class="object-cover" alt="thumbnail" [src]="item.poster">
+      <a [routerLink]="['/series', item.pseudo_link]" class="h-14 flex items-center gap-x-3">
+        <div class="h-14">
+          <img class="object-contain h-14" alt="thumbnail" [src]="item.poster">
         </div>
-        <div class="w-9/12 text-ellipsis overflow-hidden">
-          {{ item.title }} <br/>
+        <div class="text-ellipsis overflow-hidden w-10/12">
+          <p>{{ item.title }}</p>
+          <p class="uppercase text-gray-500">{{ item.anime_type }} ● EP {{ item.ep_count }}</p>
         </div>
       </a>
     </ng-template>
     <ng-template ng-label-tmp let-item="item">
       <div class="translate-y-0.5 w-9/12 text-ellipsis overflow-hidden">
-        {{ item.titleEn }}
+        {{ item.title }}
       </div>
     </ng-template>
   </ng-select>
 
-  <div class="absolute -translate-y-[30px] z-50 right-3 z-[9909]">
+  <div class="absolute -translate-y-[30px] right-3 z-[9909]">
     <ng-icon name="matSearch" class="material-icons text-deep-black relative z-[9909] text-2xl"></ng-icon>
   </div>
 </div>

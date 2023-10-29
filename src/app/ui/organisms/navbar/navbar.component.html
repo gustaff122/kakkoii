@@ -4,8 +4,8 @@
   </a>
   <div class="flex font-josefin text-sm items-center gap-x-10">
     <a *kkIsBreakpoint="1024" routerLink="/" class="hover:opacity-70 transition-opacity">Strona Główna</a>
-    <a routerLink="/browser" class="hover:opacity-70 transition-opacity">Anime</a>
-    <div class="w-64">
+    <a *kkIsBreakpoint="1024" routerLink="/browser" class="hover:opacity-70 transition-opacity">Anime</a>
+    <div class="w-96">
       <kk-search-autocomplete [(ngModel)]="search"></kk-search-autocomplete>
     </div>
   </div>
