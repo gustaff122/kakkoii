@@ -55,14 +55,23 @@ export class KkSearchAutocompleteComponent implements OnInit, OnDestroy {
         debounceTime(500),
         distinctUntilChanged(),
       ).subscribe((name) => {
-        if (name.length > 2)
-        this.kkSeriesAutocompleteComponentStore.getSeries({ name });
+        if (name.length > 2) {
+          this.kkSeriesAutocompleteComponentStore.getSeries({ name });
+        }
+
+        if (name.length === 0) {
+          this.clearState();
+        }
       }),
     );
   }
 
   public ngOnDestroy(): void {
     this.subscriptions.unsubscribe();
+  }
+
+  public clearState(): void {
+    this.kkSeriesAutocompleteComponentStore.clearSeries();
   }
 
   public onChange: any = () => {

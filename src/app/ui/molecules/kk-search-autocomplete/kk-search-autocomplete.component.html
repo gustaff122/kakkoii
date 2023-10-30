@@ -7,6 +7,7 @@
              placeholder="Szukaj..."
              notFoundText="Nie znaleziono serii..."
              typeToSearchText="Szukaj wyników"
+             (close)="clearState()"
              (ngModelChange)="updateChanges()">
     <ng-template ng-option-tmp let-item="item">
       <a [routerLink]="['/series', item.pseudo_link]" class="h-14 flex items-center gap-x-3">

@@ -51,6 +51,13 @@ export class KkSearchAutocompleteComponentStore extends DefaultComponentStore<Kk
     );
   });
 
+  public readonly clearSeries = this.updater((state): KkSearchAutocompleteComponentState => {
+    return {
+      ...state,
+      series: [],
+    };
+  });
+
   constructor(
     private readonly seriesService: SeriesService,
   ) {
