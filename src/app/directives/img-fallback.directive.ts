@@ -5,7 +5,7 @@ import { Directive, ElementRef, HostListener, Input, Renderer2 } from '@angular/
   standalone: true,
 })
 export class ImgFallbackDirective {
-  @Input() kkImgFallback: string = '';
+  @Input() kkImgFallback: string = '/assets/images/no-image.webp';
 
   constructor(
     private readonly elementRef: ElementRef,
