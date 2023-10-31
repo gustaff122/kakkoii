@@ -1,0 +1,5 @@
+<div class="w-full gap-x-3.5 flex">
+  <a [routerLink]="item.link ? item.link : null" *ngFor="let item of items" class="stepper__item" [ngClass]="{'stepper__item--active': item.active}">
+    {{ item.title }}
+  </a>
+</div>
