@@ -55,4 +55,13 @@ input[type=number] {
   -moz-appearance: textfield;
 }
 
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+.modal {
+  background: rgba(27, 27, 27, 0.40);
+  backdrop-filter: blur(3px);
+
+  top: 0;
+  position: fixed !important;
+  width: 100%;
+  height: 100vh;
+  z-index: 101;
+}
