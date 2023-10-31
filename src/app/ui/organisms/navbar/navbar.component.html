@@ -5,6 +5,7 @@
   <div class="flex font-josefin text-sm items-center gap-x-10">
     <a *kkIsBreakpoint="1024" routerLink="/" class="hover:opacity-70 transition-opacity">Strona Główna</a>
     <a *kkIsBreakpoint="1024" routerLink="/browser" class="hover:opacity-70 transition-opacity">Anime</a>
+    <p (click)="openModal()" *kkIsBreakpoint="1024" class="hover:opacity-70 transition-opacity">Zaloguj</p>
     <div class="w-96">
       <kk-search-autocomplete [(ngModel)]="search"></kk-search-autocomplete>
     </div>
