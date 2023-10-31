@@ -9,6 +9,7 @@ import { Observable } from 'rxjs';
 import { Network } from '@ngx-pwa/offline';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { Dialog, DialogModule } from '@angular/cdk/dialog';
 
 @Component({
   selector: 'kk-navbar',
@@ -21,7 +22,8 @@ import { RouterModule } from '@angular/router';
     KkSearchAutocompleteComponent,
     FormsModule,
     NgIconComponent,
-    RouterModule
+    RouterModule,
+    DialogModule
   ],
   standalone: true,
 })
@@ -30,7 +32,14 @@ export class NavbarComponent {
   public online$: Observable<boolean> = this.network.onlineChanges;
 
   constructor(
-    private readonly network: Network
+    private readonly network: Network,
+    private readonly dialog: Dialog,
   ) {
+  }
+
+  public openModal(): void {
+    import('@kakkoii/core/auth/modals/register-modal/register-modal.component').then(({ RegisterModalComponent }) => {
+      this.dialog.open(RegisterModalComponent)
+    })
   }
 }
