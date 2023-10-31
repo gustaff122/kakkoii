@@ -1,11 +1,11 @@
-import { Component, Input, OnDestroy, OnInit, Optional, Self } from '@angular/core';
+import { Component, ElementRef, HostListener, Input, OnDestroy, OnInit, Optional, Renderer2, Self, ViewChild } from '@angular/core';
 import { KkSearchAutocompleteComponentStore } from './kk-search-autocomplete.component.store';
 import { debounceTime, distinctUntilChanged, Observable, Subject, Subscription } from 'rxjs';
 import { CommonModule } from '@angular/common';
-import { NgSelectModule } from '@ng-select/ng-select';
+import { NgSelectComponent, NgSelectModule } from '@ng-select/ng-select';
 import { AbstractControl, FormsModule, NgControl } from '@angular/forms';
 import { Series } from '@kakkoii/interfaces/series';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { NgIconComponent } from '@ng-icons/core';
 
 @Component({
@@ -25,14 +25,14 @@ import { NgIconComponent } from '@ng-icons/core';
   ],
 })
 export class KkSearchAutocompleteComponent implements OnInit, OnDestroy {
+  @ViewChild('selectComponent') private readonly selectComponent: NgSelectComponent;
   @Input() label: string = '';
 
-  public seriesInput$ = new Subject<string>();
+  public seriesInput$: Subject<string> = new Subject<string>();
+  public phrase: string = ''
 
   public isRequired: boolean = false;
   public innerValue: string | number = null;
-
-  public touched = false;
 
   public readonly loading$: Observable<boolean> = this.kkSeriesAutocompleteComponentStore.loading$;
   public readonly series$: Observable<Series[]> = this.kkSeriesAutocompleteComponentStore.series$;
@@ -41,6 +41,9 @@ export class KkSearchAutocompleteComponent implements OnInit, OnDestroy {
   constructor(
     @Self() private readonly kkSeriesAutocompleteComponentStore: KkSearchAutocompleteComponentStore,
     @Self() @Optional() public readonly ngControl: NgControl,
+    private readonly router: Router,
+    public readonly renderer2: Renderer2,
+    private readonly elementRef: ElementRef
   ) {
     if (this.ngControl) {
       this.ngControl.valueAccessor = this;
@@ -55,7 +58,7 @@ export class KkSearchAutocompleteComponent implements OnInit, OnDestroy {
         debounceTime(500),
         distinctUntilChanged(),
       ).subscribe((name) => {
-        if (name.length > 2) {
+        if (name?.length > 2) {
           this.kkSeriesAutocompleteComponentStore.getSeries({ name });
         }
 
@@ -64,6 +67,20 @@ export class KkSearchAutocompleteComponent implements OnInit, OnDestroy {
         }
       }),
     );
+  }
+
+  public setPhrase(search: { term: string, items: any[]}) {
+    this.phrase = search.term
+  }
+
+  private goToBrowser(): void {
+    this.router.navigate(['/browser'], {
+      queryParams: { name: this.phrase }
+    }).then(() => {
+      this.seriesInput$.next('');
+      this.innerValue = null;
+      this.selectComponent.close()
+    })
   }
 
   public ngOnDestroy(): void {
@@ -102,5 +119,19 @@ export class KkSearchAutocompleteComponent implements OnInit, OnDestroy {
 
   public registerOnTouched(fn: any): void {
     this.onTouch = fn;
+  }
+
+  @HostListener('window:keyup', ['$event'])
+  public handleKeyUp(event: KeyboardEvent): void {
+    if (event.key === 'Enter') {
+      const container = this.elementRef.nativeElement.querySelector('.ng-input');
+      if (container) {
+        const inputElement = this.renderer2.selectRootElement('input', container);
+        if (inputElement) {
+          inputElement.blur()
+          this.goToBrowser()
+        }
+      }
+    }
   }
 }
