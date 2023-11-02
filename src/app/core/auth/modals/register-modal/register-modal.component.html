@@ -1,7 +1,9 @@
 <kk-modal title="Rejestracja">
   <kk-stepper [items]="steps" />
 
-  <form>
-
+  <form [formGroup]="form" class="pt-10">
+    <kk-input type="text" label="Adres E-mail" placeholder="Adres E-mail" formControlName="email" />
+    <kk-input type="password" label="Hasło" placeholder="Hasło" formControlName="password" />
+    <kk-input type="password" label="Powtórz hasło" placeholder="Powtórz hasło" formControlName="confirmedPassword" />
   </form>
 </kk-modal>
