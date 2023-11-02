@@ -4,6 +4,8 @@
 @tailwind components;
 @tailwind utilities;
 
+@import "@angular/cdk/overlay-prebuilt.css";
+
 @import "app/styles/variables";
 @import "app/styles/colors";
 @import "app/styles/fonts";
@@ -52,3 +54,5 @@ input::-webkit-inner-spin-button {
 input[type=number] {
   -moz-appearance: textfield;
 }
+
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

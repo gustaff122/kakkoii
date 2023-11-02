@@ -13,6 +13,7 @@ import { Season } from '@kakkoii/types/season';
 import { NgIconComponent } from '@ng-icons/core';
 import { DropDownAnimation } from '@kakkoii/animations/dropdown.animation';
 import { ActivatedRoute, Router } from '@angular/router';
+import { YearPickerComponent } from '@kakkoii/ui/atoms/year-picker/year-picker.component';
 
 interface SeriesFiltersForm {
   name: FormControl<string>;
@@ -37,6 +38,7 @@ interface SeriesFiltersForm {
     ReactiveFormsModule,
     NgSelectModule,
     NgIconComponent,
+    YearPickerComponent,
   ],
 })
 export class SeriesSearchBarComponent implements OnInit, OnDestroy {

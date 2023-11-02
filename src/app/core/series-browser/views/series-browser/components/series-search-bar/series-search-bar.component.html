@@ -20,7 +20,7 @@
       <div class="menu-item col-span-2 lg:col-span-1 flex flex-col gap-y-2">
         <label for="tags">Tagi</label>
         <div id="tags" class="kk-select-dark">
-          <ng-select [items]="tagsData" bindValue="value" bindLabel="label" [multiple]="true" placeholder="Wszystkie"
+          <ng-select notFoundText="Nie znaleziono..." [items]="tagsData" bindValue="value" bindLabel="label" [multiple]="true" placeholder="Wszystkie"
                      formControlName="tags">
             <ng-template ng-multi-label-tmp let-items="items">
               <div class="rounded-lg mx-0.5 bg-royal-blue px-3 mb-1" *ngFor="let item of items | slice:0:1">
@@ -37,7 +37,7 @@
       <div class="menu-item flex flex-col gap-y-2">
         <label for="status">Status</label>
         <div id="status" class="kk-select-dark">
-          <ng-select placeholder="Wszystkie" formControlName="status">
+          <ng-select notFoundText="Nie znaleziono..." placeholder="Wszystkie" formControlName="status">
             <ng-option value="Wydawana">Wydawane</ng-option>
             <ng-option value="Zakończona">Zakończone</ng-option>
             <ng-option value="Planowana">Planowane</ng-option>
@@ -50,7 +50,7 @@
       <div class="menu-item flex flex-col gap-y-2">
         <label for="type">Typ</label>
         <div id="type" class="kk-select-dark">
-          <ng-select placeholder="Wszystkie" formControlName="type">
+          <ng-select notFoundText="Nie znaleziono..." placeholder="Wszystkie" formControlName="type">
             <ng-option value="tv">TV</ng-option>
             <ng-option value="movie">Film</ng-option>
           </ng-select>
@@ -60,7 +60,7 @@
       <div class="menu-item flex flex-col gap-y-2">
         <label for="season">Sezon</label>
         <div id="season" class="kk-select-dark">
-          <ng-select placeholder="Wszystkie" formControlName="season_type">
+          <ng-select notFoundText="Nie znaleziono..." placeholder="Wszystkie" formControlName="season_type">
             <ng-option value="winter">Zima</ng-option>
             <ng-option value="spring">Wiosna</ng-option>
             <ng-option value="summer">Lato</ng-option>
@@ -69,10 +69,8 @@
         </div>
       </div>
 
-      <div class="menu-item flex flex-col gap-y-2">
-        <label for="name">Rok</label>
-        <input type="number" formControlName="season_year" autocomplete="off"
-               class="bg-chilly-black px-3 py-1.5 rounded-sm outline-none" id="year" placeholder="Wszystkie">
+      <div class="menu-item">
+        <kk-year-picker formControlName="season_year" placeholder="Wszystkie" label="Rok" />
       </div>
     </div>
   </form>

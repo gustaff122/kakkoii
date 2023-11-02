@@ -4,7 +4,12 @@
 
 <div *ngIf="filters$ | async" class="px-4 md:px-16">
   <kk-infinite-scroll (scrolled)="nextPageHandler()">
-    <kk-series-list sectionTitle="Wyniki wyszukiwania" [series]="series$ | async" [loading]="loading$ | async" [totalCount]="totalCount$ | async"></kk-series-list>
+    <kk-series-list sectionTitle="Wyniki wyszukiwania"
+                    [series]="series$ | async"
+                    [loading]="loading$ | async"
+                    [totalCount]="totalCount$ | async"
+                    [showTotalCount]="true"
+    />
   </kk-infinite-scroll>
 </div>
 

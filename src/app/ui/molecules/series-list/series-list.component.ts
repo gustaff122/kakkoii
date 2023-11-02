@@ -23,10 +23,11 @@ import { NgIconComponent } from '@ng-icons/core';
   standalone: true,
 })
 export class SeriesListComponent {
-  @Input() series: Series[];
-  @Input() sectionTitle: string;
-  @Input() loading: boolean;
-  @Input() totalCount: number;
+  @Input() public series: Series[];
+  @Input() public sectionTitle: string;
+  @Input() public loading: boolean;
+  @Input() public totalCount: number;
+  @Input() public showTotalCount: boolean = false;
 
   public trackByFn(_index: number, item: Series): number {
     return item.anime_id;

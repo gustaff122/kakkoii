@@ -1,6 +1,7 @@
 <div class="py-4">
   <h1 class="text-xl font-lato mb-6">
     <span @dropEnter>{{ sectionTitle }}:</span>
+    <span *ngIf="showTotalCount" @dropEnter class="text-shade-of-grey opacity-70 ms-2">({{ totalCount }})</span>
   </h1>
   <ng-container [ngTemplateOutlet]="series.length > 0 ? contentTpl : emptyTpl"></ng-container>
   <ng-container [ngTemplateOutlet]="(loading && totalCount > series.length) ? loadingTpl : null"></ng-container>

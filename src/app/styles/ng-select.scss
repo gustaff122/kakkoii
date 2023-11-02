@@ -1,4 +1,4 @@
-@import "~@ng-select/ng-select/themes/default.theme.css";
+@import "@ng-select/ng-select/themes/default.theme.css";
 
 .kk-search {
   .ng-select-opened {
@@ -64,6 +64,10 @@
     border-radius: 2px !important;
     outline: none !important;
     border: none !important;
+    color: var(--almost-white) !important;
+  }
+
+  input {
     color: var(--almost-white) !important;
   }
 
