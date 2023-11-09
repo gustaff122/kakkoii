@@ -17,10 +17,10 @@ import { SeriesSliderMainComponent } from '@kakkoii/ui/organisms/series-slider-m
   standalone: true,
 })
 export class HomeHeroDesktopComponent {
-  @Output() public readonly startWatchingBtn: EventEmitter<void> = new EventEmitter<void>();
+  @Output() private readonly startWatchingBtn: EventEmitter<void> = new EventEmitter<void>();
 
   public readonly series: Series[] = this.activatedRoute.snapshot.data[HOME];
-  public currentBgImage = this.series[2].banner;
+  public currentBgImage: string = this.series[2].banner;
 
   constructor(
     private readonly activatedRoute: ActivatedRoute,

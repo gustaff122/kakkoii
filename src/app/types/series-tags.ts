@@ -37,4 +37,3 @@ export type SeriesTags = 'Isekai' |
   'Szkolne' |
   'Dramat' |
   'Super moce'
-
