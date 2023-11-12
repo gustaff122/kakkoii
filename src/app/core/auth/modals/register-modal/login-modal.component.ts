@@ -14,7 +14,7 @@ interface LoginForm {
   selector: "kk-login-modal",
   templateUrl: "./login-modal.component.html",
   styleUrls: ["./login-modal.component.css"],
-  imports: [CommonModule, ModalComponent, InputComponent, LogoComponent, FormGroup, FormBuilder, ReactiveFormsModule, FormControl],
+  imports: [CommonModule, ModalComponent, InputComponent, LogoComponent, ReactiveFormsModule],
   standalone: true,
 })
 export class LoginModalComponent implements OnInit {
@@ -28,8 +28,8 @@ export class LoginModalComponent implements OnInit {
 
   private buildForm(): void {
     this.form = this.formBuilder.group<LoginForm>({
-      email: new FormControl(null),
-      password: new FormControl(null),
+      email: new FormControl(),
+      password: new FormControl(),
     });
   }
 }
