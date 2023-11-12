@@ -1,15 +1,21 @@
 <div id="episodesListFragment">
-  <div *ngIf="(totalCount$ | async) > 0" class="flex items-center justify-between w-full">
+  @if ((totalCount$ | async) > 0) {
+<div class="flex items-center justify-between w-full">
     <h1 class="text-xl font-bold mb-6">Lista Odcinków:</h1>
-    <button (click)="setDirectionAscHandler()" *ngIf="direction === 'desc' && (totalCount$ | async) > 2" class="flex gap-x-0.5 items-center">
+    @if (direction === 'desc' && (totalCount$ | async) > 2) {
+<button (click)="setDirectionAscHandler()" class="flex gap-x-0.5 items-center">
       Malejąco
       <ng-icon class="text-2xl" name="matArrowDropDown"></ng-icon>
     </button>
-    <button (click)="setDirectionDescHandler()" *ngIf="direction === 'asc' && (totalCount$ | async) > 2" class="flex gap-x-0.5 items-center">
+}
+    @if (direction === 'asc' && (totalCount$ | async) > 2) {
+<button (click)="setDirectionDescHandler()" class="flex gap-x-0.5 items-center">
       Rosnąco
       <ng-icon class="text-2xl" name="matArrowDropUp"></ng-icon>
     </button>
+}
   </div>
+}
 
   <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 content-center gap-y-2 lg:gap-y-4 2xl:gap-y-8 gap-x-2 lg:gap-x-4 2xl:gap-x-8">
     <ng-container [ngTemplateOutlet]="(loading$ | async) ? loadingTpl : contentTpl"></ng-container>
@@ -17,17 +23,26 @@
 </div>
 
 <ng-template #contentTpl>
-  <a [routerLink]="[item.episode_no]" fragment="episodePlayer" *ngFor="let item of (episodes$ | async); trackBy: trackByFn" class="w-full flex bg-deep-black hover:opacity-70 transition-opacity">
+  @for (item of (episodes$ | async); track trackByFn($index, item)) {
+  <a [routerLink]="[item.episode_no]" fragment="episodePlayer" class="w-full flex bg-deep-black hover:opacity-70 transition-opacity">
     <div class="aspect-square bg-sky-blue font-josefin text-4xl w-3/12 flex items-center justify-center">
-      <span class="translate-y-0.5" *ngIf="item.episode_no === 0">01</span>
-      <span class="translate-y-0.5" *ngIf="item.episode_no < 10 && item.episode_no !== 0">0{{ item.episode_no }}</span>
-      <span class="translate-y-0.5" *ngIf="item.episode_no >= 10">{{ item.episode_no }}</span>
+      @if (item.episode_no === 0) {
+<span class="translate-y-0.5">01</span>
+}
+      @if (item.episode_no < 10 && item.episode_no !== 0) {
+<span class="translate-y-0.5">0{{ item.episode_no }}</span>
+}
+      @if (item.episode_no >= 10) {
+<span class="translate-y-0.5">{{ item.episode_no }}</span>
+}
     </div>
     <div class="h-full w-9/12 flex flex-col justify-center gap-y-1 px-4 py-2">
       <p class="text-md">{{ item.title }}</p>
     </div>
   </a>
-  <button *ngIf="canLoadMore$ | async" (click)="loadEpisodesHandler()" class="w-full flex bg-deep-black hover:opacity-70 transition-opacity">
+}
+  @if (canLoadMore$ | async) {
+<button (click)="loadEpisodesHandler()" class="w-full flex bg-deep-black hover:opacity-70 transition-opacity">
     <div class="aspect-square bg-sky-blue font-josefin text-4xl w-3/12 flex items-center justify-center">
       <ng-icon name="matExpandMore"></ng-icon>
     </div>
@@ -35,14 +50,17 @@
       Załaduj więcej
     </div>
   </button>
+}
   <ng-container [ngTemplateOutlet]="(loading$ | async) ? loadingTpl : null"></ng-container>
 </ng-template>
 
 <ng-template #loadingTpl>
-  <div *ngFor="let _ of [].constructor(12)" class="w-full flex bg-deep-black animate-pulse">
+  @for (_ of [].constructor(12); track _) {
+  <div class="w-full flex bg-deep-black animate-pulse">
     <div class="aspect-square bg-sky-blue font-josefin text-4xl w-3/12 flex items-center justify-center">
     </div>
     <div class="h-full w-9/12 flex flex-col justify-center gap-y-1 px-4 py-2">
     </div>
   </div>
+}
 </ng-template>

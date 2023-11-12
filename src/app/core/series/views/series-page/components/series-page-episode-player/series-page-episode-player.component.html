@@ -23,56 +23,82 @@
       </ng-template>
     </div>
 
-    <div *ngIf="episode$ | async as item" class="rounded-xl border-2 border-solid border-[#000000] flex flex-col relative pb-24">
-      <div class="w-full h-20 flex">
-        <div class="aspect-square rounded-tl-xl h-20 bg-sky-blue flex items-center justify-center font-josefin text-4xl">
-          <span class="translate-y-0.5" *ngIf="item.episode_no === 0">01</span>
-          <span class="translate-y-0.5" *ngIf="item.episode_no < 10 && item.episode_no !== 0">0{{ item.episode_no }}</span>
-          <span class="translate-y-0.5" *ngIf="item.episode_no >= 10">{{ item.episode_no }}</span>
+    @if (episode$ | async;as item) {
+      <div class="rounded-xl border-2 border-solid border-[#000000] flex flex-col relative pb-24">
+        <div class="w-full h-20 flex">
+          <div class="aspect-square rounded-tl-xl h-20 bg-sky-blue flex items-center justify-center font-josefin text-4xl">
+            @if (item.episode_no === 0) {
+              <span class="translate-y-0.5">01</span>
+            }
+            @if (item.episode_no < 10 && item.episode_no !== 0) {
+              <span class="translate-y-0.5">0{{ item.episode_no }}</span>
+            }
+            @if (item.episode_no >= 10) {
+              <span class="translate-y-0.5">{{ item.episode_no }}</span>
+            }
+          </div>
+
+          <div class="w-full bg-[#000000] h-full flex flex-col justify-center px-4">
+            <h2 class="text-xl">{{ item.title }}</h2>
+          </div>
         </div>
 
-        <div class="w-full bg-[#000000] h-full flex flex-col justify-center px-4">
-          <h2 class="text-xl">{{ item.title }}</h2>
-        </div>
-      </div>
-
-      <form [formGroup]="form" class="flex flex-col gap-y-1 2xl:gap-y-3 text-almost-white text-sm 2xl:text-base h-full">
-        <ng-scrollbar class="synopsis-max-h kk-scrollbar">
-          <div scrollViewport>
-            <div class="pt-4 pl-4 pr-8 text-justify">
-              <span class="font-bold">Opis odcinka:</span>
-              Chwilowo brak.
+        <form [formGroup]="form" class="flex flex-col gap-y-1 2xl:gap-y-3 text-almost-white text-sm 2xl:text-base h-full">
+          <ng-scrollbar class="synopsis-max-h kk-scrollbar">
+            <div scrollViewport>
+              <div class="pt-4 pl-4 pr-8 text-justify">
+                <span class="font-bold">Opis odcinka:</span>
+                Chwilowo brak.
+              </div>
             </div>
-          </div>
-        </ng-scrollbar>
+          </ng-scrollbar>
 
-        <div *ngIf="hasPlayers$ | async" class="flex w-full justify-between items-center px-5 mt-5 lg:pt-0">
-          <span class="font-bold">Tłumaczenie:</span>
-          <div class="kk-select-dark kk-select-no-close w-48">
-            <ng-select [searchable]="false" (change)="changeTranslatorHandler()" formControlName="selectedTranslator" placeholder="Wybierz">
-              <ng-option *ngFor="let link of players$ | async; let i = index" [value]="i">{{ link.translator }}</ng-option>
-            </ng-select>
-          </div>
-        </div>
+          @if (hasPlayers$ | async) {
+            <div class="flex w-full justify-between items-center px-5 mt-5 lg:pt-0">
+              <span class="font-bold">Tłumaczenie:</span>
+              <div class="kk-select-dark kk-select-no-close w-48">
+                <ng-select [searchable]="false" (change)="changeTranslatorHandler()" formControlName="selectedTranslator" placeholder="Wybierz">
+                  @for (link of players$ | async;track link;let i = $index) {
+                    <ng-option [value]="i">{{ link.translator }}</ng-option>
+                  }
+                </ng-select>
+              </div>
+            </div>
+          }
 
-        <div *ngIf="hasPlayers$ | async" class="flex w-full justify-between px-5">
-          <span class="font-bold">Serwis:</span>
-          <div class="kk-select-dark kk-select-no-close w-48">
-            <ng-select [searchable]="false" formControlName="linkUrl" placeholder="Wybierz">
-              <ng-option *ngFor="let link of playersMirrors$ | async" [value]="link.player_link">{{ link.player_name }}</ng-option>
-            </ng-select>
-          </div>
-        </div>
-      </form>
+          @if (hasPlayers$ | async) {
+            <div class="flex w-full justify-between px-5">
+              <span class="font-bold">Serwis:</span>
+              <div class="kk-select-dark kk-select-no-close w-48">
+                <ng-select [searchable]="false" formControlName="linkUrl" placeholder="Wybierz">
+                  @for (link of playersMirrors$ | async;track link) {
+                    <ng-option [value]="link.player_link">{{ link.player_name }}</ng-option>
+                  }
+                </ng-select>
+              </div>
+            </div>
+          }
+        </form>
 
-      <div *ngIf="episodesCount$ | async as episodesCount" class="flex gap-x-0.5 absolute w-full bottom-0">
-        <a *ngIf="item.episode_no === 1" class="w-1/3 text-center py-3 bg-smooth-black rounded-bl-xl opacity-50">Poprzedni</a>
-        <a *ngIf="item.episode_no !== 1" [routerLink]="['../', (item.episode_no - 1)]" fragment="episodePlayer" class="w-1/3 text-center py-3 bg-smooth-black rounded-bl-xl hover:opacity-70 transition-opacity">Poprzedni</a>
-        <a routerLink="../" fragment="episodesListFragment" class="w-1/3 text-center py-3 bg-smooth-black hover:opacity-70 transition-opacity">Lista</a>
-        <a *ngIf="item.episode_no === episodesCount" class="w-1/3 text-center py-3 bg-smooth-black rounded-bl-xl opacity-50">Następny</a>
-        <a *ngIf="item.episode_no !== episodesCount" [routerLink]="['../', (item.episode_no + 1)]" fragment="episodePlayer" class="w-1/3 text-center py-3 bg-smooth-black rounded-br-xl hover:opacity-70 transition-opacity">Następny</a>
+        @if (episodesCount$ | async;as episodesCount) {
+          <div class="flex gap-x-0.5 absolute w-full bottom-0">
+            @if (item.episode_no === 1) {
+              <a class="w-1/3 text-center py-3 bg-smooth-black rounded-bl-xl opacity-50">Poprzedni</a>
+            }
+            @if (item.episode_no !== 1) {
+              <a [routerLink]="['../', (item.episode_no - 1)]" fragment="episodePlayer" class="w-1/3 text-center py-3 bg-smooth-black rounded-bl-xl hover:opacity-70 transition-opacity">Poprzedni</a>
+            }
+            <a routerLink="../" fragment="episodesListFragment" class="w-1/3 text-center py-3 bg-smooth-black hover:opacity-70 transition-opacity">Lista</a>
+            @if (item.episode_no === episodesCount) {
+              <a class="w-1/3 text-center py-3 bg-smooth-black rounded-bl-xl opacity-50">Następny</a>
+            }
+            @if (item.episode_no !== episodesCount) {
+              <a [routerLink]="['../', (item.episode_no + 1)]" fragment="episodePlayer" class="w-1/3 text-center py-3 bg-smooth-black rounded-br-xl hover:opacity-70 transition-opacity">Następny</a>
+            }
+          </div>
+        }
       </div>
-    </div>
+    }
   </div>
 </ng-template>
 

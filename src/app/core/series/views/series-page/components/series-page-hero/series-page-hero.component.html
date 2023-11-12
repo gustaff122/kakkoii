@@ -4,19 +4,25 @@
 
   <div class="w-full z-30 px-4 md:px-16 flex flex-col gap-y-2 md:gap-y-3 mb-20 md:mb-10 2xl:mb-20">
     <div class="text-shade-of-grey text-[10px] md:text-base flex gap-x-1 md:gap-x-3 uppercase font-bold font-lato">
-      <span class="flex gap-x-1 md:gap-x-3" *ngFor="let tag of series.tags.slice(0, 4); let l = last">
+      @for (tag of series.tags.slice(0, 4); track tag; let l = $last) {
+  <span class="flex gap-x-1 md:gap-x-3">
         <span>{{ tag | tags }}</span>
-        <span *ngIf="!l">|</span>
+        @if (!l) {
+<span>|</span>
+}
       </span>
+}
     </div>
 
     <h1 class="font-saira font-bold text-3xl md:text-7xl">{{ series.title }}</h1>
 
     <div class="font-noto-jp text-xs md:text-xl flex gap-x-1.5 md:gap-x-3">
       {{ series.title }},&nbsp;&nbsp;
-      <ng-container *ngFor="let title of series.subtitles; let last = last">
+      @for (title of series.subtitles; track title; let last = $last) {
+  
         {{ title }}{{ !last ? ',&nbsp;&nbsp;' : '' }}
-      </ng-container>
+      
+}
     </div>
 
     <div class="font-bold text-shade-of-grey text-[10px] md:text-base flex gap-x-1.5 md:gap-x-3 md:mt-8">

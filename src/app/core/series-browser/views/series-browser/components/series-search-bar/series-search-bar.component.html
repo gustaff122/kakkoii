@@ -16,19 +16,24 @@
       </div>
     </div>
 
-    <div *ngIf="droppedDown$ | async" @dropDownMenu class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-x-3 gap-y-2 mt-4">
+    @if (droppedDown$ | async) {
+<div @dropDownMenu class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-x-3 gap-y-2 mt-4">
       <div class="menu-item col-span-2 lg:col-span-1 flex flex-col gap-y-2">
         <label for="tags">Tagi</label>
         <div id="tags" class="kk-select-dark">
           <ng-select notFoundText="Nie znaleziono..." [items]="tagsData" bindValue="value" bindLabel="label" [multiple]="true" placeholder="Wszystkie"
                      formControlName="tags">
             <ng-template ng-multi-label-tmp let-items="items">
-              <div class="rounded-lg mx-0.5 bg-royal-blue px-3 mb-1" *ngFor="let item of items | slice:0:1">
+              @for (item of items | slice:0:1; track item) {
+  <div class="rounded-lg mx-0.5 bg-royal-blue px-3 mb-1">
                 <span class="text-xs leading-7">{{ $any(item).label }}</span>
               </div>
-              <div class="rounded-lg mx-0.5 bg-royal-blue px-3 mb-1" *ngIf="items.length > 1">
+}
+              @if (items.length > 1) {
+<div class="rounded-lg mx-0.5 bg-royal-blue px-3 mb-1">
                 <span class="text-xs leading-7">{{ items.length - 1}} więcej...</span>
               </div>
+}
             </ng-template>
           </ng-select>
         </div>
@@ -73,5 +78,6 @@
         <kk-year-picker formControlName="season_year" placeholder="Wszystkie" label="Rok" />
       </div>
     </div>
+}
   </form>
 </div>

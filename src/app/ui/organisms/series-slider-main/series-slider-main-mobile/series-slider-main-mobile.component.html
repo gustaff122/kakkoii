@@ -1,5 +1,6 @@
 <swiper-container init="false" [id]="id+'-swiper'">
-  <swiper-slide *ngFor="let item of series; let i = index">
+  @for (item of series; track item; let i = $index) {
+  <swiper-slide>
     <div class="p-2">
       <div class="relative">
         <a [routerLink]="['/series', item.pseudo_link]" class="absolute w-full aspect-video items-center justify-center opacity-20 transition-opacity flex">
@@ -14,4 +15,5 @@
       <p class="text-base mt-2 text-shade-of-grey">{{ item.title }}</p>
     </div>
   </swiper-slide>
+}
 </swiper-container>

@@ -6,12 +6,14 @@
     </button>
     <div class="px-4 md:px-16">
       <swiper-container init="false" [id]="id+'-swiper'">
-        <swiper-slide *ngFor="let item of series">
+        @for (item of series; track item) {
+  <swiper-slide>
           <a [routerLink]="['/series', item.pseudo_link]" class="aspect-poster w-full transition-opacity hover:opacity-70">
             <img class="object-fit rounded-lg" alt="Seria anime" [src]="item.poster">
             <p class="mt-2 text-center line-clamp-1 text-sm">{{ item.title }}</p>
           </a>
         </swiper-slide>
+}
       </swiper-container>
     </div>
     <button class="swiper-button-next-unique absolute right-3 top-[45%] -translate-y-1/2 hover:opacity-70">
