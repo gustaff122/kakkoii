@@ -10,6 +10,7 @@ import { Network } from '@ngx-pwa/offline';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { Dialog, DialogModule } from '@angular/cdk/dialog';
+import { LoginModalComponent } from '@kakkoii/core/auth/modals/register-modal/login-modal.component';
 
 @Component({
   selector: 'kk-navbar',
@@ -23,7 +24,8 @@ import { Dialog, DialogModule } from '@angular/cdk/dialog';
     FormsModule,
     NgIconComponent,
     RouterModule,
-    DialogModule
+    DialogModule,
+    LoginModalComponent
   ],
   standalone: true,
 })
@@ -40,6 +42,11 @@ export class NavbarComponent {
   public openModal(): void {
     import('@kakkoii/core/auth/modals/register-modal/register-modal.component').then(({ RegisterModalComponent }) => {
       this.dialog.open(RegisterModalComponent)
+    })
+  }
+  public openModalLog(): void {
+    import('@kakkoii/core/auth/modals/register-modal/login-modal.component').then(({ LoginModalComponent }) => {
+      this.dialog.open(LoginModalComponent)
     })
   }
 }
