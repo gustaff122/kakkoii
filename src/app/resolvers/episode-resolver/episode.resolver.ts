@@ -2,7 +2,6 @@ import { ActivatedRouteSnapshot, ResolveFn, Router } from '@angular/router';
 import { inject } from '@angular/core';
 import { map, Observable } from 'rxjs';
 import { SeriesEpisode } from '@kakkoii/interfaces/series-episode';
-import { EpisodesService } from '@kakkoii/services/episodes.service';
 import { SeriesService } from '@kakkoii/services/series.service';
 import { IS_PLATFORM_BROWSER } from '@kakkoii/utils/is-platform-browser.token';
 import { SeriesPlayer } from '@kakkoii/interfaces/series-player';
@@ -14,10 +13,9 @@ export const episodeResolver: ResolveFn<{ episode: SeriesEpisode, players: Serie
   episode: SeriesEpisode,
   players: SeriesPlayer[]
 } => {
-  const episodesService = inject(EpisodesService);
   const seriesService = inject(SeriesService);
   const seriesPseudo = route.params['seriesPseudo'];
-  const episode_no = route.params['episode_no'];
+  const episodeno = route.params['episodeno'];
   const isBrowser = inject(IS_PLATFORM_BROWSER);
   const router = inject(Router);
 
@@ -26,8 +24,8 @@ export const episodeResolver: ResolveFn<{ episode: SeriesEpisode, players: Serie
   }
 
   seriesService.getSeriesByPseudo(seriesPseudo).pipe(
-    map(({ anime_id }) => {
-      return episodesService.getEpisode(anime_id, episode_no).pipe(
+    map(({ id }) => {
+      return seriesService.getEpisode(id, episodeno).pipe(
         map((episode) => {
           return episode;
         }),

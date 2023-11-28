@@ -5,6 +5,9 @@ import { SeriesListFilters } from '@kakkoii/interfaces/series-list-filters';
 import { Paginator } from '@kakkoii/interfaces/paginator';
 import { Series } from '@kakkoii/interfaces/series';
 import { environment } from '@kakkoii/env/environment';
+import { DirectionType } from '@kakkoii/types/direction-type';
+import { SeriesEpisode } from '@kakkoii/interfaces/series-episode';
+import { SeriesPlayer } from '@kakkoii/interfaces/series-player';
 
 @Injectable({
   providedIn: 'root',
@@ -39,12 +42,12 @@ export class SeriesService {
       });
     }
 
-    if (filters?.season_type) {
-      params = params.append('season_type', filters.season_type);
+    if (filters?.season) {
+      params = params.append('season', filters.season);
     }
 
-    if (filters?.season_year) {
-      params = params.append('season_year', filters.season_year);
+    if (filters?.year) {
+      params = params.append('year', filters.year);
     }
 
     return this.httpClient.get<{ series: Series[], totalCount: number }>(`${this.API_URL}/series`, { params });
@@ -56,5 +59,15 @@ export class SeriesService {
 
   public getSeriesByPseudo(seriesPseudo: string): Observable<Series> {
     return this.httpClient.get<Series>(`${this.API_URL}/series/pseudo/${seriesPseudo}`);
+  }
+
+  public getEpisodes(anime_id: number, paginator: Paginator, direction: DirectionType): Observable<{ episodes: SeriesEpisode[], totalCount: number }> {
+    let params = new HttpParams().set('page', paginator.page).set('limit', paginator.limit).set('direction', direction);
+
+    return this.httpClient.get<{ episodes: SeriesEpisode[], totalCount: number }>(`${this.API_URL}/series/episodes/${anime_id}`, { params });
+  }
+
+  public getEpisode(anime_id: string, episodeno: number): Observable<{ episode: SeriesEpisode, players: SeriesPlayer[] }> {
+    return this.httpClient.get<{ episode: SeriesEpisode, players: SeriesPlayer[] }>(`${this.API_URL}/series/episodes/${anime_id}/${episodeno}`);
   }
 }

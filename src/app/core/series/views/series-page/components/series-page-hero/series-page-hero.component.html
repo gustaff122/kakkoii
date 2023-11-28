@@ -4,27 +4,33 @@
 
   <div class="w-full z-30 px-4 md:px-16 flex flex-col gap-y-2 md:gap-y-3 mb-20 md:mb-10 2xl:mb-20">
     <div class="text-shade-of-grey text-[10px] md:text-base flex gap-x-1 md:gap-x-3 uppercase font-bold font-lato">
-      <span class="flex gap-x-1 md:gap-x-3" *ngFor="let tag of series.tags.slice(0, 4); let l = last">
+      @for (tag of series.tags.slice(0, 4);track tag;let l = $last) {
+        <span class="flex gap-x-1 md:gap-x-3">
         <span>{{ tag | tags }}</span>
-        <span *ngIf="!l">|</span>
+          @if (!l) {
+            <span>|</span>
+          }
       </span>
+      }
     </div>
 
     <h1 class="font-saira font-bold text-3xl md:text-7xl">{{ series.title }}</h1>
 
     <div class="font-noto-jp text-xs md:text-xl flex gap-x-1.5 md:gap-x-3">
       {{ series.title }},&nbsp;&nbsp;
-      <ng-container *ngFor="let title of series.subtitles; let last = last">
+      @for (title of series.subtitles;track title;let last = $last) {
+
         {{ title }}{{ !last ? ',&nbsp;&nbsp;' : '' }}
-      </ng-container>
+
+      }
     </div>
 
     <div class="font-bold text-shade-of-grey text-[10px] md:text-base flex gap-x-1.5 md:gap-x-3 md:mt-8">
-      <p>{{ series.anime_type | uppercase }}</p>
+      <p>{{ series.animetype | uppercase }}</p>
       <p>|</p>
-      <p>Odcinki: {{ series.ep_count }}</p>
+      <p>Odcinki: {{ series.epcount }}</p>
       <p>|</p>
-      <p class="capitalize">{{ series.season_type | season }} {{ series.season_year }}</p>
+      <p class="capitalize">{{ series.seasontype | season }} {{ series.seasonyear }}</p>
     </div>
 
     <p class="text-almost-white w-full md:w-8/12 xl:w-6/12 text-justify text-xs md:text-sm 2xl:text-lg 2xl:pe-10">
@@ -33,8 +39,8 @@
 
     <div class="flex gap-x-4 mt-4">
       <button (click)="startWatchingButtonFn()" class="hover:opacity-80 transition-opacity bg-royal-blue rounded-sm text-white w-44 2xl:w-56 h-12 2xl:h-16 flex justify-center items-center text-base 2xl:text-lg font-bold">Oglądaj</button>
-      <a [attr.href]="series.external_link_value ? series.external_link_value : null" target="_blank">
-        <button [ngClass]="series.external_link_value ? 'hover:opacity-80 transition-opacity' : 'opacity-50 cursor-default'" class="border-royal-blue border-solid border-2 rounded-sm text-white w-44 2xl:w-56 h-12 2xl:h-16 flex justify-center items-center text-base 2xl:text-lg font-bold">Trailer</button>
+      <a [attr.href]="series.externallinkvalue ? series.externallinkvalue : null" target="_blank">
+        <button [ngClass]="series.externallinkvalue ? 'hover:opacity-80 transition-opacity' : 'opacity-50 cursor-default'" class="border-royal-blue border-solid border-2 rounded-sm text-white w-44 2xl:w-56 h-12 2xl:h-16 flex justify-center items-center text-base 2xl:text-lg font-bold">Trailer</button>
       </a>
     </div>
   </div>

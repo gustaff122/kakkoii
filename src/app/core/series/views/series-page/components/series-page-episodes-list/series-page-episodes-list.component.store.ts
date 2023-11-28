@@ -4,11 +4,11 @@ import { exhaustMap, Observable, tap } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
 import { DefaultComponentState, DefaultComponentStore } from '@kakkoii/utils/default.component.store';
 import { SeriesEpisode } from '@kakkoii/interfaces/series-episode';
-import { EpisodesService } from '@kakkoii/services/episodes.service';
 import { Paginator } from '@kakkoii/interfaces/paginator';
 import { ActivatedRoute } from '@angular/router';
 import { DirectionType } from '@kakkoii/types/direction-type';
 import { SERIES } from '@kakkoii/resolvers/series-resolver/series.key';
+import { SeriesService } from '@kakkoii/services/series.service';
 
 interface SeriesPageEpisodesListComponentState extends DefaultComponentState {
   episodes: SeriesEpisode[],
@@ -28,11 +28,11 @@ export class SeriesPageEpisodesListComponentStore extends DefaultComponentStore<
       tap(() => {
         this.patchState({
           loading: true,
-          page: 1,
+          page: 0,
         });
       }),
       exhaustMap(({ direction }) => {
-        const anime_id = this.activatedRoute.snapshot.data[SERIES].anime_id;
+        const anime_id = this.activatedRoute.snapshot.data[SERIES].id;
         const page = this.get().page;
 
         const paginator: Paginator = {
@@ -40,7 +40,7 @@ export class SeriesPageEpisodesListComponentStore extends DefaultComponentStore<
           page,
         };
 
-        return this.episodesService.getEpisodes(anime_id, paginator, direction)
+        return this.seriesService.getEpisodes(anime_id, paginator, direction)
           .pipe(
             tapResponse(({ episodes, totalCount }) => {
               this.patchState((state) => {
@@ -72,7 +72,7 @@ export class SeriesPageEpisodesListComponentStore extends DefaultComponentStore<
         });
       }),
       exhaustMap(({ direction }) => {
-        const animeId = this.activatedRoute.snapshot.data[SERIES].anime_id;
+        const animeId = this.activatedRoute.snapshot.data[SERIES].id;
         const page = this.get().page;
 
         const paginator: Paginator = {
@@ -80,7 +80,7 @@ export class SeriesPageEpisodesListComponentStore extends DefaultComponentStore<
           page,
         };
 
-        return this.episodesService.getEpisodes(animeId, paginator, direction)
+        return this.seriesService.getEpisodes(animeId, paginator, direction)
           .pipe(
             tapResponse(({ episodes, totalCount }) => {
               this.patchState((state) => {
@@ -105,12 +105,12 @@ export class SeriesPageEpisodesListComponentStore extends DefaultComponentStore<
   });
 
   constructor(
-    private readonly episodesService: EpisodesService,
+    private readonly seriesService: SeriesService,
     private readonly activatedRoute: ActivatedRoute,
   ) {
     super({
       episodes: [],
-      page: 1,
+      page: 0,
       totalCount: null,
       loading: false,
       error: null,

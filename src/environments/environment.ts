@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'https://api.kakkoii.pl',
+  apiUrl: 'http://localhost:3001',
 };
 
 

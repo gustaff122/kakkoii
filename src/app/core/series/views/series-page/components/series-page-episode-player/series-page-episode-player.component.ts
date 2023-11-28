@@ -40,7 +40,7 @@ interface SelectedTranslatorForm {
   standalone: true,
 })
 export class SeriesPageEpisodePlayerComponent implements OnInit {
-  public readonly epNumber: string = this.activatedRoute.snapshot.params['episode_no'];
+  public readonly epNumber: string = this.activatedRoute.snapshot.params['episodeno'];
   public readonly title: string = this.activatedRoute.snapshot.data[SERIES].title;
 
   public form: FormGroup<SelectedTranslatorForm>;
@@ -72,7 +72,7 @@ export class SeriesPageEpisodePlayerComponent implements OnInit {
 
     this.seriesPageEpisodesListComponentStore.selectTranslator({ selectedTranslator });
     firstValueFrom(this.playersMirrors$).then((links) => {
-      this.form.patchValue({ linkUrl: links[0].player_link });
+      this.form.patchValue({ linkUrl: links[0].playerlink });
     });
   }
 
@@ -80,7 +80,7 @@ export class SeriesPageEpisodePlayerComponent implements OnInit {
     firstValueFrom(this.playersMirrors$).then((links) => {
       this.form = this.formBuilder.group<SelectedTranslatorForm>({
         selectedTranslator: new FormControl(0),
-        linkUrl: new FormControl(links ? links[0].player_link : null),
+        linkUrl: new FormControl(links ? links[0].playerlink : null),
       });
     });
   }

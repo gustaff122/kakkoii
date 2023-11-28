@@ -19,7 +19,7 @@ export class SeriesCurrentSeasonListComponentStore extends DefaultComponentStore
   public readonly hasSeries$: Observable<boolean> = this.select((state) => state.series.length > 0);
 
   public readonly getSeries = this.effect((origin$: Observable<void>) => {
-    const { season_type, season_year } = getCurrentSeason();
+    const { season, year } = getCurrentSeason();
     const paginator: Paginator = {
       page: 0,
       limit: 12,
@@ -32,7 +32,7 @@ export class SeriesCurrentSeasonListComponentStore extends DefaultComponentStore
         });
       }),
       exhaustMap(() => {
-        return this.seriesService.getSeriesList(paginator, { season_year, season_type })
+        return this.seriesService.getSeriesList(paginator, { year, season })
           .pipe(
             tapResponse(({ series }) => {
               this.patchState({

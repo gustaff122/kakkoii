@@ -19,7 +19,7 @@ export class SeriesCurrentSeasonCarouselComponentStore extends DefaultComponentS
   public readonly hasSeries$: Observable<boolean> = this.select((state) => state.series.length > 0);
 
   public readonly getSeries = this.effect((origin$: Observable<void>) => {
-    const { season_type, season_year } = this.getSeason();
+    const { season, year } = this.getSeason();
     const paginator: Paginator = {
       page: 0,
       limit: 12,
@@ -32,7 +32,7 @@ export class SeriesCurrentSeasonCarouselComponentStore extends DefaultComponentS
         });
       }),
       exhaustMap(() => {
-        return this.seriesService.getSeriesList(paginator, { season_year, season_type })
+        return this.seriesService.getSeriesList(paginator, { year, season })
           .pipe(
             tapResponse(({ series }) => {
               this.patchState({
@@ -50,37 +50,37 @@ export class SeriesCurrentSeasonCarouselComponentStore extends DefaultComponentS
     );
   });
 
-  private getSeason(): { season_type: Season, season_year: number } {
+  private getSeason(): { season: Season, year: number } {
     const month = [ 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December' ];
     const d = new Date();
     const monthName = month[d.getMonth()];
-    const season_year = d.getFullYear();
+    const year = d.getFullYear();
 
     switch (monthName) {
       case 'January':
       case 'February':
-        return { season_type: 'winter', season_year };
+        return { season: 'winter', year };
 
       case 'March':
       case 'April':
       case 'May':
-        return { season_type: 'spring', season_year };
+        return { season: 'spring', year };
 
       case 'June':
       case 'July':
       case 'August':
-        return { season_type: 'summer', season_year };
+        return { season: 'summer', year };
 
       case 'September':
       case 'October':
       case 'November':
-        return { season_type: 'autumn', season_year };
+        return { season: 'autumn', year };
 
       case 'December':
-        return { season_type: 'winter', season_year: season_year + 1 };
+        return { season: 'winter', year: year + 1 };
 
       default:
-        return { season_type: 'winter', season_year };
+        return { season: 'winter', year };
     }
   }
 

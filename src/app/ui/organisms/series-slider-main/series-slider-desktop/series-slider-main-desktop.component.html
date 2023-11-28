@@ -1,17 +1,19 @@
 <swiper-container class="swiper-noevents" init="false" [id]="id+'-swiper'">
-  <swiper-slide *ngFor="let item of series; let i = index">
-    <div class="p-6">
-      <div class="relative">
-        <a [routerLink]="['/series', item.pseudo_link]" class="absolute w-full aspect-video items-center justify-center opacity-20 transition-opacity flex">
-          <div class="w-full h-full absolute bg-zinc-800 rounded-md opacity-70 ">
-          </div>
-          <ng-icon name="matPlayArrow" class="material-icons text-slate-300 text-7xl"></ng-icon>
-        </a>
+  @for (item of series;track item;let i = $index) {
+    <swiper-slide>
+      <div class="p-6">
+        <div class="relative">
+          <a [routerLink]="['/series', item.pseudolink]" class="absolute w-full aspect-video items-center justify-center opacity-20 transition-opacity flex">
+            <div class="w-full h-full absolute bg-zinc-800 rounded-md opacity-70 ">
+            </div>
+            <ng-icon name="matPlayArrow" class="material-icons text-slate-300 text-7xl"></ng-icon>
+          </a>
+        </div>
+        <div class="overflow-hidden rounded-md aspect-video">
+          <img [id]="id+'-swiper-img-'+i" class="rounded-md object-cover aspect-video" [src]="item.banner" alt="Anime series">
+        </div>
+        <p class="text-base mt-2 text-shade-of-grey">{{ item.title }}</p>
       </div>
-      <div class="overflow-hidden rounded-md aspect-video">
-        <img [id]="id+'-swiper-img-'+i" class="rounded-md object-cover aspect-video" [src]="item.banner" alt="Anime series">
-      </div>
-      <p class="text-base mt-2 text-shade-of-grey">{{ item.title }}</p>
-    </div>
-  </swiper-slide>
+    </swiper-slide>
+  }
 </swiper-container>

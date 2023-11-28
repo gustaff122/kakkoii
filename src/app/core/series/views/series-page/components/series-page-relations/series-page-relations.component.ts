@@ -22,7 +22,7 @@ import { RouterLink } from '@angular/router';
   standalone: true,
 })
 export class SeriesPageRelationsComponent implements OnInit {
-  @Input() public seriesId: number;
+  @Input() public seriesId: string;
 
   public readonly relations$: Observable<SeriesRelation[]> = this.seriesPageRelationsComponentStore.relations$;
   public readonly hasRelations$: Observable<boolean> = this.seriesPageRelationsComponentStore.hasRelations$;

@@ -2,7 +2,8 @@
   <kk-series-search-bar (filtersChange)="getFirstPageHandler($event)"></kk-series-search-bar>
 </div>
 
-<div *ngIf="filters$ | async" class="px-4 md:px-16">
+@if (filters$ | async) {
+<div class="px-4 md:px-16">
   <kk-infinite-scroll (scrolled)="nextPageHandler()">
     <kk-series-list sectionTitle="Wyniki wyszukiwania"
                     [series]="series$ | async"
@@ -12,6 +13,7 @@
     />
   </kk-infinite-scroll>
 </div>
+}
 
 <div>
   <kk-series-current-season-carousel></kk-series-current-season-carousel>

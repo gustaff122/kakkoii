@@ -24,13 +24,15 @@
   <ng-scrollbar class="kk-scrollbar w-32 sm:w-32 md:w-36 lg:w-32 xl:w-44 2xl:w-56 bg-chilly-black rounded-b-lg !py-3.5 px-3 md:px-5 !h-36">
     <div scrollViewport>
         <div class="!grid !grid-cols-3 gap-y-3.5 sm:gap-y-5 gap-x-1 py-2 ps-2 pe-6 sm:px-4">
-          <button *ngFor="let year of years"
+          @for (year of years; track year) {
+  <button
                   (click)="selectYear(year)"
                   class="text-center py-0.5 text-xs sm:text-sm"
                   [ngClass]="{'rounded-xl bg-royal-blue': innerValue === year}"
           >
             {{ year }}
           </button>
+}
       </div>
     </div>
   </ng-scrollbar>

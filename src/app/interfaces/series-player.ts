@@ -1,7 +1,7 @@
 export interface SeriesPlayer {
-  player_id: number;
-  episode_id: number;
-  player_name: string;
-  player_link: string;
+  id: number;
+  episodeid: number;
+  playername: string;
+  playerlink: string;
   translator: string;
 }

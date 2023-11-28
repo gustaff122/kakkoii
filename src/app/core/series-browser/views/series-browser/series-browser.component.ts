@@ -42,7 +42,7 @@ export class SeriesBrowserComponent {
   }
 
   public getFirstPageHandler(filters: Partial<SeriesListFilters>): void {
-    if (filters.season_year || filters.season_type || filters.status || filters.tags || filters.name || filters.type) {
+    if (filters.year || filters.season || filters.status || filters.tags || filters.name || filters.type) {
       this.seriesBrowserComponentStore.getSeries({ filters });
     }
   }

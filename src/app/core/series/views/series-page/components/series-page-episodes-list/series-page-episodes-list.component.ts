@@ -52,8 +52,4 @@ export class SeriesPageEpisodesListComponent implements OnInit {
     this.direction = 'desc';
     this.seriesPageEpisodesListComponentStore.changeDirection({ direction: this.direction });
   }
-
-  public trackByFn(_index: number, item: SeriesEpisode): number {
-    return item.episode_id;
-  }
 }

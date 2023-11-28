@@ -1,4 +1,4 @@
-<a [routerLink]="['/series', series.pseudo_link]" class="w-full transition-opacity hover:opacity-70 z-[-1]">
+<a [routerLink]="['/series', series.pseudolink]" class="w-full transition-opacity hover:opacity-70 z-[-1]">
   <div class="bg-smooth-black rounded-lg">
     <div class="relative w-full h-3/4">
       <div class="img-bg-gradient absolute h-full w-full">
@@ -6,27 +6,35 @@
       <img class="!object-cover h-full w-full rounded-t-lg" alt="Seria anime" kkImgFallback [src]="series.poster">
     </div>
     <div class="relative w-full h-1/4">
-      <div [ngClass]="{'bg-sky-blue': series.anime_type === 'tv', 'bg-violet': series.anime_type === 'movie'}" class="absolute bg-sky-blue rounded px-2 text-sm right-3 -top-4">
-        <ng-container [ngSwitch]="series.anime_type">
-          <ng-container *ngSwitchDefault>
-            <span *ngIf="series.ep_count > 0">
-              EP {{ series.ep_count }}
+      <div [ngClass]="{'bg-sky-blue': series.animetype === 'tv', 'bg-violet': series.animetype === 'movie'}" class="absolute bg-sky-blue rounded px-2 text-sm right-3 -top-4">
+        @switch (series.animetype) {
+          @default {
+            @if (series.epcount > 0) {
+              <span>
+              EP {{ series.epcount }}
             </span>
-            <span *ngIf="series.ep_count === 0">
+            }
+            @if (series.epcount === 0) {
+              <span>
               NADCHODZI
             </span>
-          </ng-container>
-          <ng-container *ngSwitchCase="'movie'">
+            }
+          }
+          @case ('movie') {
             FILM
-          </ng-container>
-        </ng-container>
+          }
+        }
       </div>
       <p class="px-3 h-11 pt-3 text-start bg-smooth-black w-full text-xs line-clamp-2">{{ series.title }}</p>
       <div class="px-3 w-full flex  justify-center rounded-b-lg bg-smooth-black gap-x-1.5 pt-2">
-        <span class="flex gap-x-1 items-center pb-3 rounded-b-lg" *ngFor="let tag of series.tags.slice(0, 3); let l = last">
+        @for (tag of series.tags.slice(0, 3);track tag;let l = $last) {
+          <span class="flex gap-x-1 items-center pb-3 rounded-b-lg">
           <span class="text-[9px] text-shade-of-grey text-center">{{ tag | tags }}</span>
-          <span class="-translate-y-[1px] text-[8px]" *ngIf="!l">●</span>
+            @if (!l) {
+              <span class="-translate-y-[1px] text-[8px]">●</span>
+            }
         </span>
+        }
       </div>
     </div>
   </div>

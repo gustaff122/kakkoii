@@ -28,8 +28,4 @@ export class SeriesListComponent {
   @Input() public loading: boolean;
   @Input() public totalCount: number;
   @Input() public showTotalCount: boolean = false;
-
-  public trackByFn(_index: number, item: Series): number {
-    return item.anime_id;
-  }
 }

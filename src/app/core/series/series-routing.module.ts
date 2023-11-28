@@ -39,7 +39,7 @@ const routes: Routes = [
             component: SeriesPageEpisodesListComponent,
           },
           {
-            path: 'episodes/:episode_no',
+            path: 'episodes/:episodeno',
             component: SeriesPageEpisodePlayerComponent,
             canActivate: [ episodeAvailableGuard ],
             resolve: {
