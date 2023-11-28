@@ -65,7 +65,7 @@
         <div class="menu-item flex flex-col gap-y-2">
           <label for="season">Sezon</label>
           <div id="season" class="kk-select-dark">
-            <ng-select notFoundText="Nie znaleziono..." placeholder="Wszystkie" formControlName="season_type">
+            <ng-select notFoundText="Nie znaleziono..." placeholder="Wszystkie" formControlName="seasontype">
               <ng-option value="winter">Zima</ng-option>
               <ng-option value="spring">Wiosna</ng-option>
               <ng-option value="summer">Lato</ng-option>
@@ -75,7 +75,7 @@
         </div>
 
         <div class="menu-item">
-          <kk-year-picker formControlName="season_year" placeholder="Wszystkie" label="Rok"/>
+          <kk-year-picker formControlName="seasonyear" placeholder="Wszystkie" label="Rok"/>
         </div>
       </div>
     }

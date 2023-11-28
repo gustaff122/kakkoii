@@ -20,8 +20,8 @@ interface SeriesFiltersForm {
   status: FormControl<SeriesStatus>;
   type: FormControl<SeriesType>;
   tags: FormControl<SeriesTags[]>;
-  season_type: FormControl<Season>;
-  season_year: FormControl<number>;
+  seasontype: FormControl<Season>;
+  seasonyear: FormControl<number>;
 }
 
 @Component({
@@ -80,8 +80,8 @@ export class SeriesSearchBarComponent implements OnInit, OnDestroy {
       status: new FormControl(null),
       type: new FormControl(null),
       tags: new FormControl(null),
-      season_type: new FormControl(null),
-      season_year: new FormControl(null),
+      seasontype: new FormControl(null),
+      seasonyear: new FormControl(null),
     });
   }
 

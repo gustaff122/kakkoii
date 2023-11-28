@@ -12,10 +12,10 @@ export const homeResolver: ResolveFn<Series[]> = (): Observable<Series[]> | Prom
     limit: 10,
     page: 0,
   };
-  const { season_type, season_year } = getCurrentSeason();
+  const { season, year } = getCurrentSeason();
 
 
-  return seriesService.getSeriesList(paginator, { season_year, season_type }).pipe(
+  return seriesService.getSeriesList(paginator, { year, season }).pipe(
     map(({ series }) => {
       return series;
     }),

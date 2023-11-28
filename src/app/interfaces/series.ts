@@ -4,22 +4,22 @@ import { SeriesStatus } from '@kakkoii/types/series-status';
 import { SeriesTags } from '@kakkoii/types/series-tags';
 
 export interface Series {
-  anime_id: number;
+  id: string;
   nsfw: boolean;
-  anime_type: SeriesType;
+  animetype: SeriesType;
   title: string;
   subtitles: string[];
   description: string;
   poster: string;
   banner: string;
   status: SeriesStatus;
-  season_type: Season;
-  season_year: number;
+  seasontype: Season;
+  seasonyear: number;
   tags: SeriesTags[];
-  external_link_type: string;
-  external_link_value: string;
+  externallinktype: string;
+  externallinkvalue: string;
   rating: number;
-  pseudo_link: string;
-  ep_count: number;
+  pseudolink: string;
+  epcount: number;
   studio: string;
 }

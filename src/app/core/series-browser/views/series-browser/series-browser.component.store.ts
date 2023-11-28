@@ -23,7 +23,7 @@ export class SeriesBrowserComponentStore extends DefaultComponentStore<SeriesBro
   public readonly totalCount$: Observable<number | null> = this.select((state) => state.totalCount);
   public readonly filters$: Observable<Partial<SeriesListFilters> | null> = this.select((state) => state.filters);
 
-  public readonly droppedDown$: Observable<boolean> = this.select(state => state.droppedDown)
+  public readonly droppedDown$: Observable<boolean> = this.select(state => state.droppedDown);
 
   public readonly getSeries = this.effect((origin$: Observable<{ filters: Partial<SeriesListFilters> }>) => {
     return origin$.pipe(
@@ -44,11 +44,11 @@ export class SeriesBrowserComponentStore extends DefaultComponentStore<SeriesBro
               series,
               filters,
               totalCount,
-              page: 1,
+              page: 0,
               loading: false,
               error: null,
             });
-            }, ({ error }: HttpErrorResponse) => {
+          }, ({ error }: HttpErrorResponse) => {
             this.patchState({
               loading: false,
               error,
@@ -76,14 +76,14 @@ export class SeriesBrowserComponentStore extends DefaultComponentStore<SeriesBro
 
         return this.seriesService.getSeriesList(paginator, filters).pipe(
           tapResponse(({ series, totalCount }) => {
-            this.patchState((state) =>{
+            this.patchState((state) => {
               return {
                 ...state,
-                series: [...state.series, ...series],
+                series: [ ...state.series, ...series ],
                 totalCount,
                 page: state.page + 1,
                 loading: false,
-              }
+              };
             });
 
           }, ({ error }: HttpErrorResponse) => {
@@ -100,12 +100,12 @@ export class SeriesBrowserComponentStore extends DefaultComponentStore<SeriesBro
   public readonly dropDown = this.updater((state): SeriesBrowserComponentState => {
     return {
       ...state,
-      droppedDown: !state.droppedDown
+      droppedDown: !state.droppedDown,
     };
   });
 
   constructor(
-    private readonly seriesService: SeriesService
+    private readonly seriesService: SeriesService,
   ) {
     super({
       series: [],

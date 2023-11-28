@@ -2,8 +2,8 @@
   <h1 class="text-xl font-lato mb-6">
     <span @dropEnter>{{ sectionTitle }}:</span>
     @if (showTotalCount) {
-<span @dropEnter class="text-shade-of-grey opacity-70 ms-2">({{ totalCount }})</span>
-}
+      <span @dropEnter class="text-shade-of-grey opacity-70 ms-2">({{ totalCount }})</span>
+    }
   </h1>
   <ng-container [ngTemplateOutlet]="series.length > 0 ? contentTpl : emptyTpl"></ng-container>
   <ng-container [ngTemplateOutlet]="(loading && totalCount > series.length) ? loadingTpl : null"></ng-container>
@@ -11,9 +11,9 @@
 
 <ng-template #contentTpl>
   <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 2xl:grid-cols-7 3xl:grid-cols-9 gap-2 md:gap-8">
-    @for (item of series; track trackByFn($index, item)) {
-  <kk-series-thumbnail @dropEnter [series]="item"></kk-series-thumbnail>
-}
+    @for (item of series;track item.id) {
+      <kk-series-thumbnail @dropEnter [series]="item"></kk-series-thumbnail>
+    }
   </div>
 </ng-template>
 
@@ -29,9 +29,9 @@
 
 <ng-template #loadingTpl>
   <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-7 3xl:grid-cols-9 gap-2 md:gap-8">
-    @for (_ of [].constructor(16); track _) {
-  <div class="bg-smooth-black aspect-card w-full rounded-lg h-full animate-pulse">
-    </div>
-}
+    @for (_ of [].constructor(16);track _) {
+      <div class="bg-smooth-black aspect-card w-full rounded-lg h-full animate-pulse">
+      </div>
+    }
   </div>
 </ng-template>

@@ -13,13 +13,13 @@
              #selectComponent
   >
     <ng-template ng-option-tmp let-item="item">
-      <a [routerLink]="['/series', item.pseudo_link]" class="h-14 flex items-center gap-x-3">
+      <a [routerLink]="['/series', item.pseudolink]" class="h-14 flex items-center gap-x-3">
         <div class="h-14">
           <img class="object-contain h-14" alt="thumbnail" [src]="item.poster">
         </div>
         <div class="text-ellipsis overflow-hidden w-10/12">
           <p>{{ item.title }}</p>
-          <p class="uppercase text-gray-500">{{ item.anime_type }} ● EP {{ item.ep_count }}</p>
+          <p class="uppercase text-gray-500">{{ item.animetype }} ● EP {{ item.epcount }}</p>
         </div>
       </a>
     </ng-template>

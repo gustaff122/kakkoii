@@ -1,6 +1,6 @@
 export interface SeriesEpisode {
-  episode_id: number;
-  anime_id: number;
+  id: string;
+  animeid: string;
   title: string;
-  episode_no: number;
+  episodeno: number;
 }

@@ -1,15 +1,14 @@
 import { tapResponse } from '@ngrx/component-store';
 import { Injectable } from '@angular/core';
-import { exhaustMap, forkJoin, Observable, tap } from 'rxjs';
+import { exhaustMap, Observable, tap } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
 import { DefaultComponentState, DefaultComponentStore } from '@kakkoii/utils/default.component.store';
 import { SeriesEpisode } from '@kakkoii/interfaces/series-episode';
-import { EpisodesService } from '@kakkoii/services/episodes.service';
 import { ActivatedRoute } from '@angular/router';
-import { Paginator } from '@kakkoii/interfaces/paginator';
 import { SeriesFilteredLinks } from '@kakkoii/interfaces/series-filtered-players';
 import { SeriesPlayer } from '@kakkoii/interfaces/series-player';
 import { SERIES } from '@kakkoii/resolvers/series-resolver/series.key';
+import { SeriesService } from '@kakkoii/services/series.service';
 
 interface SeriesPageEpisodePlayerComponentState extends DefaultComponentState {
   episode: SeriesEpisode | null,
@@ -34,18 +33,11 @@ export class SeriesPageEpisodePlayerComponentStore extends DefaultComponentStore
         });
       }),
       exhaustMap(({ epNumber, callbackFn }) => {
-        const animeId = this.activatedRoute.snapshot.data[SERIES].anime_id;
-        const paginator: Paginator = {
-          page: 1,
-          limit: 1,
-        };
+        const animeId = this.activatedRoute.snapshot.data[SERIES].id;
 
-        return forkJoin([
-          this.episodesService.getEpisode(animeId, epNumber),
-          this.episodesService.getEpisodes(animeId, paginator, 'asc'),
-        ])
+        return this.seriesService.getEpisode(animeId, epNumber)
           .pipe(
-            tapResponse(([ { episode, players }, { totalCount } ]) => {
+            tapResponse(({ episode, players }) => {
               const links = players.reduce((acc, link) => {
                 const translator = link.translator;
 
@@ -62,7 +54,7 @@ export class SeriesPageEpisodePlayerComponentStore extends DefaultComponentStore
               this.patchState({
                 episode,
                 players: links,
-                episodesCount: totalCount,
+                episodesCount: 0,
                 loading: false,
               });
               callbackFn();
@@ -85,7 +77,7 @@ export class SeriesPageEpisodePlayerComponentStore extends DefaultComponentStore
   });
 
   constructor(
-    private readonly episodesService: EpisodesService,
+    private readonly seriesService: SeriesService,
     private readonly activatedRoute: ActivatedRoute,
   ) {
     super({

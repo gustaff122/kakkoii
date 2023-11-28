@@ -1,1 +1,1 @@
-export type SeriesStatus = 'Planowana' | 'Wstrzymana' | 'Porzucona' | 'Zakończona' | 'Wydawana';
+export type SeriesStatus = 'planned' | 'withhold' | 'abandoned' | 'finished' | 'airing'

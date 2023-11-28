@@ -27,14 +27,14 @@
       <div class="rounded-xl border-2 border-solid border-[#000000] flex flex-col relative pb-24">
         <div class="w-full h-20 flex">
           <div class="aspect-square rounded-tl-xl h-20 bg-sky-blue flex items-center justify-center font-josefin text-4xl">
-            @if (item.episode_no === 0) {
+            @if (item.episodeno === 0) {
               <span class="translate-y-0.5">01</span>
             }
-            @if (item.episode_no < 10 && item.episode_no !== 0) {
-              <span class="translate-y-0.5">0{{ item.episode_no }}</span>
+            @if (item.episodeno < 10 && item.episodeno !== 0) {
+              <span class="translate-y-0.5">0{{ item.episodeno }}</span>
             }
-            @if (item.episode_no >= 10) {
-              <span class="translate-y-0.5">{{ item.episode_no }}</span>
+            @if (item.episodeno >= 10) {
+              <span class="translate-y-0.5">{{ item.episodeno }}</span>
             }
           </div>
 
@@ -72,7 +72,7 @@
               <div class="kk-select-dark kk-select-no-close w-48">
                 <ng-select [searchable]="false" formControlName="linkUrl" placeholder="Wybierz">
                   @for (link of playersMirrors$ | async;track link) {
-                    <ng-option [value]="link.player_link">{{ link.player_name }}</ng-option>
+                    <ng-option [value]="link.playerlink">{{ link.playername }}</ng-option>
                   }
                 </ng-select>
               </div>
@@ -82,18 +82,18 @@
 
         @if (episodesCount$ | async;as episodesCount) {
           <div class="flex gap-x-0.5 absolute w-full bottom-0">
-            @if (item.episode_no === 1) {
+            @if (item.episodeno === 1) {
               <a class="w-1/3 text-center py-3 bg-smooth-black rounded-bl-xl opacity-50">Poprzedni</a>
             }
-            @if (item.episode_no !== 1) {
-              <a [routerLink]="['../', (item.episode_no - 1)]" fragment="episodePlayer" class="w-1/3 text-center py-3 bg-smooth-black rounded-bl-xl hover:opacity-70 transition-opacity">Poprzedni</a>
+            @if (item.episodeno !== 1) {
+              <a [routerLink]="['../', (item.episodeno - 1)]" fragment="episodePlayer" class="w-1/3 text-center py-3 bg-smooth-black rounded-bl-xl hover:opacity-70 transition-opacity">Poprzedni</a>
             }
             <a routerLink="../" fragment="episodesListFragment" class="w-1/3 text-center py-3 bg-smooth-black hover:opacity-70 transition-opacity">Lista</a>
-            @if (item.episode_no === episodesCount) {
+            @if (item.episodeno === episodesCount) {
               <a class="w-1/3 text-center py-3 bg-smooth-black rounded-bl-xl opacity-50">Następny</a>
             }
-            @if (item.episode_no !== episodesCount) {
-              <a [routerLink]="['../', (item.episode_no + 1)]" fragment="episodePlayer" class="w-1/3 text-center py-3 bg-smooth-black rounded-br-xl hover:opacity-70 transition-opacity">Następny</a>
+            @if (item.episodeno !== episodesCount) {
+              <a [routerLink]="['../', (item.episodeno + 1)]" fragment="episodePlayer" class="w-1/3 text-center py-3 bg-smooth-black rounded-br-xl hover:opacity-70 transition-opacity">Następny</a>
             }
           </div>
         }
