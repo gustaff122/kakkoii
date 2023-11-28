@@ -28,8 +28,8 @@ export class LoginModalComponent implements OnInit {
 
   private buildForm(): void {
     this.form = this.formBuilder.group<LoginForm>({
-      email: new FormControl(),
-      password: new FormControl(),
+      email: new FormControl(''),
+      password: new FormControl(''),
     });
   }
 }
