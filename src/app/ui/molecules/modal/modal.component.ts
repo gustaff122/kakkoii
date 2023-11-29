@@ -8,18 +8,18 @@ import { DialogRef } from '@angular/cdk/dialog';
   standalone: true,
   imports: [ CommonModule, NgIconComponent ],
   templateUrl: './modal.component.html',
-  styleUrls: ['./modal.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styleUrls: [ './modal.component.scss' ],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ModalComponent {
-  @Input() public title: string = '';
+  @Input() public label: string = '';
 
   constructor(
-    private readonly dialogRef: DialogRef
+    private readonly dialogRef: DialogRef,
   ) {
   }
 
   public close(): void {
-    this.dialogRef.close()
+    this.dialogRef.close();
   }
 }

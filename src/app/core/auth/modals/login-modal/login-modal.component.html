@@ -1,17 +1,17 @@
-<kk-modal title="Logowanie">
+<kk-modal label="Logowanie">
   <div class="login-modal-header justify-center">
     <kk-logo></kk-logo>
   </div>
 
 
   <form [formGroup]="form" class="pt-10">
-    <kk-input type="text" label="Adres E-mail" placeholder="Adres E-mail" formControlName="email" />
-    <kk-input type="password" label="Hasło" placeholder="Hasło" formControlName="password" />
+    <kk-input type="text" label="Adres E-mail" placeholder="Adres E-mail" formControlName="email"/>
+    <kk-input type="password" label="Hasło" placeholder="Hasło" formControlName="password"/>
   </form>
   <div class="mt-10 flex items-center justify-center gap-x-6">
     <button type="button">
       <a href="#"
-        class="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Zaloguj
+         class="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Zaloguj
         się</a>
     </button>
   </div>
@@ -23,6 +23,6 @@
   </div>
   <div class="p-createaccount mt-3 items-center justify-center gap-x-6">
     <p>Aby się zalogować musisz mieć zarejestrowane konto. Jeżeli wcześniej się nie rejestrowałeś <a href="#">przejdź
-        do rejestracji</a></p>
+      do rejestracji</a></p>
   </div>
 </kk-modal>

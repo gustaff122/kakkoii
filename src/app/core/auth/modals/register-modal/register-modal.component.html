@@ -1,10 +1,39 @@
-<kk-modal title="Rejestracja">
-  <kk-stepper [items]="steps" />
+<kk-modal label="Rejestracja">
+  <kk-stepper [items]="steps"/>
 
-  <form [formGroup]="form" class="pt-10">
-    <kk-input type="text" label="Adres E-mail" placeholder="Adres E-mail" formControlName="email" />
-    <kk-input type="password" label="Hasło" placeholder="Hasło" formControlName="password" />
-    <kk-input type="password" label="Powtórz hasło" placeholder="Powtórz hasło" formControlName="confirmedPassword" />
+  <form [formGroup]="form" class="pt-24 flex flex-col gap-y-6 px-20 pb-16">
+    <kk-input type="text" label="Adres E-mail" placeholder="Adres E-mail" formControlName="email"/>
+    <kk-input type="password" label="Hasło" placeholder="Hasło" formControlName="password"/>
+    <div class="flex gap-y-4 flex-col">
+      <kk-input type="password" label="Powtórz hasło" placeholder="Powtórz hasło" formControlName="confirmedPassword"/>
+      <kk-checkbox formControlName="acceptedPolicy">
+        <span class="text-xs leading-6 text-almost-white">
+          Zapoznałem się z
+            <a class="text-sky-blue">
+              Polityką Prywatności
+            </a>
+          oraz
+          <a class="text-sky-blue">
+            Warunkami Użytkowania
+          </a>
+        </span>
+      </kk-checkbox>
+    </div>
+
+    <div class="flex flex-col gap-y-2">
+      <button type="submit"
+              class="rounded-md p-3 bg-sky-blue text-xs mt-3"
+      >
+        Zarejestruj Konto
+      </button>
+
+      <p class="text-center text-xs">
+        Masz już założone konto?
+        <a class="text-sky-blue">
+          Zaloguj się
+        </a>
+      </p>
+    </div>
+
   </form>
-  
 </kk-modal>

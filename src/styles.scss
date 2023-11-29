@@ -1,3 +1,5 @@
+@import "app/styles/fonts";
+@import "app/styles/variables";
 @import "app/styles/normalize";
 
 @tailwind base;
@@ -6,9 +8,6 @@
 
 @import "@angular/cdk/overlay-prebuilt.css";
 
-@import "app/styles/variables";
-@import "app/styles/colors";
-@import "app/styles/fonts";
 @import "app/styles/scrollbar";
 @import "app/styles/ng-select";
 @import "app/styles/swiper.scss";
@@ -53,6 +52,16 @@ input::-webkit-inner-spin-button {
 
 input[type=number] {
   -moz-appearance: textfield;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: #ffffff;
+  transition: background-color 5000s ease-in-out 0s;
+  box-shadow: inset 0 0 20px 20px #23232329;
 }
 
 .modal {
