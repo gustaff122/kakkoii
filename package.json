@@ -27,6 +27,7 @@
     "@ngneat/helipopper": "^7.1.1",
     "@ngneat/overview": "^4.1.0",
     "@ngrx/component-store": "^17.0.1",
+    "@ngrx/signals": "^17.0.1",
     "@ngx-pwa/offline": "^13.0.3",
     "ngx-progressbar": "^11.0.0",
     "ngx-scrollbar": "^13.0.3",
