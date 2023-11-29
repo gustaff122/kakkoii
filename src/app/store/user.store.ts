@@ -29,7 +29,7 @@ export const UsersStore = signalStore(
       pipe(
         debounceTime(300),
         distinctUntilChanged(),
-        tap(() => patchState(store, { isLoading: true })),
+        tap(() => patchState(store, { loading: true })),
         switchMap(({ email, login, password }) =>
           authService.signUp(email, login, password).pipe(
             tapResponse({
