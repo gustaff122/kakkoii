@@ -1,3 +1,5 @@
+@import "app/styles/fonts";
+@import "app/styles/variables";
 @import "app/styles/normalize";
 
 @tailwind base;
@@ -6,9 +8,6 @@
 
 @import "@angular/cdk/overlay-prebuilt.css";
 
-@import "app/styles/variables";
-@import "app/styles/colors";
-@import "app/styles/fonts";
 @import "app/styles/scrollbar";
 @import "app/styles/ng-select";
 @import "app/styles/swiper.scss";
@@ -55,4 +54,23 @@ input[type=number] {
   -moz-appearance: textfield;
 }
 
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: #ffffff;
+  transition: background-color 5000s ease-in-out 0s;
+  box-shadow: inset 0 0 20px 20px #23232329;
+}
+
+.modal {
+  background: rgba(27, 27, 27, 0.40);
+  backdrop-filter: blur(3px);
+
+  top: 0;
+  position: fixed !important;
+  width: 100%;
+  height: 100vh;
+  z-index: 101;
+}

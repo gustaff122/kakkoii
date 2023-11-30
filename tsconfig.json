@@ -37,6 +37,9 @@
       "@kakkoii/services/*": [
         "app/services/*"
       ],
+      "@kakkoii/store/*": [
+        "app/store/*"
+      ],
       "@kakkoii/styles/*": [
         "app/styles/*"
       ],

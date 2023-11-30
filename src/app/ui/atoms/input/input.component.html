@@ -1,0 +1,22 @@
+<div class="container">
+  <div class="relative w-full">
+    <input [type]="type"
+           [disabled]="disabled"
+           [placeholder]="placeholder"
+           [(ngModel)]="innerValue"
+           (ngModelChange)="updateChanges()"
+    />
+
+    <label>
+      {{ label }}
+      <span *ngIf="isRequired">*</span>
+    </label>
+  </div>
+  <button (click)="showPassword()" *ngIf="isPasswordType && type === 'password'" class="absolute top-[50%] -translate-y-[50%] right-3 flex items-center justify-center">
+    <ng-icon name="matVisibilityOff"></ng-icon>
+  </button>
+
+  <button (click)="hidePassword()" *ngIf="isPasswordType && type === 'text'" class="absolute top-[50%] -translate-y-[50%] right-3 flex items-center justify-center">
+    <ng-icon name="matVisibility"></ng-icon>
+  </button>
+</div>
