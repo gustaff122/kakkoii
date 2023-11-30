@@ -18,14 +18,14 @@ const initialState: State = {
   loading: false,
 };
 
-export const UsersStore = signalStore(
+export const UserStore = signalStore(
   { providedIn: 'root' },
   withState(initialState),
   withMethods((
     store,
     authService = inject(AuthService),
   ) => ({
-    signUp: rxMethod<{ email: string, login: string, password: string }>(
+    signUpByEmail: rxMethod<{ email: string, login: string, password: string }>(
       pipe(
         debounceTime(300),
         distinctUntilChanged(),

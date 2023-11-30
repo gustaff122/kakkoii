@@ -1,8 +1,9 @@
 <kk-modal label="Rejestracja">
   <kk-stepper [items]="steps"/>
 
-  <form [formGroup]="form" class="pt-24 flex flex-col gap-y-6 px-20 pb-16">
+  <form (ngSubmit)="signUpHandler()" [formGroup]="form" class="pt-24 flex flex-col gap-y-6 px-20 pb-16">
     <kk-input type="text" label="Adres E-mail" placeholder="Adres E-mail" formControlName="email"/>
+    <kk-input type="text" label="Login" placeholder="Adres E-mail" formControlName="login"/>
     <kk-input type="password" label="Hasło" placeholder="Hasło" formControlName="password"/>
     <div class="flex gap-y-4 flex-col">
       <kk-input type="password" label="Powtórz hasło" placeholder="Powtórz hasło" formControlName="confirmedPassword"/>
@@ -21,7 +22,7 @@
     </div>
 
     <div class="flex flex-col gap-y-2">
-      <button type="submit"
+      <button type="submit" (click)="signUpHandler()"
               class="rounded-md p-3 bg-sky-blue text-xs mt-3"
       >
         Zarejestruj Konto
