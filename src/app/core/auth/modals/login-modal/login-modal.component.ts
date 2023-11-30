@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { InputComponent } from '@kakkoii/ui/atoms/input/input.component';
 import { ModalComponent } from '@kakkoii/ui/molecules/modal/modal.component';
 import { LogoComponent } from '@kakkoii/ui/atoms/logo/logo.component';
@@ -14,6 +14,7 @@ interface LoginForm {
   selector: 'kk-login-modal',
   templateUrl: './login-modal.component.html',
   styleUrls: [ './login-modal.component.scss' ],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [ CommonModule, ModalComponent, InputComponent, LogoComponent, ReactiveFormsModule ],
   standalone: true,
 })
@@ -21,7 +22,7 @@ export class LoginModalComponent implements OnInit {
   constructor(private readonly formBuilder: FormBuilder) {
   }
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
     this.buildForm();
   }
 
