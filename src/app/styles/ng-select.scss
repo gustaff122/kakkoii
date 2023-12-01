@@ -1,0 +1,86 @@
+@import "@ng-select/ng-select/themes/default.theme.css";
+
+.kk-search {
+  .ng-select-opened {
+    .ng-select-container {
+      border-bottom-left-radius: 0 !important;
+      border-bottom-right-radius: 0 !important;
+    }
+  }
+
+  .ng-dropdown-panel {
+    transition: all 0.3s 0.15s ease-in-out;
+  }
+
+  .ng-option {
+    border-bottom: 1px solid var(--shade-of-grey-secondary);
+  }
+
+  .ng-select-container {
+    @apply shadow-md;
+    border-radius: 18px !important;
+    cursor: text !important;
+    transition: all 0.3s ease-in-out;
+
+    .ng-input {
+      padding-top: 3.5px !important;
+    }
+
+    input {
+      cursor: text !important;
+      width: 100% !important;
+      height: 100% !important;
+    }
+
+    .ng-clear-wrapper {
+      display: none;
+    }
+
+    .ng-arrow-wrapper {
+      display: none;
+    }
+
+    .ng-placeholder {
+      padding-top: 3.5px !important;
+    }
+  }
+}
+
+.kk-select-no-close {
+  .ng-clear-wrapper {
+    display: none !important;
+  }
+}
+
+.kk-select-dark {
+  ng-dropdown-panel {
+    border-radius: 8px !important;
+    outline: none !important;
+    border: none !important;
+  }
+
+  .ng-select-container {
+    background-color: var(--chilly-black) !important;
+    border-radius: 2px !important;
+    outline: none !important;
+    border: none !important;
+    color: var(--almost-white) !important;
+  }
+
+  input {
+    color: var(--almost-white) !important;
+  }
+
+  .ng-option {
+    background-color: var(--chilly-black) !important;
+    color: var(--almost-white) !important;
+
+    &:hover {
+      background-color: #414141 !important;
+    }
+
+    &-selected {
+      background-color: var(--royal-blue) !important;
+    }
+  }
+}

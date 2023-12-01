@@ -1,0 +1,20 @@
+<div class="mb-4 px-4 md:px-16">
+  <kk-series-search-bar (filtersChange)="getFirstPageHandler($event)"></kk-series-search-bar>
+</div>
+
+@if (filters$ | async) {
+<div class="px-4 md:px-16">
+  <kk-infinite-scroll (scrolled)="nextPageHandler()">
+    <kk-series-list sectionTitle="Wyniki wyszukiwania"
+                    [series]="series$ | async"
+                    [loading]="loading$ | async"
+                    [totalCount]="totalCount$ | async"
+                    [showTotalCount]="true"
+    />
+  </kk-infinite-scroll>
+</div>
+}
+
+<div>
+  <kk-series-current-season-carousel></kk-series-current-season-carousel>
+</div>

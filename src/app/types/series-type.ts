@@ -1,0 +1,1 @@
+export type SeriesType = 'tv' | 'movie';

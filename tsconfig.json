@@ -1,0 +1,102 @@
+/* To learn more about this file see: https://angular.io/config/tsconfig. */
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "baseUrl": "src",
+    "paths": {
+      "@kakkoii/*": [
+        "app/*"
+      ],
+      "@kakkoii/animations/*": [
+        "app/animations/*"
+      ],
+      "@kakkoii/core/*": [
+        "app/core/*"
+      ],
+      "@kakkoii/directives/*": [
+        "app/directives/*"
+      ],
+      "@kakkoii/guards/*": [
+        "app/guards/*"
+      ],
+      "@kakkoii/interceptors/*": [
+        "app/interceptors/*"
+      ],
+      "@kakkoii/interfaces/*": [
+        "app/interfaces/*"
+      ],
+      "@kakkoii/pipes/*": [
+        "app/pipes/*"
+      ],
+      "@kakkoii/providers/*": [
+        "app/providers/*"
+      ],
+      "@kakkoii/resolvers/*": [
+        "app/resolvers/*"
+      ],
+      "@kakkoii/services/*": [
+        "app/services/*"
+      ],
+      "@kakkoii/store/*": [
+        "app/store/*"
+      ],
+      "@kakkoii/styles/*": [
+        "app/styles/*"
+      ],
+      "@kakkoii/types/*": [
+        "app/types/*"
+      ],
+      "@kakkoii/ui/*": [
+        "app/ui/*"
+      ],
+      "@kakkoii/utils/*": [
+        "app/utils/*"
+      ],
+      "@kakkoii/assets/*": [
+        "app/assets/*"
+      ],
+      "@kakkoii/env/*": [
+        "environments/*"
+      ]
+    },
+    "outDir": "./dist/out-tsc",
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "noImplicitOverride": true,
+    "noPropertyAccessFromIndexSignature": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "sourceMap": true,
+    "declaration": false,
+    "downlevelIteration": true,
+    "experimentalDecorators": true,
+    "moduleResolution": "node",
+    "importHelpers": true,
+    "target": "ES2022",
+    "module": "es2020",
+    "lib": [
+      "es2020",
+      "dom"
+    ],
+    "noImplicitAny": true,
+    "noImplicitThis": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "strictFunctionTypes": true,
+    "strictBindCallApply": true,
+    "listEmittedFiles": true,
+    "strictNullChecks": false,
+    "strictPropertyInitialization": false,
+    "diagnostics": true,
+    "extendedDiagnostics": true,
+    "removeComments": true,
+    "useDefineForClassFields": false,
+    "skipLibCheck": true
+  },
+  "angularCompilerOptions": {
+    "enableI18nLegacyMessageIdFormat": false,
+    "strictInjectionParameters": true,
+    "strictInputAccessModifiers": true,
+    "strictTemplates": true
+  }
+}

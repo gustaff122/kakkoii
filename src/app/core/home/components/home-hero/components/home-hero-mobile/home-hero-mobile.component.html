@@ -1,0 +1,25 @@
+<div [ngStyle]="{'background-image': 'url(' + currentBgImage + ')'}" class="img-bg-container min-h-[600px] relative h-screen flex flex-col justify-end">
+  <div class="absolute min-h-[600px] shadow-bg-container">
+  </div>
+
+  <div class="h-full w-full flex flex-col justify-center gap-y-10 pt-20 pb-10">
+    <div class="py-2">
+      <kk-series-slider-main [series]="series" (imageChange)="changeCurrentBgImage($event)"></kk-series-slider-main>
+    </div>
+
+    <div class="w-full z-40 mb-14 px-1">
+      <h1 class="text-center font-roboto text-2xl font-bold">Witamy na <span class="text-royal-blue">Kakkoii!</span></h1>
+      <div class="text-shade-of-grey text-[11px] text-center py-4">
+        <p>Wejdź do świata anime, gdzie emocje nabierają kolorów.</p>
+        <p>Przeżyj z Nami wiele niesamowitych historii!</p>
+      </div>
+      <div class="flex gap-x-4 px-2">
+        <button (click)="startWatchingButtonFn()" class="hover:opacity-80 transition-opacity bg-royal-blue rounded-sm text-white w-1/2 py-3 flex justify-center items-center  text-sm font-bold">Zacznij oglądać</button>
+        <a class="w-1/2" href="https://discord.gg/q8vGT2sxD6" target="_blank">
+          <button class="hover:opacity-80 transition-opacity border-royal-blue border-solid border-2 rounded-sm text-white w-full py-3 flex justify-center text-sm items-center font-bold">Nasze Community</button>
+        </a>
+      </div>
+    </div>
+  </div>
+
+</div>

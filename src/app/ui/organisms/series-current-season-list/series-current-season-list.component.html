@@ -1,0 +1,11 @@
+<ng-container [ngTemplateOutlet]="(loading$ | async) ? loadingTpl : (hasSeries$ | async) ? contentTpl : null"></ng-container>
+
+<ng-template #contentTpl>
+  <kk-series-list sectionTitle="Nowości" [series]="series$ | async"></kk-series-list>
+</ng-template>
+
+<ng-template #loadingTpl>
+  <div class="w-full flex justify-center py-24">
+    <kk-loading-spinner></kk-loading-spinner>
+  </div>
+</ng-template>

@@ -1,0 +1,21 @@
+<!--<ng-container [ngTemplateOutlet]="(loading$ | async) ? loadingTpl : (hasRelations$ | async) ? contentTpl : null"></ng-container>-->
+
+<!--<ng-template #contentTpl>-->
+<!--  <div class="px-4 md:px-16 py-4">-->
+<!--    <h1 class="text-xl font-bold mb-6">Powiązane Serie:</h1>-->
+<!--    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-7 content-center gap-x-16">-->
+<!--      <a [routerLink]="['../', item.relatedSeries.pseudo]" *ngFor="let item of (relations$ | async)" class="aspect-poster w-full">-->
+<!--        <img class="object-fit rounded-lg" alt="Powiązana seria anime" [src]="item.relatedSeries.imageUrl">-->
+<!--        <p class="mt-2 text-center">{{ item.relatedSeries.titleEn }}</p>-->
+<!--        <p class="text-xs text-shade-of-grey text-center uppercase tracking-wide opacity-70 font-bold">{{ item.relation }}</p>-->
+<!--      </a>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</ng-template>-->
+
+<!--<ng-template #loadingTpl>-->
+<!--  <div class="w-full flex justify-center py-24">-->
+<!--    <kk-loading-spinner></kk-loading-spinner>-->
+<!--  </div>-->
+<!--</ng-template>-->
+
