@@ -1,1 +1,0 @@
-export type SeriesAgeRating = 'G' | 'PG' | 'R' | 'R18';
