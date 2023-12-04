@@ -3,11 +3,11 @@
     <kk-logo></kk-logo>
   </div>
   <div class="px-20">
-    <form [formGroup]="form" class="pt-10">
+    <form [formGroup]="form" class="grid gap-y-6 pt-10">
       <kk-input type="text" label="Adres E-mail" placeholder="Adres E-mail" formControlName="email" />
       <kk-input type="password" label="Hasło" placeholder="Hasło" formControlName="password" />
     </form>
-    <div>
+    <div class="text-xs leading-6 text-almost-white">
       <p>Nie pamiętasz hasła? Przypomnij hasło.</p>
     </div>
     <div class="h-40 flex items-center justify-center">
@@ -20,7 +20,7 @@
           się</a>
       </button>
     </div>
-    <div class="flex items-center justify-center">
+    <div class="flex text-xs leading-6 text-almost-white justify-center">
       <p>Nie posiadasz konta? Zarejestruj się.</p>
     </div>
   </div>
