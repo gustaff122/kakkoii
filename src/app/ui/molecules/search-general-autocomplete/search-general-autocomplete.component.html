@@ -1,0 +1,45 @@
+<form [formGroup]="form" (ngSubmit)="goToBrowser()" class="w-96 relative" cdkOverlayOrigin #trigger="cdkOverlayOrigin">
+  <input #input
+         class="w-96 pt-2 pb-1.5 text-smoky-black rounded-2xl ps-3 pe-10 focus:outline-0 search__input"
+         [ngClass]="{'rounded-b-none': isOpen$ | async}"
+         formControlName="name"
+         placeholder="Szukaj..."
+         (focus)="openOnFocus()"
+         (blur)="closeHandlerWithTimeout()"
+         type="text"/>
+
+  <button class="absolute translate-y-[4px] right-3 z-[100]">
+    <ng-icon name="matSearch" class="material-icons text-deep-black relative z-[100] text-2xl"></ng-icon>
+  </button>
+
+  <ng-template
+    cdkConnectedOverlay
+    [cdkConnectedOverlayOrigin]="trigger"
+    [cdkConnectedOverlayOpen]="isOpen$ | async"
+  >
+    <div @opacity
+         class="w-96 bg-almost-white text-smooth-black py-3 font-josefin border-t-2 rounded-b-lg">
+      <ng-container [ngTemplateOutlet]="(hasSeries$ | async) ? contentTpl : emptyTpl"></ng-container>
+    </div>
+  </ng-template>
+</form>
+
+<ng-template #contentTpl>
+  <div class="flex flex-col">
+    @for (series of series$ | async;track series.id) {
+      <a [routerLink]="['/series', series.pseudolink]" class="flex items-center bg-almost-white gap-x-3 px-3 py-2 hover:bg-shade-of-grey-secondary">
+        <div class="h-14">
+          <img class="object-contain h-14" alt="thumbnail" [src]="series.poster">
+        </div>
+        <div class="text-ellipsis overflow-hidden w-10/12">
+          <p>{{ series.title }}</p>
+          <p class="uppercase text-gray-500 text-sm">{{ series.animetype }} ● EP {{ series.epcount }}</p>
+        </div>
+      </a>
+    }
+  </div>
+</ng-template>
+
+<ng-template #emptyTpl>
+  <p class="text-sm opacity-70">Nie znaleziono serii..</p>
+</ng-template>

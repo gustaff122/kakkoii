@@ -1,5 +1,5 @@
 import { inject } from '@angular/core';
-import { debounceTime, distinctUntilChanged, pipe, switchMap, tap } from 'rxjs';
+import { pipe, switchMap, tap } from 'rxjs';
 import {
   signalStore,
   patchState,
@@ -10,6 +10,7 @@ import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { tapResponse } from '@ngrx/operators';
 import { User } from '@kakkoii/interfaces/user';
 import { AuthService } from '@kakkoii/services/auth.service';
+import { LocalStorageProvider } from '@kakkoii/providers/local-storage.provider';
 
 type State = { user: User; loading: boolean };
 
@@ -24,11 +25,10 @@ export const UserStore = signalStore(
   withMethods((
     store,
     authService = inject(AuthService),
+    localStorageProvider = inject(LocalStorageProvider),
   ) => ({
     signUpByEmail: rxMethod<{ email: string, login: string, password: string }>(
       pipe(
-        debounceTime(300),
-        distinctUntilChanged(),
         tap(() => patchState(store, { loading: true })),
         switchMap(({ email, login, password }) =>
           authService.signUp(email, login, password).pipe(
@@ -39,6 +39,25 @@ export const UserStore = signalStore(
             }),
           ),
         ),
-      )),
+      ),
+    ),
+
+    signInByLogin: rxMethod<{ login: string, password: string }>(
+      pipe(
+        tap(() => patchState(store, { loading: true })),
+        switchMap(({ login, password }) =>
+          authService.signIn(login, password).pipe(
+            tapResponse({
+              next: ({ user, accessToken }) => {
+                patchState(store, { user });
+                localStorageProvider.setItem('access_token', accessToken);
+              },
+              error: console.error,
+              finalize: () => patchState(store, { loading: false }),
+            }),
+          ),
+        ),
+      ),
+    ),
   })),
 );

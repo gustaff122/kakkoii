@@ -1,12 +1,13 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
 import { InputComponent } from '@kakkoii/ui/atoms/input/input.component';
 import { ModalComponent } from '@kakkoii/ui/molecules/modal/modal.component';
 import { LogoComponent } from '@kakkoii/ui/atoms/logo/logo.component';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { UserStore } from '@kakkoii/store/user.store';
 
 interface LoginForm {
-  email: FormControl<string>;
+  login: FormControl<string>;
   password: FormControl<string>;
 }
 
@@ -19,6 +20,9 @@ interface LoginForm {
   standalone: true,
 })
 export class LoginModalComponent implements OnInit {
+
+  private readonly userStore = inject(UserStore);
+
   constructor(private readonly formBuilder: FormBuilder) {
   }
 
@@ -30,9 +34,13 @@ export class LoginModalComponent implements OnInit {
 
   private buildForm(): void {
     this.form = this.formBuilder.group<LoginForm>({
-      email: new FormControl(''),
+      login: new FormControl(''),
       password: new FormControl(''),
     });
+  }
+
+  public loginHandler(): void {
+    this.userStore.signInByLogin(this.form.getRawValue());
   }
 }
 

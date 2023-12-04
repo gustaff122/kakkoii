@@ -4,7 +4,7 @@ import { ModalComponent } from '@kakkoii/ui/molecules/modal/modal.component';
 import { StepperComponent } from '@kakkoii/ui/molecules/stepper/stepper.component';
 import { StepperItem } from '@kakkoii/ui/molecules/stepper/models/stepper-item';
 import { InputComponent } from '@kakkoii/ui/atoms/input/input.component';
-import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CheckboxComponent } from '@kakkoii/ui/atoms/checkbox/checkbox.component';
 import { UserStore } from '@kakkoii/store/user.store';
 
@@ -56,9 +56,11 @@ export class RegisterModalComponent implements OnInit {
 
   private buildForm(): void {
     this.form = this.formBuilder.group<RegisterForm>({
-      email: new FormControl(null),
-      login: new FormControl(null),
-      password: new FormControl(null),
+      email: new FormControl(null, [ Validators.required, Validators.email ]),
+      // Ile tu musi być znaków xd?
+      login: new FormControl(null, [ Validators.required ]),
+      //8 znaków, w tym jedna wielka litera i jeden znak specjalny
+      password: new FormControl(null, [ Validators.minLength(8), Validators.required ]),
       confirmedPassword: new FormControl(null),
       acceptedPolicy: new FormControl(false),
     });

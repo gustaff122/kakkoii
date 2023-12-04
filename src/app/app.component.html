@@ -1,12 +1,15 @@
 <ng-progress [id]="'routingProgress'"></ng-progress>
-<kk-snackbar/>
+
+@if (snack()) {
+  <kk-snackbar/>
+}
 
 <div class="pb-12 md:pb-0 kk-container">
-  <kk-navbar></kk-navbar>
+  <kk-navbar/>
 
   <div class="min-h-screen">
     <router-outlet></router-outlet>
   </div>
 
-  <kk-footer></kk-footer>
+  <kk-footer/>
 </div>

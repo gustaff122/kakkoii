@@ -1,0 +1,20 @@
+<p>{{ label }}</p>
+<div (click)="openHandler()" cdkOverlayOrigin #trigger="cdkOverlayOrigin">
+  <span>{{ placeholder }}</span>
+</div>
+
+<ng-template
+  cdkConnectedOverlay
+  [cdkConnectedOverlayOrigin]="trigger"
+  [cdkConnectedOverlayOpen]="isOpen$ | async"
+>
+  <ng-container [ngTemplateOutlet]="idKey.length > 0 ?  objArrTpl : arrTpl"></ng-container>
+</ng-template>
+
+<ng-template #objArrTpl>
+
+</ng-template>
+
+<ng-template #arrTpl>
+
+</ng-template>

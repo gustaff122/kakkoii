@@ -74,10 +74,8 @@ export class SeriesCurrentSeasonCarouselComponentStore extends DefaultComponentS
       case 'September':
       case 'October':
       case 'November':
-        return { season: 'autumn', year };
-
       case 'December':
-        return { season: 'winter', year: year + 1 };
+        return { season: 'autumn', year };
 
       default:
         return { season: 'winter', year };

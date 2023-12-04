@@ -17,7 +17,10 @@ export class ErrorInterceptor implements HttpInterceptor {
         catchError((error: HttpErrorResponse) => {
           const message = error.error.message;
 
-          this.snackbarProvider.showErrorSnackbar(message);
+          if (!req.headers.get('Snackbar') || req.headers.get('Snackbar') === 'true') {
+            this.snackbarProvider.showErrorSnackbar(message);
+          }
+
           return throwError(() => message);
         }),
       );

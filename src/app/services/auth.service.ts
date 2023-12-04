@@ -22,4 +22,14 @@ export class AuthService {
         catchError(() => of(null)),
       );
   }
+
+  public signIn(login: string, password: string): Observable<{ user: User, accessToken: string }> {
+    return this.httpClient.post<{ user: User, accessToken: string, message: string }>(`${this.API_URL}/auth/signin`, { login, password })
+      .pipe(map(resp => {
+            return { user: resp.user, accessToken: resp.accessToken };
+          },
+        ),
+        catchError(() => of(null)),
+      );
+  }
 }

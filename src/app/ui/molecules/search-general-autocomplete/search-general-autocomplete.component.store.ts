@@ -7,25 +7,29 @@ import { DefaultComponentState, DefaultComponentStore } from '@kakkoii/utils/def
 import { SeriesService } from '@kakkoii/services/series.service';
 import { Paginator } from '@kakkoii/interfaces/paginator';
 
-interface KkSearchAutocompleteComponentState extends DefaultComponentState {
+interface SearchGeneralAutocompleteComponentState extends DefaultComponentState {
   series: Series[];
+  isOpen: boolean;
 }
 
 @Injectable()
-export class KkSearchAutocompleteComponentStore extends DefaultComponentStore<KkSearchAutocompleteComponentState> {
+export class SearchGeneralAutocompleteComponentStore extends DefaultComponentStore<SearchGeneralAutocompleteComponentState> {
 
   public readonly series$: Observable<Series[]> = this.select((state) => state.series);
+  public readonly hasSeries$: Observable<boolean> = this.select((state) => state.series.length > 0);
+  public readonly isOpen$: Observable<boolean> = this.select((state) => state.isOpen);
+  public readonly firstSeries$: Observable<Series> = this.select((state) => state.series[0]);
 
-  public readonly getSeries = this.effect((origin$: Observable<{ name: string }>) => {
+  public readonly getSeries = this.effect((origin$: Observable<{ name: string, callbackFn: () => void }>) => {
     return origin$.pipe(
       tap(() => {
         this.patchState({
           loading: true,
         });
       }),
-      exhaustMap(({ name }) => {
+      exhaustMap(({ name, callbackFn }) => {
         const paginator: Paginator = {
-          limit: 4,
+          limit: 3,
           page: 0,
         };
 
@@ -40,6 +44,8 @@ export class KkSearchAutocompleteComponentStore extends DefaultComponentStore<Kk
               loading: false,
               error: null,
             });
+
+            callbackFn();
           }, ({ error }: HttpErrorResponse) => {
             this.patchState({
               loading: false,
@@ -51,10 +57,24 @@ export class KkSearchAutocompleteComponentStore extends DefaultComponentStore<Kk
     );
   });
 
-  public readonly clearSeries = this.updater((state): KkSearchAutocompleteComponentState => {
+  public readonly clearSeries = this.updater((state): SearchGeneralAutocompleteComponentState => {
     return {
       ...state,
       series: [],
+    };
+  });
+
+  public readonly open = this.updater((state): SearchGeneralAutocompleteComponentState => {
+    return {
+      ...state,
+      isOpen: true,
+    };
+  });
+
+  public readonly close = this.updater((state): SearchGeneralAutocompleteComponentState => {
+    return {
+      ...state,
+      isOpen: false,
     };
   });
 
@@ -63,6 +83,7 @@ export class KkSearchAutocompleteComponentStore extends DefaultComponentStore<Kk
   ) {
     super({
       series: [],
+      isOpen: false,
       loading: false,
       error: null,
     });

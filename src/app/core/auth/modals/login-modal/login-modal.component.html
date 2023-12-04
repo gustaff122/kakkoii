@@ -3,9 +3,9 @@
     <kk-logo></kk-logo>
   </div>
   <div class="px-20">
-    <form [formGroup]="form" class="pt-10">
-      <kk-input type="text" label="Adres E-mail" placeholder="Adres E-mail" formControlName="email" />
-      <kk-input type="password" label="Hasło" placeholder="Hasło" formControlName="password" />
+    <form (ngSubmit)="loginHandler()" [formGroup]="form" class="pt-10">
+      <kk-input type="text" label="Login" placeholder="Login" formControlName="login"/>
+      <kk-input type="password" label="Hasło" placeholder="Hasło" formControlName="password"/>
     </form>
     <div>
       <p>Nie pamiętasz hasła? Przypomnij hasło.</p>
@@ -14,10 +14,8 @@
       <p>Błędny login lub hasło, sprobuj jeszcze raz.</p>
     </div>
     <div class="flex items-center justify-center">
-      <button type="button" class="w-full">
-        <a href="#"
-          class="block w-full rounded-md bg-sky-blue px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Zaloguj
-          się</a>
+      <button (click)="loginHandler()" type="submit" class="block w-full rounded-md bg-sky-blue px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+        Zaloguj się
       </button>
     </div>
     <div class="flex items-center justify-center">

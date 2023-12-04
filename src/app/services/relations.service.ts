@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { SeriesRelation } from '@kakkoii/interfaces/series-relation';
 import { environment } from '@kakkoii/env/environment';
@@ -17,6 +17,10 @@ export class RelationsService {
   }
 
   public getSeriesRelations(seriesId: string): Observable<SeriesRelation[]> {
-    return this.httpClient.get<SeriesRelation[]>(`${this.API_URL}/relations/${seriesId}`);
+    const headers: HttpHeaders = new HttpHeaders({
+      'Snackbar': 'false',
+    });
+
+    return this.httpClient.get<SeriesRelation[]>(`${this.API_URL}/relations/${seriesId}`, { headers });
   }
 }

@@ -5,4 +5,5 @@ export interface User {
   activated: boolean;
   facebookId?: string;
   googleId?: string;
+  profiles?: any[];
 }
