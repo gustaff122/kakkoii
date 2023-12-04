@@ -3,7 +3,7 @@ import { ControlValueAccessor, ReactiveFormsModule } from '@angular/forms';
 import { SelectComponentStore } from './select.component.store';
 import { Observable } from 'rxjs';
 import { CdkConnectedOverlay, CdkOverlayOrigin } from '@angular/cdk/overlay';
-import { AsyncPipe } from '@angular/common';
+import { AsyncPipe, NgTemplateOutlet } from '@angular/common';
 
 @Component({
   selector: 'kk-select',
@@ -13,6 +13,7 @@ import { AsyncPipe } from '@angular/common';
     CdkOverlayOrigin,
     AsyncPipe,
     CdkConnectedOverlay,
+    NgTemplateOutlet,
   ],
   templateUrl: './select.component.html',
   styleUrl: './select.component.scss',
