@@ -5,6 +5,7 @@ import { ModalComponent } from '@kakkoii/ui/molecules/modal/modal.component';
 import { LogoComponent } from '@kakkoii/ui/atoms/logo/logo.component';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { Dialog, DialogRef } from '@angular/cdk/dialog';
+import { ResetPassModalComponent } from '../reset-pass-modal/reset-pass-modal.component';
 
 interface LoginForm {
   email: FormControl<string>;
@@ -16,7 +17,7 @@ interface LoginForm {
   templateUrl: './login-modal.component.html',
   styleUrls: [ './login-modal.component.scss' ],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [ CommonModule, ModalComponent, InputComponent, LogoComponent, ReactiveFormsModule ],
+  imports: [ CommonModule, ModalComponent, InputComponent, LogoComponent, ReactiveFormsModule, ResetPassModalComponent ],
   standalone: true,
 })
 export class LoginModalComponent implements OnInit {
@@ -42,6 +43,15 @@ export class LoginModalComponent implements OnInit {
 
     import('@kakkoii/core/auth/modals/register-modal/register-modal.component').then(({ RegisterModalComponent }) => {
       this.dialog.open(RegisterModalComponent);
+    });
+    this.dialogRef.close();
+
+  }
+
+  public openResetPasswordModal(): void {
+    console.log('Dupa');
+    import('@kakkoii/core/auth/modals/reset-pass-modal/reset-pass-modal.component').then(({ ResetPassModalComponent }) => {
+      this.dialog.open(ResetPassModalComponent);
     });
     this.dialogRef.close();
 

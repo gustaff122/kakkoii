@@ -1,0 +1,19 @@
+<kk-modal label="Resetowanie hasła">
+  <div class="flex items-center justify-center">
+    <kk-logo></kk-logo>
+  </div>
+  <div class="px-20">
+    <form [formGroup]="form" class="grid gap-y-6 pt-10">
+      <kk-input type="text" label="Adres E-mail" placeholder="Adres E-mail" formControlName="email"/>
+    </form>
+    <div class="h-40 flex items-center justify-center">
+      <p>Brak podanego adresu e-mail w bazie</p>
+    </div>
+    <div class="flex items-center justify-center">
+      <button type="button" class="w-full">
+        <a href="#"
+           class="block w-full rounded-md bg-sky-blue px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Resetuj hasło</a>
+      </button>
+    </div>
+  </div>
+</kk-modal>
