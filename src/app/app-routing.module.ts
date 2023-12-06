@@ -12,8 +12,8 @@ const routes: Routes = [
         path: '',
         loadComponent: () => import('@kakkoii/core/home/home.component').then(c => c.HomeComponent),
         resolve: {
-          [HOME]: homeResolver
-        }
+          [HOME]: homeResolver,
+        },
       },
       {
         path: 'series',
@@ -23,23 +23,24 @@ const routes: Routes = [
         path: 'browser',
         loadChildren: () => import('@kakkoii/core/series-browser/series-browser.module').then(m => m.SeriesBrowserModule),
       },
-    ]
+    ],
   },
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, {
+  imports: [ RouterModule.forRoot(routes, {
     initialNavigation: 'enabledBlocking',
     enableTracing: false,
     anchorScrolling: 'enabled',
     urlUpdateStrategy: 'deferred',
     scrollPositionRestoration: 'enabled',
-    paramsInheritanceStrategy: 'always'
-  })
+    paramsInheritanceStrategy: 'always',
+  }),
   ],
   providers: [
     { provide: RouteReuseStrategy, useClass: KakkoiiRouteReuseStrategy },
   ],
-  exports: [RouterModule]
+  exports: [ RouterModule ],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {
+}

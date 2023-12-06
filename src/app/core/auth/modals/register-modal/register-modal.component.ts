@@ -7,6 +7,7 @@ import { InputComponent } from '@kakkoii/ui/atoms/input/input.component';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CheckboxComponent } from '@kakkoii/ui/atoms/checkbox/checkbox.component';
 import { UserStore } from '@kakkoii/store/user.store';
+import { Dialog, DialogRef } from '@angular/cdk/dialog';
 
 interface RegisterForm {
   email: FormControl<string>;
@@ -47,6 +48,8 @@ export class RegisterModalComponent implements OnInit {
 
   constructor(
     private readonly formBuilder: FormBuilder,
+    private readonly dialogRef: DialogRef,
+    private readonly dialog: Dialog,
   ) {
   }
 
@@ -69,5 +72,13 @@ export class RegisterModalComponent implements OnInit {
   public signUpHandler(): void {
     const { email, login, password } = this.form.getRawValue();
     this.userStore.signUpByEmail({ email, login, password });
+  }
+
+  public changeModalToLogin(): void {
+    import('@kakkoii/core/auth/modals/login-modal/login-modal.component').then(({ LoginModalComponent }) => {
+      this.dialogRef.close();
+      
+      this.dialog.open(LoginModalComponent);
+    });
   }
 }
