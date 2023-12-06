@@ -4,11 +4,11 @@
   </div>
   <div class="px-20">
     <form [formGroup]="form" class="grid gap-y-6 pt-10">
-      <kk-input type="text" label="Adres E-mail" placeholder="Adres E-mail" formControlName="email" />
-      <kk-input type="password" label="Hasło" placeholder="Hasło" formControlName="password" />
+      <kk-input type="text" label="Adres E-mail" placeholder="Adres E-mail" formControlName="email"/>
+      <kk-input type="password" label="Hasło" placeholder="Hasło" formControlName="password"/>
     </form>
     <div class="text-xs leading-6 text-almost-white">
-      <p>Nie pamiętasz hasła? Przypomnij hasło.</p>
+      <p>Nie pamiętasz hasła? <a class="text-sky-blue cursor-pointer">Przypomnij hasło.</a></p>
     </div>
     <div class="h-40 flex items-center justify-center">
       <p>Błędny login lub hasło, sprobuj jeszcze raz.</p>
@@ -16,12 +16,12 @@
     <div class="flex items-center justify-center">
       <button type="button" class="w-full">
         <a href="#"
-          class="block w-full rounded-md bg-sky-blue px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Zaloguj
+           class="block w-full rounded-md bg-sky-blue px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Zaloguj
           się</a>
       </button>
     </div>
     <div class="flex text-xs leading-6 text-almost-white justify-center">
-      <p>Nie posiadasz konta? Zarejestruj się.</p>
+      <p>Nie posiadasz konta? <a class="text-sky-blue cursor-pointer" (click)=moveToRegistrationModal()>Zarejestruj się.</a></p>
     </div>
   </div>
 </kk-modal>

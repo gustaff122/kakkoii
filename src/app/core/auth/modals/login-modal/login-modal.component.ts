@@ -4,6 +4,7 @@ import { InputComponent } from '@kakkoii/ui/atoms/input/input.component';
 import { ModalComponent } from '@kakkoii/ui/molecules/modal/modal.component';
 import { LogoComponent } from '@kakkoii/ui/atoms/logo/logo.component';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { Dialog, DialogRef } from '@angular/cdk/dialog';
 
 interface LoginForm {
   email: FormControl<string>;
@@ -19,7 +20,9 @@ interface LoginForm {
   standalone: true,
 })
 export class LoginModalComponent implements OnInit {
-  constructor(private readonly formBuilder: FormBuilder) {
+  constructor(private readonly formBuilder: FormBuilder,
+              private readonly dialogRef: DialogRef,
+              private readonly dialog: Dialog) {
   }
 
   public ngOnInit(): void {
@@ -33,6 +36,15 @@ export class LoginModalComponent implements OnInit {
       email: new FormControl(''),
       password: new FormControl(''),
     });
+  }
+
+  public moveToRegistrationModal(): void {
+
+    import('@kakkoii/core/auth/modals/register-modal/register-modal.component').then(({ RegisterModalComponent }) => {
+      this.dialog.open(RegisterModalComponent);
+    });
+    this.dialogRef.close();
+
   }
 }
 
