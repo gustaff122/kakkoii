@@ -42,19 +42,19 @@ export class LoginModalComponent implements OnInit {
   public moveToRegistrationModal(): void {
 
     import('@kakkoii/core/auth/modals/register-modal/register-modal.component').then(({ RegisterModalComponent }) => {
+      this.dialogRef.close();
       this.dialog.open(RegisterModalComponent);
     });
-    this.dialogRef.close();
+
 
   }
 
   public openResetPasswordModal(): void {
     console.log('Dupa');
     import('@kakkoii/core/auth/modals/reset-pass-modal/reset-pass-modal.component').then(({ ResetPassModalComponent }) => {
+      this.dialogRef.close();
       this.dialog.open(ResetPassModalComponent);
     });
-    this.dialogRef.close();
-
   }
 }
 
